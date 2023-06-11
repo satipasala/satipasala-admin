@@ -1,0 +1,70 @@
+<mat-card class="">
+  <mat-card-header>
+    <img *ngIf="imageUrl | async as ptUrl" mat-card-avatar style="width: 52px;height: 52px" [src]="ptUrl"
+         alt="No Image" alt="Avatar">
+    <mat-card-title>{{session.name }}</mat-card-title>
+    <mat-card-subtitle class="subtitle-with-icon">
+
+      <mat-chip-list aria-label="Fish selection">
+        <mat-chip selected>{{session.status.name}}</mat-chip>
+        <!--<mat-chip *ngIf="isOverDue()" color="warn"> Over Due</mat-chip>-->
+      </mat-chip-list>
+    </mat-card-subtitle>
+    <mat-card-subtitle>
+      {{session.description}}
+    </mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content>
+    <div class="row">
+      <div class="col">
+        <div>
+          Start:
+          <mat-icon>today</mat-icon>
+          {{session?.startDate}}
+          <mat-icon>schedule</mat-icon>
+          {{session?.startTime}}
+        </div>
+        <div>
+          End:
+          <mat-icon>today</mat-icon>
+          {{session?.endDate}}
+          <mat-icon>schedule</mat-icon>
+          {{session?.endTime}}
+        </div>
+      </div>
+      <div class="col">
+        <div class="row"> Facilitators: {{getFacilitatorCount()}}
+        </div>
+        <div class="row"> Participants:  {{getParticipantCount()}}
+        </div>
+      </div>
+      <div class="col">
+        <mat-chip-list aria-label="Fish selection">
+          <mat-chip *ngFor="let course of getProgramsNames()">{{course.name}}</mat-chip>
+        </mat-chip-list>
+      </div>
+    </div>
+
+
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-icon-button aria-label="View Session" (click)="viewSession(session)">
+      <mat-icon>visibility</mat-icon>
+    </button>
+    <button mat-icon-button aria-label="Edit Session"   (click)="editSession(session)">
+      <mat-icon>edit</mat-icon>
+    </button>
+    <button *ngIf="session.status.value ==='not_started'" mat-raised-button aria-label="Start Session"
+            (click)="startSession()">
+      Start
+      <mat-icon>play_circle_filled</mat-icon>
+    </button>
+    <button *ngIf="session.status.value === 'started'" mat-raised-button aria-label="Complete Session"
+            (click)="completeSession()">
+      Complete
+      <mat-icon>check_circle_outline</mat-icon>
+    </button>
+  </mat-card-actions>
+</mat-card>
+

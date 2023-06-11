@@ -1,0 +1,89 @@
+<h1 mat-dialog-title>Activity</h1>
+<mat-dialog-content [formGroup]="formGroup" novalidate class="ref-dialog">
+
+  <mat-form-field>
+    <input matInput placeholder="Name" formControlName="name" [readonly]="mode === 'view'">
+    <mat-error *ngIf="formGroup.controls['name'].hasError('required')">
+      Name is required
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-select placeholder="Type" formControlName="type" i18n-placeholder="@@type" [compareWith]="compareItems"
+                [disabled]="mode === 'view'">
+      <mat-option *ngFor="let activityType of activityTypes" [value]="activityType"
+                  [disabled]="activityType.active === 'No'">{{activityType.name}}</mat-option>
+    </mat-select>
+    <mat-error *ngIf="formGroup.controls['type'].hasError('required')">
+      Type is required
+    </mat-error>
+  </mat-form-field>
+
+  <section class="example-section">
+    <mat-radio-group [(value)]="inputType" (change)="setInputValue($event)" >
+
+      <mat-radio-button class="example-margin" value="link">
+        Link
+      </mat-radio-button>
+      <mat-radio-button class="example-margin" value="resource">
+        Upload
+      </mat-radio-button>
+    </mat-radio-group>
+  </section>
+
+  <div class="example-form" *ngIf="isUrlVisible()">
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Resource Link</mat-label>
+      <input type="text" matInput [formControl]="linkFormControl" [errorStateMatcher]="matcher"
+             placeholder="PDF,Video,Audio Link">
+      <mat-hint>Errors appear instantly!</mat-hint>
+      <mat-error *ngIf="linkFormControl.hasError('email') && !linkFormControl.hasError('required')">
+        Please enter a valid link
+      </mat-error>
+      <mat-error *ngIf="linkFormControl.hasError('required')">
+        Link is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+  </div>
+
+  <app-file-upload *ngIf="isUploadVisible()" #uploadComponent
+                   [simplified]="true"
+                   [multiple]="false"
+                   [loc]="'activity_content'"
+                   [fileTypeData]="fileType"
+                   (uploadComplete)="addOrUpdateEvent($event)" [disabled]="mode === 'view'"></app-file-upload>
+
+  <div class="example-form" >
+    <mat-form-field class="example-full-width"appearance="fill">
+      <mat-label>Content</mat-label>
+      <textarea matInput placeholder="Content"  [formControl]="textFormControl" [errorStateMatcher]="matcher" ></textarea>
+    </mat-form-field>
+  </div>
+
+  <mat-form-field>
+    <mat-select placeholder="Is Gradable" formControlName="gradable" [disabled]="mode === 'view'">
+      <mat-option value="Yes">Yes</mat-option>
+      <mat-option value="No">No</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Max Points" formControlName="maxPoints" [readonly]="mode === 'view'">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Description" formControlName="description" [readonly]="mode === 'view'">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-select placeholder="Active" formControlName="active" [disabled]="mode === 'view'">
+      <mat-option value="Yes">Yes</mat-option>
+      <mat-option value="No">No</mat-option>
+    </mat-select>
+  </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions>
+
+  <button *ngIf="mode === 'view'" mat-flat-button color="primary" (click)="cancel()">OK
+  </button>
+  <button *ngIf="mode !== 'view'" mat-flat-button color="primary" (click)="onSave()" [disabled]="formGroup.invalid"
+          i18n="@@save">Save
+  </button>
+  <button *ngIf="mode !== 'view'" mat-flat-button color="accent" (click)="cancel()">Cancel</button>
+</mat-dialog-actions>

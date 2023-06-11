@@ -1,0 +1,24 @@
+.dashboard-wrapper {
+  margin: 20px;
+}
+
+
+admin-google-map-component {
+margin-top: 20px !important;
+overflow: hidden;
+height: 600px;
+width: 100%;
+display: block;
+}
+
+.svgBackground{
+height: 100%;
+text-align: center;
+display: block;
+margin-left: auto;
+margin-right: auto;
+background-image: url("../../../../../assets/images/popup-bg-1.svg")!important;
+background-repeat: no-repeat;
+background-size: cover;
+background-color: #f6f6f6;
+}

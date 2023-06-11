@@ -1,0 +1,99 @@
+<form *ngIf="question" [formGroup]="questionForm" (ngSubmit)="onSubmit(questionForm.value)">
+  <div class="shipping-card ">
+    <div class="scroll-y">
+      <mat-card class="question">
+        <!-- <mat-card-header>
+          <mat-card-title>{{mode == 'edit'? 'Edit ' : 'Create a '}}Question</mat-card-title>
+          <mat-slide-toggle *ngIf="mode == 'edit'" formControlName="disabled"
+            class="float-right">Disable
+          </mat-slide-toggle>
+        </mat-card-header> -->
+
+        <mat-form-field class="full-width">
+          <input id="questionName" matInput placeholder="Question" formControlName="label" [readonly]="mode === 'view'">
+          <mat-error *ngIf="questionForm.controls['label'].hasError('required')">
+            Question <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="full-width">
+          <mat-select id="questionType" placeholder="Question Type" [(value)]="selectedQuestionType">
+
+            <mat-option *ngFor="let questionType of questionsTypes" [value]="questionType.id">
+              {{questionType.name}}
+            </mat-option>
+
+          </mat-select>
+          <mat-error
+            *ngIf="(questionForm.touched || questionForm.dirty) && questionForm.controls['questionType'].hasError('required')">
+            Answer Type is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+
+        <div *ngIf="questionForm.value.options">
+
+          <dynamic-form-component #form (onSubmit)="onSubmit($event)" [fields]="[questionForm.value]" [title]="''" [showLabels]="false"
+            [disableSubmit]="true"></dynamic-form-component>
+        </div>
+
+
+      </mat-card>
+
+
+      <mat-card class="margin_bottom_10">
+        <mat-form-field class="full-width">
+          <textarea id="questionDescription" matInput placeholder="Description" formControlName="description"></textarea>
+        </mat-form-field>
+      </mat-card>
+
+
+      <mat-card class="">
+        <mat-card-header>
+          <mat-card-title>Grouping</mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="margin-radio">
+
+          <label>Question Level</label>
+          <mat-radio-group [(value)]="questionLevelName" (change)="questionLevelName=$event.value">
+            <mat-radio-button [id]="level.name" [value]="level.name" *ngFor=" let level of questionLevels">{{level.name}}
+            </mat-radio-button>
+          </mat-radio-group>
+          <hr class="b-20" style="margin-bottom: 20px !important;">
+          <mat-chip-list aria-label="Fish selection">
+            <div *ngFor="let label of questionLabels">
+              <mat-chip> <mat-checkbox [id]="generateElementId(label.label)" #checkbox [checked]="isLabelChecked(label)" (change)="onLabelChange(checkbox.checked,label)" class="mr-10"> {{label.label?label.label:label.name}}</mat-checkbox></mat-chip>
+            </div>
+          </mat-chip-list>
+
+
+        </mat-card-content>
+      </mat-card>
+
+
+      <mat-card class="">
+        <mat-card-header>
+
+          <mat-card-title>Scoring mechanism</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+
+          <!-- <label id="example-radio-group-label">Question Type</label>-->
+          <mat-radio-group [(value)]="scoringMechanismType" (change)="scoringMechanismType=$event.value">
+            <mat-radio-button [id]="scoreMechanism.type" *ngFor="let scoreMechanism of scoringMechanisms" [value]="scoreMechanism.type"
+              class="margin_R_10">
+              {{scoreMechanism.type}}
+            </mat-radio-button>
+          </mat-radio-group>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <mat-card class="button-footer-fixed">
+      <mat-card-actions>
+        <button mat-flat-button color="primary" [disabled]="!questionForm?.valid" type="submit">Submit</button>
+        <button mat-flat-button color="accent" type="button" (click)="reset()">
+          Cancel
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</form>

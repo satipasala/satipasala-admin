@@ -1,0 +1,11 @@
+<div *ngIf="questionnaire">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>
+        <mat-icon class="questionnaire" [matBadge]="length" matBadgeColor="accent">update</mat-icon>
+        <span>{{questionnaire?.name}}</span>
+      </mat-card-title>
+    </mat-card-header>
+  </mat-card>
+  <s-questionnaire-form [questionnaire]="questionnaire" [disableSubmit]="true" [mode]="'preview'"></s-questionnaire-form>
+</div>

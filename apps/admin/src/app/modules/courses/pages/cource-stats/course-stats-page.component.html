@@ -1,0 +1,66 @@
+<form *ngIf="rolePermission?.edit" [formGroup]="feedbackForm" (ngSubmit)="addEditFeedback()">
+  <div class="card_wrapper">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Student</mat-card-title>
+      </mat-card-header>
+
+      <mat-card-content>
+
+        <s-search-box [parentForm]="feedbackForm" [collectionName]="collection" [displayField]="displayField"
+          [searchFields]="searchFields" [orderBy]="orderBy" [batchSize]="5" [placeholder]="'Student name*'"
+          (valueChange)="selectStudent($event)">
+        </s-search-box>
+
+        <button mat-button mat-mini-fab (click)="addStudent()" type="button">
+          <mat-icon matTooltip="Add Student">add</mat-icon>
+        </button>
+      </mat-card-content>
+      <mat-card-content>
+        <mat-card-header>
+          <mat-card-title>Courses</mat-card-title>
+        </mat-card-header>
+
+
+        <mat-form-field>
+          <mat-label>Select Course</mat-label>
+          <mat-select formControlName="course" [(value)]="selectedSubscription" (selectionChange)="courseSelected()"
+            required>
+            <mat-option *ngFor="let subscription of selectedStudent?.courseSubscriptions|keyvalue"
+              [value]="subscription.value">
+              {{subscription.value.name}}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="feedbackForm.controls['course'].hasError('required')">Course is required</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Select Occurrence</mat-label>
+          <mat-select formControlName="occurrence" [(value)]="selectedOccurrence"
+            (selectionChange)="occurrenceSelected()">
+            <mat-option *ngFor="let occurrence of occurrences" [value]="occurrence">
+              {{occurrence.name}}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="feedbackForm.controls['occurrence'].hasError('required')">Occurrence is required</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Select Year</mat-label>
+          <mat-select formControlName="year" [(value)]="currentYear">
+            <mat-option *ngFor="let year of yearList" [value]="year">
+              {{year}}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="feedbackForm.controls['year'].hasError('required')">Year is required</mat-error>
+        </mat-form-field>
+        <s-questionnaire-form [questionnaire]="selectedQuestionnaire" [disableSubmit]="true" [form]="feedbackForm"
+          [mode]="'submit'" (onSubmit)="onQuestionnaireSubmit()"></s-questionnaire-form>
+
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-flat-button color="primary" type="submit">{{submitBtnText}}</button>
+        <button mat-flat-button color="accent" class="margin_LF_10" type="button" (click)="clearForm()">Cancel</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</form>

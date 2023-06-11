@@ -1,0 +1,21 @@
+<div class="row">
+  <div class="col">
+<mat-form-field class="full-width">
+  <input matInput placeholder="Name" required [formControl]="name" [readonly]="mode === 'view'">
+  <mat-error *ngIf="name.invalid">{{getNameErrorMessage()}}</mat-error>
+</mat-form-field>
+  </div>
+  <div class="col">
+<mat-form-field class="full-width">
+  <input matInput placeholder="Description" [formControl]="description" [readonly]="mode === 'view'">
+</mat-form-field>
+  </div>
+  <div class="col">
+    <div class="full-width ma-t-20">
+<button type="button" mat-icon-button matSuffix mat-button (click)="addNewItem()"
+        [disabled]="mode === 'view' || !isValied()">
+  <mat-icon mat-icon-button color="primary">add_circle</mat-icon>
+</button>
+    </div>
+  </div>
+</div>

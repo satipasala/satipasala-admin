@@ -1,0 +1,23 @@
+<mat-card *ngIf="user" [ngClass]="user.disabled?'disable-block':''">
+  <mat-card-header>
+    <img *ngIf="imageUrl | async as ptUrl" mat-card-avatar style="width: 52px;height: 52px" [src]="ptUrl" alt="No Image"
+      alt="Avatar">
+    <mat-card-title>{{user.displayName }}</mat-card-title>
+    <mat-card-subtitle>{{user?.email}}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <p>{{organization}}</p>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-icon-button *ngIf="isAuthorizedToEdit" (click)="edit()">
+      <mat-icon matTooltip="Edit user">edit</mat-icon>
+    </button>
+    <button mat-icon-button (click)="editCourses(user)" *ngIf="isAuthorizedTossignCourses">
+      <mat-icon matTooltip="Manage courses">chrome_reader_mode</mat-icon>
+    </button>
+    <button mat-icon-button *ngIf="isAuthorizedToEdit" (click)="openDialog(user)">
+      <mat-icon matTooltip="Reset password">lock_open</mat-icon>
+    </button>
+    <mat-chip class="role" selcted color="primary">{{user?.userRole?.name}}</mat-chip>
+  </mat-card-actions>
+</mat-card>

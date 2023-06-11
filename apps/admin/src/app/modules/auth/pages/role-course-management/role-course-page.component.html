@@ -1,0 +1,14 @@
+<form *ngIf="currentRole" [formGroup]="roleCourseForm" (ngSubmit)="onSubmit(roleCourseForm.value)">
+  <s-infinite-scroll-grid [addItemEnabled]="true" [collectionName]="'courses'" [orderBy]="orderBy"
+    formArrayName="items">
+    <ng-template let-item="item" let-i="i">
+      <admin-role-course-card [course]="item" [role]="currentRole" [formGroup]="roleCourseForm"
+        (isCourseSelected)="formSubmissionStatus($event)"></admin-role-course-card>
+    </ng-template>
+  </s-infinite-scroll-grid>
+  <mat-card-actions class="infinite-action-wrapper">
+    <button mat-flat-button color="primary" [disabled]='!isFormTouched' type="submit">Submit
+    </button>
+    <button mat-flat-button color="accent" type="button" (click)="back()">Cancel</button>
+  </mat-card-actions>
+</form>

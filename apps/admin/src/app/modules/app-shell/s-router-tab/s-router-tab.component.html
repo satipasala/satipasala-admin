@@ -1,0 +1,22 @@
+<div (swipeleft)="swipe($event.type)" (swiperight)="swipe($event.type)" class="routerWrapper-tab">
+  <!--<div class="">
+    <button mat-button color="primary" (click)="goBack()">
+      <mat-icon>keyboard_backspace</mat-icon>
+    </button>
+  </div>-->
+  <nav mat-tab-nav-bar mat-align-tabs="start" animationDuration="1ms" (swipeleft)="swipe($event.type)"
+    (swiperight)="swipe($event.type)">
+
+
+    <a mat-tab-link class="tablink" *ngFor="let subCategory of navigation?.subCategory;let i = index"
+      [id]="subCategory.subCategoryLink" [class.selected]="i == currentTab" (click)="tabChanged(i)" [routerLink]="subCategory.subCategoryLink"
+      routerLinkActive #rla="routerLinkActive" [active]="rla.isActive">
+<!--      <img width="32" height="32" src="../../../../assets/nav/subIcon/{{subCategory.subIcon}}.svg">{{subCategory.subCategoryName}}-->
+      <i class="icon-{{subCategory.subIcon}}"></i>{{subCategory.subCategoryName}}
+<!--      <mat-icon class="example-tab-icon">{{navigation.icon}}</mat-icon> -->
+    </a>
+  </nav>
+  <div class="admin-tab-content">
+    <router-outlet (swipeleft)="swipe($event.type)" (swiperight)="swipe($event.type)"></router-outlet>
+  </div>
+</div>

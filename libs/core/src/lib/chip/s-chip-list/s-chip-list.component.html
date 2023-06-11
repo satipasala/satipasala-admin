@@ -1,0 +1,3 @@
+<mat-chip-list [className]="chipList.stacked ? 'mat-chip-list-stacked' : ''">
+  <s-chip *ngFor="let chip of chipList.values" [matChip]="chip" (click)="onChipClick.emit(chip)"></s-chip>
+</mat-chip-list>

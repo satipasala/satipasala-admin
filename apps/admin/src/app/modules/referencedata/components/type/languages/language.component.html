@@ -1,0 +1,22 @@
+<s-infinite-scroll-grid *ngIf="rolePermission" [addItemEnabled]="rolePermission.edit" [dataSource]="dataSource" [orderBy]="[{fieldPath: 'name', directionStr: 'asc'}]" (onAddItem)="addNew()" >
+  <ng-template let-item="item" let-i="i">
+    <mat-card  [ngClass]="item.active === 'No' ?'disable-block':''">
+      <mat-card-header>
+        <img mat-card-avatar style="width: 52px;height: 52px" src="assets/images/language_1.png">
+        <mat-card-title> {{item.native}}</mat-card-title>
+        <mat-card-subtitle>{{item.name}} ({{item.shortName}})</mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-card-content>
+        <p>{{item.description}}</p>
+        <mat-chip-list aria-label="Attributes">
+          <mat-chip color="accent" selected>{{item.active === 'Yes' ? 'Active' : 'Deactivated'}}</mat-chip>
+        </mat-chip-list>
+      </mat-card-content>
+      <mat-card-actions>
+        <admin-ref-data-context-menu [refDataObj]="item"
+                                     (contextMenuClickEmitter)="onContextMenuCommand($event)"></admin-ref-data-context-menu>
+      </mat-card-actions>
+    </mat-card>
+  </ng-template>
+</s-infinite-scroll-grid>

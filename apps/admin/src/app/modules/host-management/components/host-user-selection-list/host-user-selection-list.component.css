@@ -1,0 +1,62 @@
+.form-container {
+    display: flex;
+    flex-direction: column;
+    max-width: flex;
+    min-height: flex;
+    margin-top: 20px;
+   
+  }
+/* 
+  .button{
+    position: absolute;
+    bottom: 30px;
+    left: 30px;
+  } */
+  
+  .mat{
+    display: flex;
+    max-width: 200px;
+    margin-bottom: 20px;
+    /* position:fixed; */
+  }
+/*  
+  .new{ */
+/* padding: 30px;
+width: 1600px;
+margin-left: 150px; */
+/* position:fixed;
+margin-bottom: 100px;
+
+  } */
+
+  .page{
+ position:fixed;
+
+  }
+
+  .header{
+margin-left: 150px;
+
+  }
+
+  .form{
+
+    position: fixed
+  }
+
+  .new{
+
+    position: fixed; 
+    overflow-y: scroll;
+    top: 0; right: 0; bottom: 0; left: 0;
+    overflow: hidden;
+
+  }
+
+  .noscroll { 
+    overflow: hidden;
+  }
+
+  .margin_L10{
+    margin-left: 10px;
+  }

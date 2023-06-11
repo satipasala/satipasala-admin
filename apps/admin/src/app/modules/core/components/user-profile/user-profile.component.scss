@@ -1,0 +1,35 @@
+.card-img-top{
+  border-radius: 50px;
+  border: 2px solid var(--dar_gary);
+}
+
+ul {
+  text-align: justify;
+  padding: 10px 18px;
+}
+ul:after {
+  content: '';
+  display: inline-block;
+  width: 100%;
+}
+ul:before {
+  content: '';
+  display: block;
+  margin-top: -1.25em;
+}
+li {
+  display: block;
+  display: inline-block;
+  margin-right: 1.25em;
+  vertical-align: middle;
+  position: relative;
+  top: 0.80em;
+  p{
+    min-width: 120px;
+    display: inline-block;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    vertical-align: top;
+  }
+}
+

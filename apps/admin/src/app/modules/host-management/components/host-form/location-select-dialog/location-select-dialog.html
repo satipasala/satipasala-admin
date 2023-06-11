@@ -1,0 +1,25 @@
+<h1 mat-dialog-title>Location Types Selection</h1>
+<p mat-line *ngIf="orgType?.locations.length>0">Please pick what you want to add to your host</p>
+<p mat-line *ngIf="orgType && (!orgType?.locations || orgType?.locations.length==0)">
+  Please add a location type to {{orgType?.name}} org type in reference data
+
+  <button mat-button (click)="navigateToRefData()">
+  <mat-icon style="position: relative; top: -1px" >add_circle_outline</mat-icon>
+  </button>
+</p>
+<p mat-line *ngIf="!orgType">Please select an Organization type from Organization Details</p>
+<mat-dialog-content class="ref-dialog">
+  <mat-selection-list [(ngModel)]="selectedOptions" [compareWith]="compareItems">
+    <mat-list-option *ngFor="let location of orgType?.locations || []" [value]="location">
+      <h3 mat-line>{{location.name}}</h3>
+      <p mat-line>{{location.displayName}}</p>
+    </mat-list-option>
+
+  </mat-selection-list>
+</mat-dialog-content>
+<div mat-dialog-actions>
+
+  <button mat-flat-button color="primary" (click)="setSelectedList()" cdkFocusInitial>Ok</button>
+  <button mat-flat-button color="accent" (click)="onNoClick()">Cancel</button>
+</div>
+

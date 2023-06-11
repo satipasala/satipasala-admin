@@ -1,0 +1,5 @@
+<s-infinite-scroll-grid [addItemEnabled]="false" [dataSource]="dataSource" [orderBy]="[{fieldPath: 'name', directionStr: 'asc'}]"   >
+  <ng-template let-item="item" let-i="i">
+    <admin-permission-card [permission]="item" [selectionEnabled]="selectionEnabled" [onSelected]="onSelected"></admin-permission-card>
+  </ng-template>
+</s-infinite-scroll-grid>

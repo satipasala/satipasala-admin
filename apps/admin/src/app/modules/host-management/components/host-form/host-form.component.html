@@ -1,0 +1,285 @@
+<form [formGroup]="hostForm" (ngSubmit)="addEditHost()">
+
+  <h2>{{formTitle}}</h2>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Organization Details
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <div class="row">
+
+        <div class="col">
+          <mat-form-field>
+      <textarea id="organizationName" cdkTextareaAutosize cdkAutosizeMinRows="0" matInput placeholder="Organisation Name*"
+                formControlName="name" [readonly]="mode === 'view'"></textarea>
+            <mat-error *ngIf="hostForm.controls['name'].hasError('required')">Organisation name is required</mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="col">
+          <mat-form-field>
+      <textarea id="organizationDescription" cdkTextareaAutosize cdkAutosizeMinRows="0" matInput placeholder="Description"
+                formControlName="description" [readonly]="mode === 'view'"></textarea>
+          </mat-form-field>
+        </div>
+
+        <div class="col">
+          <mat-form-field>
+            <mat-label>Host Type</mat-label>
+            <mat-select id="organizationType" formControlName="type" [(value)]="selectedOrganizationType" [compareWith]="compareItems"
+                        required
+                        [disabled]="mode !== 'add'">
+              <mat-option *ngFor="let hostType of hostTypes" [value]="hostType">
+                {{hostType.name}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="hostForm.controls.type.hasError('required')">Organisation type is required</mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="col">
+          <mat-form-field>
+            <mat-label>Preferred Medium</mat-label>
+            <mat-select id="preferredMedium" formControlName="medium" [disabled]="mode === 'view'" placeholder="Preferred Medium*"
+                        [compareWith]="compareItems" required>
+              <mat-option *ngFor="let medium of mediums" [value]="medium">
+                {{medium.name}} ({{medium.native}})
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="hostForm.controls['medium'].hasError('required')">Preferred Medium is required
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <mat-form-field>
+            <input matInput id="organizationPhoneNumber" placeholder="Phone Number" formControlName="phone_number" [readonly]="mode === 'view'" #phoneNumber [maxLength]="10" required>
+            <mat-hint align="end">{{phoneNumber.value?.length || 0}}/10</mat-hint>
+            <mat-error *ngIf="hostForm.controls['phone_number'].hasError('required')">Phone number is required</mat-error>
+            <mat-error *ngIf="hostForm.controls['phone_number'].hasError('pattern')">Phone number is not 10 digits</mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="col">
+          <mat-form-field>
+      <textarea id="organizationRegNumber" cdkTextareaAutosize cdkAutosizeMinRows="0" matInput placeholder="Business Registration No"
+                formControlName="business_reg_no" [readonly]="mode === 'view'"></textarea>
+          </mat-form-field>
+        </div>
+
+        <div class="col">
+          <mat-form-field>
+      <textarea id="organizationWebsite" cdkTextareaAutosize cdkAutosizeMinRows="0" matInput placeholder="Website" formControlName="website"
+                [readonly]="mode === 'view'"></textarea>
+          </mat-form-field>
+        </div>
+
+        <div class="col">
+          <mat-form-field>
+            <input id="organizationEmail" matInput placeholder="Email*" formControlName="email" type="email" [readonly]="mode === 'view'">
+            <mat-error *ngIf="hostForm.controls['email'].hasError('email')">Please Enter a valid email</mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+    </mat-expansion-panel>
+
+
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Location
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <admin-address-form [parentForm]="hostForm" [disabled]="mode === 'view'"></admin-address-form>
+
+    </mat-expansion-panel>
+
+
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Person In Charge / Coordinators
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input id="personInChargeName" matInput placeholder="Person In Charge" formControlName="personInChargeName"
+                   [readonly]="mode === 'view'">
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input id="personInChargeDesignation" matInput placeholder="Designation" formControlName="personInChargeDesignation"
+                   [readonly]="mode === 'view'">
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input id="personInChargePhone" matInput placeholder="Phone" formControlName="personInChargePhone" [readonly]="mode === 'view'" #person1PhoneNumber [maxLength]="10">
+            <mat-hint align="end">{{person1PhoneNumber.value?.length || 0}}/10</mat-hint>
+            <mat-error *ngIf="hostForm.controls['personInChargePhone'].hasError('pattern')">
+              Phone number is not 10 digits
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input id="personInChargeEmail" matInput placeholder="Email" formControlName="personInChargeEmail" [readonly]="mode === 'view'">
+            <mat-error *ngIf="hostForm.controls['personInChargeEmail'].hasError('email')">
+              Email format is not correct
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Primary Coordinator" formControlName="coordinator1Name"
+                   [readonly]="mode === 'view'">
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Designation" formControlName="coordinator1Designation"
+                   [readonly]="mode === 'view'">
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Phone" formControlName="coordinator1Phone" [readonly]="mode === 'view'" #person2PhoneNumber [maxLength]="10">
+            <mat-hint align="end">{{person2PhoneNumber.value?.length || 0}}/10</mat-hint>
+            <mat-error *ngIf="hostForm.controls['coordinator1Phone'].hasError('pattern')">
+              Phone number is not 10 digits
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Email" formControlName="coordinator1Email" [readonly]="mode === 'view'">
+            <mat-error *ngIf="hostForm.controls['coordinator1Email'].hasError('email')">
+              Email format is not correct
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Secondary Coordinator" formControlName="coordinator2Name"
+                   [readonly]="mode === 'view'">
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Designation" formControlName="coordinator2Designation"
+                   [readonly]="mode === 'view'">
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Phone" formControlName="coordinator2Phone" [readonly]="mode === 'view'" #person3PhoneNumber [maxLength]="10">
+            <mat-hint align="end">{{person3PhoneNumber.value?.length || 0}}/10</mat-hint>
+            <mat-error *ngIf="hostForm.controls['coordinator2Phone'].hasError('pattern')">
+              Phone number is not 10 digits
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Email" formControlName="coordinator2Email" [readonly]="mode === 'view'">
+            <mat-error *ngIf="hostForm.controls['coordinator2Email'].hasError('email')">
+              Email format is not correct
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+    </mat-expansion-panel>
+
+  </mat-accordion>
+
+
+  <mat-card class="padding_LFB_0 scroll">
+    <mat-card-header>
+      <mat-card-title>Locations</mat-card-title>
+      <button id="addLocation" style="position: relative; top: -10px" type="button" mat-icon-button color="primary"
+              (click)="openDialog()"
+              aria-label="Example icon-button with a heart icon" class="right" [disabled]="mode === 'view'">
+        <mat-icon style="position: relative; top: -1px">add_circle_outline</mat-icon>
+      </button>
+    </mat-card-header>
+
+
+    <mat-accordion>
+      <mat-expansion-panel *ngFor="let locationType of (selectedLocationTypes || [])"
+                           class="remove_padding">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            {{ locationType.name }}
+          </mat-panel-title>
+          <mat-panel-description>
+            {{locationType.displayName}}
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+
+        <div>
+          <mat-selection-list>
+            <div *ngFor="let location of locationList">
+              <mat-list-item *ngIf="location.locationType.name === locationType.name" class="pading-bot">
+                <div class="row">
+                  <div class="col">
+                    <mat-form-field class="full-width">
+                      <input matInput [readonly]="mode === 'view' || location.isDisabled === true" value="{{location.name}}">
+                    </mat-form-field>
+                  </div>
+                  <div class="col">
+                    <mat-form-field class="full-width">
+                      <input matInput [readonly]="mode === 'view' || location.isDisabled === true" value="{{location.description}}">
+                    </mat-form-field>
+                  </div>
+                  <div class="col">
+                    <div class="full-width ma-t-20">
+                      <button type="button" mat-button matSuffix mat-icon-button (click)="enableItem(location)" *ngIf="location.isDisabled && mode === 'edit'">
+                        <mat-icon mat-icon-button color="primary" matTooltip="Enable">visibility</mat-icon>
+                      </button>
+                      <button type="button" mat-button matSuffix mat-icon-button (click)="disableItem(location)"  *ngIf="!location.isDisabled && mode === 'edit'">
+                        <mat-icon mat-icon-button color="primary" matTooltip="Disable">visibility_off</mat-icon>
+                      </button>
+                      <button type="button" mat-button matSuffix mat-icon-button (click)="deleteItem(location)"  *ngIf="mode === 'add'">
+                        <mat-icon mat-icon-button color="primary" matTooltip="Remove">delete</mat-icon>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </mat-list-item>
+            </div>
+
+            <!-- <mat-divider></mat-divider> -->
+            <mat-list-item>
+
+              <location-create-form [mode]="mode" [locationType]="locationType" [host]="host" (onAddNewLocation)="addNewLocation($event)" *ngIf="mode != 'view'"></location-create-form>
+
+            </mat-list-item>
+
+          </mat-selection-list>
+        </div>
+
+      </mat-expansion-panel>
+    </mat-accordion>
+  </mat-card>
+  <mat-card-actions *ngIf="mode !== 'view'" class="margin_LFB_0">
+    <div class="command-btn-container" fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="10px">
+      <button mat-flat-button  color="primary" type="submit" [disabled]="hostForm.invalid" >{{submitBtnText}}</button>
+      <button mat-flat-button  color="accent" type="button" (click)="backToHostManage()" >Cancel</button>
+    </div>
+  </mat-card-actions>
+</form>

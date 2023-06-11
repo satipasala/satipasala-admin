@@ -1,0 +1,42 @@
+<mat-card class="">
+  <mat-card-header>
+    <mat-card-title>{{ program?.name}}</mat-card-title>
+    <mat-card-subtitle>{{program?.questionnaire?.name}} </mat-card-subtitle>
+  </mat-card-header>
+  <img src="assets/images/mindfulness.jpg" alt="">
+  <mat-card-content>
+    <p>{{program.description}}</p>
+    <p class="card_matbages">
+    <span matTooltip="Activities">
+      <mat-icon [matBadge]="getCourseCount(program)" matBadgeColor="accent">accessibility</mat-icon>
+       <span class="cdk-visually-hidden"></span>
+    </span>
+
+      <span matTooltip="facilitators">
+      <mat-icon matBadge="{{program?.facilitatorsCount}}" matBadgeColor="accent">emoji_people</mat-icon>
+       <span class="cdk-visually-hidden"></span>
+    </span>
+
+      <span matTooltip="Feedbacks">
+      <mat-icon matBadge="{{program?.numberOfFeedback}}" matBadgeColor="accent">feedback</mat-icon>
+       <span class="cdk-visually-hidden"></span>
+    </span>
+    </p>
+
+  </mat-card-content>
+  <mat-card-footer>
+    <mat-card-actions>
+      <button mat-icon-button (click)="editProgram(program)" *ngIf="rolePermission['edit']">
+        <mat-icon matTooltip="Edit Program">edit</mat-icon>
+      </button>
+      <button mat-icon-button (click)="showCourses(program)">
+        <mat-icon matTooltip="View courses">directions_bike</mat-icon>
+      </button>
+      <button mat-icon-button (click)="addStudents(program)" *ngIf="rolePermission['edit']">
+        <mat-icon matTooltip="Manage students">accessibility_new</mat-icon>
+      </button>
+    </mat-card-actions>
+  </mat-card-footer>
+
+</mat-card>
+

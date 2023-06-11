@@ -1,0 +1,14 @@
+<div style="grid-area:left;display: flex;flex-direction: column">
+  <admin-search-filter></admin-search-filter>
+  <s-infinite-scroll-grid [addItemEnabled]="true"
+                          [collectionName]="'eventSessions'"
+                          [orderBy]="eventSessionOrderBy"
+                          [searchBy]="eventSessionSearchBy"
+                          [filterBy]="eventSessionFilterBy" class="event_edit_popup_margin_top">
+    <ng-template let-item="item" let-i="i">
+      <admin-event-session-card [session]="item"></admin-event-session-card>
+    </ng-template>
+  </s-infinite-scroll-grid>
+</div>
+
+

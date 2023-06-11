@@ -1,0 +1,14 @@
+<!--
+<s-infinite-scroll-grid [dataSource]="dataSource"  [orderBy]="orderBy" >
+  <ng-template let-item="item" let-i="i">
+    <admin-permission-level-card [permissionLevel]="item"></admin-permission-level-card>
+  </ng-template>
+</s-infinite-scroll-grid>
+-->
+
+
+<s-infinite-scroll-grid [addItemEnabled]="false" [dataSource]="dataSource" [orderBy]="[{fieldPath: 'name', directionStr: 'asc'}]"   >
+  <ng-template let-item="item" let-i="i">
+    <admin-permission-level-card [permissionLevel]="item"></admin-permission-level-card>
+  </ng-template>
+</s-infinite-scroll-grid>

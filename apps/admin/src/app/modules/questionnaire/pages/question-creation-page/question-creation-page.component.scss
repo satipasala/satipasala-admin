@@ -1,0 +1,26 @@
+
+.shipping-card{
+  .question{
+  .mat-card-content{
+    padding: 15px 0;
+  }
+  }
+
+  .mat-card-header-text{
+    margin: 0;
+  }
+}
+.shipping-card {
+  > .mat-card{
+    margin: 9px auto;
+  }
+}
+
+.b-20{
+  margin-bottom: 20px !important;
+}
+
+.mr-10{
+  margin-right: 10px !important;
+}
+

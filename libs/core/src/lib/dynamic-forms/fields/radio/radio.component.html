@@ -1,0 +1,10 @@
+<div>
+  <p *ngIf="showLabel" id="sathi-radio-group-label">{{field.description}}</p>
+  <mat-radio-group aria-labelledby="sathi-radio-group-label" [(value)]="field.value"
+    (change)="setControlValue($event.value)" aria-label="Select an option" [disabled]="field.disabled">
+
+    <mat-radio-button class="sathi-radio-button" *ngFor="let option of field.options" [value]="option.value">
+      <img *ngIf="option.imageUrl" [src]="option.imageUrl"> {{option.label}}
+    </mat-radio-button>
+  </mat-radio-group>
+</div>

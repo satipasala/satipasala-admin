@@ -1,0 +1,52 @@
+<!--
+<div cdkDropListGroup>
+  <div class="example-container" *ngFor="let list of dragDropLists">
+    <h2>{{list.name}}</h2>
+
+    <div
+      cdkDropList
+      [cdkDropListData]="list.list"
+      class="example-list"
+      (cdkDropListDropped)="drop($event)" >
+      &lt;!&ndash;<div class="example-box" *ngFor="let item of list.list" cdkDrag>{{item.name}}</div>&ndash;&gt;
+      <satipasala-drag-drop-list-item class="example-box" *ngFor="let item of list.list" cdkDrag  [item]="item"></satipasala-drag-drop-list-item>
+    </div>
+  </div>
+</div>
+-->
+  <s-grid
+    lg= "'questionnaire questionnaire . questions' "
+    md="'questionnaire questionnaire' '. questions'"
+    sm="'questionnaire' 'questions'"
+    x-sm="'questionnaire' 'questions'"
+    class="drag-drop-list">
+
+
+  <s-grid-tile  *ngFor="let dragDropList of dragDropLists" [gridArea]="dragDropList.id">
+    <div class="grid-tile-wrapper">
+      <h2>{{dragDropList.name}}</h2><br>
+      <h1>{{dragDropList.label}}</h1>
+
+      <div
+        cdkDropList
+        [cdkDropListData]="dragDropList.list.values"
+        class="example-list"
+        (cdkDropListDropped)="drop($event)">
+        <s-drag-drop-list-item class="example-box" *ngFor="let item of dragDropList.list.values" cdkDrag
+                               [item]="item"></s-drag-drop-list-item>
+      </div>
+    </div>
+  </s-grid-tile>
+
+</s-grid>
+
+<!--<mat-grid-list cdkDropListGroup cols="{{columns}}" rowHeight={{rowHeight}} class="drag-drop-list">
+  <mat-grid-tile class="example-container"
+                 *ngFor="let list of dragDropLists"
+                 [colspan]="list.cols"
+                 [rowspan]="list.rows"
+                 [style.background]="list.color">
+
+
+  </mat-grid-tile>
+</mat-grid-list>-->

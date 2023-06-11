@@ -1,0 +1,757 @@
+{
+  "roles": {
+    "STUDENT": {
+      "name": "Student",
+      "allowedPermissions": {
+        "collection_questionnaires": {
+          "description": "Questionnaires Collection",
+          "view": true,
+          "updatedAt": "2019-04-18T18:25:43.511Z",
+          "name": "collection_questionnaires",
+          "edit": false,
+          "id": "collection_questionnaires",
+          "createdAt": "2019-04-18T18:25:43.511Z"
+        },
+        "collection_hosts": {
+          "description": "Hosts Collection",
+          "view": true,
+          "updatedAt": "2019-04-18T18:25:43.511Z",
+          "name": "collection_hosts",
+          "edit": false,
+          "id": "collection_hosts",
+          "createdAt": "2019-04-18T18:25:43.511Z"
+        },
+        "collection_questions": {
+          "updatedAt": "2019-04-18T18:25:43.511Z",
+          "name": "collection_questions",
+          "edit": false,
+          "id": "collection_questions",
+          "createdAt": "2019-04-18T18:25:43.511Z",
+          "description": "Questions Collection",
+          "view": true
+        },
+        "collection_referencedata": {
+          "description": "Reference Data Collection",
+          "view": true,
+          "updatedAt": "2019-04-18T18:25:43.511Z",
+          "name": "collection_referencedata",
+          "edit": false,
+          "id": "collection_referencedata",
+          "createdAt": "2019-04-18T18:25:43.511Z"
+        },
+        "collection_roles": {
+          "edit": false,
+          "id": "collection_roles",
+          "createdAt": "2019-04-18T18:25:43.511Z",
+          "description": "Roles Collection",
+          "view": true,
+          "updatedAt": "2019-04-18T18:25:43.511Z",
+          "name": "collection_roles"
+        },
+        "collection_courses": {
+          "edit": false,
+          "id": "collection_courses",
+          "createdAt": "2019-04-18T18:25:43.511Z",
+          "description": "Courses Collection",
+          "view": true,
+          "updatedAt": "2019-04-18T18:25:43.511Z",
+          "name": "collection_courses"
+        },
+        "collection_users": {
+          "name": "collection_users",
+          "edit": false,
+          "id": "collection_users",
+          "createdAt": "2019-04-18T18:25:43.511Z",
+          "description": "Users Collection",
+          "view": true,
+          "updatedAt": "2019-04-18T18:25:43.511Z"
+        },
+        "collection_events": {
+          "edit": false,
+          "id": "collection_events",
+          "createdAt": "2019-04-18T18:25:43.511Z",
+          "description": "Events Collection",
+          "view": true,
+          "updatedAt": "2019-04-18T18:25:43.511Z",
+          "name": "collection_events"
+        },
+        "collection_feedbacks": {
+          "updatedAt": "2019-04-18T18:25:43.511Z",
+          "name": "collection_feedbacks",
+          "edit": false,
+          "id": "collection_feedbacks",
+          "createdAt": "2019-04-18T18:25:43.511Z",
+          "description": "Feedbacks Collection",
+          "view": true
+        }
+      },
+      "permissionLevelGroup": {
+        "view": {
+          "name": "Country",
+          "id": "country",
+          "access_level": 800,
+          "active": "Yes"
+        },
+        "edit": {
+          "name": "Disabled",
+          "id": "disabled",
+          "access_level": 0,
+          "active": "Yes"
+        }
+      },
+      "id": "STUDENT",
+      "isActive": true,
+      "createdAt": {
+        "_seconds": 1585211413,
+        "_nanoseconds": 900000000
+      },
+      "allowedOrgTypes": {
+        "School": {
+          "id": "School",
+          "active": "Yes",
+          "name": "School",
+          "description": "School",
+          "locations": [
+            {
+              "name": "G1",
+              "displayName": "Grade 1"
+            },
+            {
+              "name": "G2",
+              "displayName": " Grade 2"
+            },
+            {
+              "name": "G3",
+              "displayName": "Grade 3"
+            },
+            {
+              "name": "G4",
+              "displayName": "Grade 4"
+            },
+            {
+              "name": "G5",
+              "displayName": "Grade 5"
+            },
+            {
+              "name": "G6",
+              "displayName": "Grade 6"
+            },
+            {
+              "name": "G7",
+              "displayName": "Grade 7"
+            },
+            {
+              "name": "G8",
+              "displayName": "Grade 8"
+            },
+            {
+              "name": "G9",
+              "displayName": "Grade 9"
+            },
+            {
+              "name": "G10",
+              "displayName": "Grade 10"
+            },
+            {
+              "name": "G11",
+              "displayName": "Grade 11"
+            },
+            {
+              "name": "G12",
+              "displayName": "Grade 12"
+            },
+            {
+              "name": "G13",
+              "displayName": "Grade 13"
+            }
+          ]
+        },
+        "Daham Pasala": {
+          "id": "Daham Pasala",
+          "active": "Yes",
+          "name": "Daham Pasala",
+          "description": "Daham Pasala Organization",
+          "locations": [
+            {
+              "name": "G1",
+              "displayName": "Grade 1"
+            },
+            {
+              "name": "G2",
+              "displayName": "Grade 2"
+            },
+            {
+              "name": "G3",
+              "displayName": "Grade 3"
+            },
+            {
+              "name": "G4",
+              "displayName": "Grade 4"
+            },
+            {
+              "name": "G5",
+              "displayName": "Grade 5"
+            },
+            {
+              "name": "G6",
+              "displayName": "Grade 6"
+            },
+            {
+              "name": "G7",
+              "displayName": "Grade 7"
+            },
+            {
+              "name": "G8",
+              "displayName": "Grade 8"
+            },
+            {
+              "name": "G9",
+              "displayName": "Grade 9"
+            },
+            {
+              "name": "G10",
+              "displayName": "Grade 10"
+            },
+            {
+              "name": "G11",
+              "displayName": "Grade 11"
+            },
+            {
+              "name": "G12",
+              "displayName": "Grade 12"
+            },
+            {
+              "name": "G13",
+              "displayName": "Grade 13"
+            }
+          ]
+        }
+      },
+      "roleLevel": {
+        "id": "student",
+        "access_level": 20,
+        "active": "Yes",
+        "name": "Student"
+      },
+      "courses": {},
+      "updatedAt": {
+        "_seconds": 1585211413,
+        "_nanoseconds": 900000000
+      }
+    },
+    "SYSTEMADMIN": {
+      "allowedPermissions": {
+        "collection_courses": {
+          "name": "collection_courses",
+          "edit": true,
+          "id": "collection_courses",
+          "createdAt": "2019-04-18T18:25:43.511Z",
+          "description": "Courses Collection",
+          "view": true,
+          "updatedAt": "2019-04-18T18:25:43.511Z"
+        },
+        "collection_users": {
+          "description": "Users Collection",
+          "view": true,
+          "updatedAt": "2019-04-18T18:25:43.511Z",
+          "name": "collection_users",
+          "edit": true,
+          "id": "collection_users",
+          "createdAt": "2019-04-18T18:25:43.511Z"
+        },
+        "collection_events": {
+          "view": true,
+          "updatedAt": "2019-04-18T18:25:43.511Z",
+          "name": "collection_events",
+          "edit": true,
+          "id": "collection_events",
+          "createdAt": "2019-04-18T18:25:43.511Z",
+          "description": "Events Collection"
+        },
+        "collection_feedbacks": {
+          "description": "Feedbacks Collection",
+          "view": true,
+          "updatedAt": "2019-04-18T18:25:43.511Z",
+          "name": "collection_feedbacks",
+          "edit": true,
+          "id": "collection_feedbacks",
+          "createdAt": "2019-04-18T18:25:43.511Z"
+        },
+        "collection_questionnaires": {
+          "description": "Questionnaires Collection",
+          "view": true,
+          "updatedAt": "2019-04-18T18:25:43.511Z",
+          "name": "collection_questionnaires",
+          "edit": true,
+          "id": "collection_questionnaires",
+          "createdAt": "2019-04-18T18:25:43.511Z"
+        },
+        "collection_hosts": {
+          "view": true,
+          "updatedAt": "2019-04-18T18:25:43.511Z",
+          "name": "collection_hosts",
+          "edit": true,
+          "id": "collection_hosts",
+          "createdAt": "2019-04-18T18:25:43.511Z",
+          "description": "Hosts Collection"
+        },
+        "collection_questions": {
+          "updatedAt": "2019-04-18T18:25:43.511Z",
+          "name": "collection_questions",
+          "edit": true,
+          "id": "collection_questions",
+          "createdAt": "2019-04-18T18:25:43.511Z",
+          "description": "Questions Collection",
+          "view": true
+        },
+        "collection_referencedata": {
+          "description": "Reference Data Collection",
+          "view": true,
+          "updatedAt": "2019-04-18T18:25:43.511Z",
+          "name": "collection_referencedata",
+          "edit": true,
+          "id": "collection_referencedata",
+          "createdAt": "2019-04-18T18:25:43.511Z"
+        },
+        "collection_roles": {
+          "description": "Roles Collection",
+          "view": true,
+          "updatedAt": "2019-04-18T18:25:43.511Z",
+          "name": "collection_roles",
+          "edit": true,
+          "id": "collection_roles",
+          "createdAt": "2019-04-18T18:25:43.511Z"
+        }
+      },
+      "permissionLevelGroup": {
+        "view": {
+          "name": "Global",
+          "id": "global",
+          "access_level": 1000
+        },
+        "edit": {
+          "id": "global",
+          "access_level": 1000,
+          "name": "Global"
+        }
+      },
+      "id": "SYSTEMADMIN",
+      "isActive": true,
+      "allowedOrgTypes": {
+        "Daham Pasala": {
+          "name": "Daham Pasala",
+          "description": "Daham Pasala Organization",
+          "locations": [
+            {
+              "name": "G1",
+              "displayName": "Grade 1"
+            },
+            {
+              "name": "G2",
+              "displayName": "Grade 2"
+            },
+            {
+              "name": "G3",
+              "displayName": "Grade 3"
+            },
+            {
+              "name": "G4",
+              "displayName": "Grade 4"
+            },
+            {
+              "name": "G5",
+              "displayName": "Grade 5"
+            },
+            {
+              "name": "G6",
+              "displayName": "Grade 6"
+            },
+            {
+              "name": "G7",
+              "displayName": "Grade 7"
+            },
+            {
+              "name": "G8",
+              "displayName": "Grade 8"
+            },
+            {
+              "name": "G9",
+              "displayName": "Grade 9"
+            },
+            {
+              "name": "G10",
+              "displayName": "Grade 10"
+            },
+            {
+              "name": "G11",
+              "displayName": "Grade 11"
+            },
+            {
+              "name": "G12",
+              "displayName": "Grade 12"
+            },
+            {
+              "name": "G13",
+              "displayName": "Grade 13"
+            }
+          ],
+          "id": "Daham Pasala",
+          "active": "Yes"
+        },
+        "Organization Type - Government": {
+          "locations": [
+            {
+              "name": "Colombo",
+              "displayName": "Colombo - Gov"
+            },
+            {
+              "name": "Gampaha",
+              "displayName": "Gov Org"
+            }
+          ],
+          "id": "Organization Type - Government",
+          "active": "Yes",
+          "name": "Organization Type - Government",
+          "description": "Government Organization"
+        },
+        "Corporate Sector": {
+          "name": "Corporate Sector",
+          "description": "",
+          "locations": [
+            {
+              "name": "OfficeLocation",
+              "displayName": "Office Locations"
+            }
+          ],
+          "id": "Corporate Sector",
+          "active": "Yes"
+        },
+        "School": {
+          "name": "School",
+          "description": "School",
+          "locations": [
+            {
+              "name": "G1",
+              "displayName": "Grade 1"
+            },
+            {
+              "name": "G2",
+              "displayName": " Grade 2"
+            },
+            {
+              "name": "G3",
+              "displayName": "Grade 3"
+            },
+            {
+              "name": "G4",
+              "displayName": "Grade 4"
+            },
+            {
+              "name": "G5",
+              "displayName": "Grade 5"
+            },
+            {
+              "name": "G6",
+              "displayName": "Grade 6"
+            },
+            {
+              "name": "G7",
+              "displayName": "Grade 7"
+            },
+            {
+              "name": "G8",
+              "displayName": "Grade 8"
+            },
+            {
+              "name": "G9",
+              "displayName": "Grade 9"
+            },
+            {
+              "name": "G10",
+              "displayName": "Grade 10"
+            },
+            {
+              "name": "G11",
+              "displayName": "Grade 11"
+            },
+            {
+              "name": "G12",
+              "displayName": "Grade 12"
+            },
+            {
+              "name": "G13",
+              "displayName": "Grade 13"
+            }
+          ],
+          "id": "School",
+          "active": "Yes"
+        },
+        "Private Company": {
+          "name": "Private Company",
+          "description": "Private Company",
+          "locations": [],
+          "id": "Private Company",
+          "active": "Yes"
+        },
+        "NonProfit": {
+          "id": "NonProfit",
+          "active": "Yes",
+          "name": "NonProfit",
+          "description": "Organizations whose works are non profit",
+          "locations": [
+            {
+              "name": "OpenAreas",
+              "displayName": "Open areas allows large groups"
+            }
+          ]
+        }
+      },
+      "roleLevel": {
+        "id": "super_admin",
+        "access_level": 60,
+        "name": "Super Admin"
+      },
+      "courses": {},
+      "name": "System Administrator"
+    },
+    "TEACHER": {
+      "updatedAt": {
+        "_seconds": 1585210477,
+        "_nanoseconds": 900000000
+      },
+      "name": "Teacher",
+      "allowedPermissions": {
+        "collection_users": {
+          "name": "collection_users",
+          "edit": true,
+          "id": "collection_users",
+          "createdAt": "2019-04-18T18:25:43.511Z",
+          "description": "Users Collection",
+          "view": true,
+          "updatedAt": "2019-04-18T18:25:43.511Z"
+        },
+        "collection_events": {
+          "name": "collection_events",
+          "edit": false,
+          "id": "collection_events",
+          "createdAt": "2019-04-18T18:25:43.511Z",
+          "description": "Events Collection",
+          "view": true,
+          "updatedAt": "2019-04-18T18:25:43.511Z"
+        },
+        "collection_feedbacks": {
+          "description": "Feedbacks Collection",
+          "view": true,
+          "updatedAt": "2019-04-18T18:25:43.511Z",
+          "name": "collection_feedbacks",
+          "edit": true,
+          "id": "collection_feedbacks",
+          "createdAt": "2019-04-18T18:25:43.511Z"
+        },
+        "collection_questionnaires": {
+          "name": "collection_questionnaires",
+          "edit": false,
+          "id": "collection_questionnaires",
+          "createdAt": "2019-04-18T18:25:43.511Z",
+          "description": "Questionnaires Collection",
+          "view": true,
+          "updatedAt": "2019-04-18T18:25:43.511Z"
+        },
+        "collection_hosts": {
+          "name": "collection_hosts",
+          "edit": false,
+          "id": "collection_hosts",
+          "createdAt": "2019-04-18T18:25:43.511Z",
+          "description": "Hosts Collection",
+          "view": true,
+          "updatedAt": "2019-04-18T18:25:43.511Z"
+        },
+        "collection_questions": {
+          "updatedAt": "2019-04-18T18:25:43.511Z",
+          "name": "collection_questions",
+          "edit": false,
+          "id": "collection_questions",
+          "createdAt": "2019-04-18T18:25:43.511Z",
+          "description": "Questions Collection",
+          "view": true
+        },
+        "collection_referencedata": {
+          "description": "Reference Data Collection",
+          "view": true,
+          "updatedAt": "2019-04-18T18:25:43.511Z",
+          "name": "collection_referencedata",
+          "edit": false,
+          "id": "collection_referencedata",
+          "createdAt": "2019-04-18T18:25:43.511Z"
+        },
+        "collection_roles": {
+          "description": "Roles Collection",
+          "view": true,
+          "updatedAt": "2019-04-18T18:25:43.511Z",
+          "name": "collection_roles",
+          "edit": false,
+          "id": "collection_roles",
+          "createdAt": "2019-04-18T18:25:43.511Z"
+        },
+        "collection_courses": {
+          "description": "Courses Collection",
+          "view": true,
+          "updatedAt": "2019-04-18T18:25:43.511Z",
+          "name": "collection_courses",
+          "edit": false,
+          "id": "collection_courses",
+          "createdAt": "2019-04-18T18:25:43.511Z"
+        }
+      },
+      "permissionLevelGroup": {
+        "view": {
+          "name": "Country",
+          "id": "country",
+          "access_level": 800,
+          "active": "Yes"
+        },
+        "edit": {
+          "name": "Organization",
+          "id": "organization",
+          "access_level": 400,
+          "active": "Yes"
+        }
+      },
+      "id": "TEACHER",
+      "isActive": true,
+      "createdAt": {
+        "_seconds": 1585210477,
+        "_nanoseconds": 900000000
+      },
+      "allowedOrgTypes": {
+        "School": {
+          "locations": [
+            {
+              "name": "G1",
+              "displayName": "Grade 1"
+            },
+            {
+              "name": "G2",
+              "displayName": " Grade 2"
+            },
+            {
+              "name": "G3",
+              "displayName": "Grade 3"
+            },
+            {
+              "name": "G4",
+              "displayName": "Grade 4"
+            },
+            {
+              "name": "G5",
+              "displayName": "Grade 5"
+            },
+            {
+              "name": "G6",
+              "displayName": "Grade 6"
+            },
+            {
+              "name": "G7",
+              "displayName": "Grade 7"
+            },
+            {
+              "name": "G8",
+              "displayName": "Grade 8"
+            },
+            {
+              "name": "G9",
+              "displayName": "Grade 9"
+            },
+            {
+              "name": "G10",
+              "displayName": "Grade 10"
+            },
+            {
+              "name": "G11",
+              "displayName": "Grade 11"
+            },
+            {
+              "name": "G12",
+              "displayName": "Grade 12"
+            },
+            {
+              "name": "G13",
+              "displayName": "Grade 13"
+            }
+          ],
+          "id": "School",
+          "active": "Yes",
+          "name": "School",
+          "description": "School"
+        },
+        "Daham Pasala": {
+          "id": "Daham Pasala",
+          "active": "Yes",
+          "name": "Daham Pasala",
+          "description": "Daham Pasala Organization",
+          "locations": [
+            {
+              "name": "G1",
+              "displayName": "Grade 1"
+            },
+            {
+              "name": "G2",
+              "displayName": "Grade 2"
+            },
+            {
+              "name": "G3",
+              "displayName": "Grade 3"
+            },
+            {
+              "name": "G4",
+              "displayName": "Grade 4"
+            },
+            {
+              "name": "G5",
+              "displayName": "Grade 5"
+            },
+            {
+              "name": "G6",
+              "displayName": "Grade 6"
+            },
+            {
+              "name": "G7",
+              "displayName": "Grade 7"
+            },
+            {
+              "name": "G8",
+              "displayName": "Grade 8"
+            },
+            {
+              "name": "G9",
+              "displayName": "Grade 9"
+            },
+            {
+              "name": "G10",
+              "displayName": "Grade 10"
+            },
+            {
+              "name": "G11",
+              "displayName": "Grade 11"
+            },
+            {
+              "name": "G12",
+              "displayName": "Grade 12"
+            },
+            {
+              "name": "G13",
+              "displayName": "Grade 13"
+            }
+          ]
+        }
+      },
+      "roleLevel": {
+        "id": "teacher",
+        "access_level": 30,
+        "active": "Yes",
+        "name": "Teacher"
+      },
+      "courses": {}
+    }
+  }
+}

@@ -1,0 +1,20 @@
+<button mat-icon-button [matMenuTriggerFor]="menu">
+  <mat-icon>more_vert</mat-icon>
+</button>
+<mat-menu #menu="matMenu">
+  <button mat-menu-item  (click)="showLocations()">
+    <mat-icon>location_on</mat-icon>
+    <span>Locations</span>
+  </button><button mat-menu-item  (click)="edit()">
+    <mat-icon>edit</mat-icon>
+    <span>Edit Host</span>
+  </button>
+  <button mat-menu-item>
+    <mat-icon>location_disabled</mat-icon>
+    <span>Disable Host</span>
+  </button>
+  <button mat-menu-item (click)="addStudents()">
+    <mat-icon>add</mat-icon>
+    <span>Add Students</span>
+  </button>
+</mat-menu>

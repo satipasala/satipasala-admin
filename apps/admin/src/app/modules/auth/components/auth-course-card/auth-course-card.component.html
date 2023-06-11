@@ -1,0 +1,31 @@
+<mat-card class="">
+  <mat-card-header>
+    <mat-card-title>{{ course.name}}</mat-card-title>
+    <mat-card-subtitle>{{course.questionnaire.name}} </mat-card-subtitle>
+  </mat-card-header>
+  <img src="assets/images/v-mindful-walking.png" alt="">
+  <mat-card-content>
+    <p>{{course.description}}</p>
+    <p class="card_matbages">
+    <span matTooltip="Activities">
+      <mat-icon matBadge="getNumberOfActivities(course)" matBadgeColor="accent">accessibility</mat-icon>
+       <span class="cdk-visually-hidden"></span>
+    </span>
+
+    <span matTooltip="facilitators">
+      <mat-icon matBadge="{{course.facilitatorsCount}}" matBadgeColor="accent">emoji_people</mat-icon>
+       <span class="cdk-visually-hidden"></span>
+    </span>
+
+    <span matTooltip="Feedbacks">
+      <mat-icon matBadge="{{course.numberOfFeedback}}" matBadgeColor="accent">feedback</mat-icon>
+       <span class="cdk-visually-hidden"></span>
+    </span>
+    </p>
+
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-icon-button  (click)="showActivites(course)" ><mat-icon matTooltip="view activities">directions_bike</mat-icon></button>
+  </mat-card-actions>
+</mat-card>
+

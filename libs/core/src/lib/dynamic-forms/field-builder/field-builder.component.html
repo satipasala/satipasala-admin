@@ -1,0 +1,11 @@
+<div class="sathi-form-group" [ngSwitch]="field.type">
+    <satipasala-text-box *ngSwitchCase="'text'" [field]="field" [form]="form"></satipasala-text-box>
+    <satipasala-drop-down *ngSwitchCase="'dropdown'" [field]="field" [form]="form"></satipasala-drop-down>
+    <satipasala-check-box *ngSwitchCase="'checkbox'" [field]="field" [form]="form"></satipasala-check-box>
+    <satipasala-radio [showLabel]="showLabel" *ngSwitchCase="'radio'" [field]="field" [form]="form"></satipasala-radio>
+    <satipasala-input *ngSwitchCase="'email'" [field]="field" [form]="form"></satipasala-input>
+    <s-selection-list *ngSwitchCase="'selection-list'" [field]="field" [form]="form"></s-selection-list>
+<!--    <satipasala-file *ngSwitchCase="'file'" [field]="field" [form]="form"></satipasala-file>-->
+  </div>
+
+

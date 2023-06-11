@@ -1,0 +1,44 @@
+<h1 mat-dialog-title>Link accounts</h1>
+<h4>Link your social login account by providing a password for account registered with {{user.email}} . </h4>
+<mat-dialog-content class="ref-dialog">
+  <form [formGroup]="userProfileForm" (ngSubmit)="onSubmit()">
+    <div class="row">
+      <div class="col">
+        <mat-form-field>
+          <input matInput placeholder="Password*" formControlName="password" type="password">
+        </mat-form-field>
+        <div *ngIf="submitted && upf.password.errors">
+          <mat-error *ngIf="upf.password.errors.required">
+            Password is <strong>required</strong>
+          </mat-error>
+          <mat-error *ngIf="upf.password.errors.minlength">
+            Password should contain at least 6 characters
+          </mat-error>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col">
+        <mat-form-field>
+          <input matInput placeholder="Confirm Password*" formControlName="confirmPassword" type="password">
+        </mat-form-field>
+        <div *ngIf="submitted && upf.confirmPassword.errors">
+          <mat-error *ngIf="upf.confirmPassword.errors.required">
+            Password is <strong>required</strong>
+          </mat-error>
+          <mat-error *ngIf="upf.confirmPassword.errors.isPasswordaMatch">
+            Password should be the same
+          </mat-error>
+        </div>
+      </div>
+    </div>
+
+    <mat-dialog-actions>
+      <button mat-flat-button color="primary" type="submit" [disabled]="!userProfileForm.valid" cdkFocusInitial>Link</button>
+      <button mat-flat-button color="accent" type="button" (click)="onNoClick()">Cancel</button>
+    </mat-dialog-actions>
+
+
+  </form>
+</mat-dialog-content>

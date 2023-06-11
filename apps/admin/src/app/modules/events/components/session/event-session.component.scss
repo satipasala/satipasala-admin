@@ -1,0 +1,52 @@
+@import "../../../card_format";
+
+:host {
+  --s-grid-template-columns: 1;
+  height: 90vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr;
+  grid-template-areas: "left right";
+}
+
+s-infinite-scroll-grid{
+  display: block;
+  width: 100%;
+}
+
+/*
+ .location_img{
+   position: relative;
+   margin: -15px -15px 0;
+   img{
+     max-width: 100%;
+   }
+   span{
+     position: absolute;
+     top: 80px;
+     right: 30px;
+     color: var(--white);
+     z-index: 3;
+     font-size: 18px;
+   }
+ }
+
+
+ .location_icon{
+   margin-left: 26px;
+ }
+
+.mat-card-header{
+  min-height: 100px;
+  max-height: 100px;
+}
+*/
+
+.mat-card-subtitle {
+  display: flex;
+
+  .flag {
+    margin-right: 5px;
+    color: rgba(0, 0, 0, 0.99);
+  }
+}

@@ -1,0 +1,229 @@
+{
+  "users": {
+    "admin@satipasala.com": {
+      "preferredMedium": "New Language",
+      "lastName": "Admin",
+      "courseSubscriptions": {},
+      "displayName": "Satipasala Admin",
+      "firstName": "Satipasala",
+      "phoneNumber": "",
+      "updatedAt": "January 18, 2020 at 10:46:19 PM GMT+5",
+      "dob": null,
+      "disabled": false,
+      "userRole": {
+        "name": "System Administrator",
+        "allowedPermissions": {
+          "collection_users": {
+            "description": "Users Collection",
+            "view": true,
+            "updatedAt": "2019-04-18T18:25:43.511Z",
+            "name": "collection_users",
+            "edit": true,
+            "id": "collection_users",
+            "createdAt": "2019-04-18T18:25:43.511Z"
+          },
+          "collection_events": {
+            "id": "collection_events",
+            "createdAt": "2019-04-18T18:25:43.511Z",
+            "description": "Events Collection",
+            "view": true,
+            "updatedAt": "2019-04-18T18:25:43.511Z",
+            "name": "collection_events",
+            "edit": true
+          },
+          "collection_feedbacks": {
+            "id": "collection_feedbacks",
+            "createdAt": "2019-04-18T18:25:43.511Z",
+            "description": "Feedbacks Collection",
+            "view": true,
+            "updatedAt": "2019-04-18T18:25:43.511Z",
+            "name": "collection_feedbacks",
+            "edit": true
+          },
+          "collection_questionnaires": {
+            "view": true,
+            "updatedAt": "2019-04-18T18:25:43.511Z",
+            "name": "collection_questionnaires",
+            "edit": true,
+            "id": "collection_questionnaires",
+            "createdAt": "2019-04-18T18:25:43.511Z",
+            "description": "Questionnaires Collection"
+          },
+          "collection_hosts": {
+            "description": "Hosts Collection",
+            "view": true,
+            "updatedAt": "2019-04-18T18:25:43.511Z",
+            "name": "collection_hosts",
+            "edit": true,
+            "id": "collection_hosts",
+            "createdAt": "2019-04-18T18:25:43.511Z"
+          },
+          "collection_questions": {
+            "id": "collection_questions",
+            "createdAt": "2019-04-18T18:25:43.511Z",
+            "description": "Questions Collection",
+            "view": true,
+            "updatedAt": "2019-04-18T18:25:43.511Z",
+            "name": "collection_questions",
+            "edit": true
+          },
+          "collection_referencedata": {
+            "id": "collection_referencedata",
+            "createdAt": "2019-04-18T18:25:43.511Z",
+            "description": "Reference Data Collection",
+            "view": true,
+            "updatedAt": "2019-04-18T18:25:43.511Z",
+            "name": "collection_referencedata",
+            "edit": true
+          },
+          "collection_roles": {
+            "edit": true,
+            "id": "collection_roles",
+            "createdAt": "2019-04-18T18:25:43.511Z",
+            "description": "Roles Collection",
+            "view": true,
+            "updatedAt": "2019-04-18T18:25:43.511Z",
+            "name": "collection_roles"
+          },
+          "collection_courses": {
+            "updatedAt": "2019-04-18T18:25:43.511Z",
+            "name": "collection_courses",
+            "edit": true,
+            "id": "collection_courses",
+            "createdAt": "2019-04-18T18:25:43.511Z",
+            "description": "Courses Collection",
+            "view": true
+          }
+        },
+        "permissionLevelGroup": {
+          "view": {
+            "id": "global",
+            "access_level": 1000,
+            "name": "Global"
+          },
+          "edit": {
+            "id": "global",
+            "access_level": 1000,
+            "name": "Global"
+          }
+        },
+        "id": "SYSTEMADMIN",
+        "isActive": true,
+        "roleLevel": {
+          "name": "Super Admin",
+          "id": "super_admin",
+          "access_level": 60
+        },
+        "courses": {}
+      },
+      "organizationsInfo": [
+        {
+          "id": "00dVJdhVk5SxpOSsMMgN",
+          "disabled": false,
+          "name": "Sri Lanka",
+          "description": "Sati Pasala - Sri Lanka"
+        }
+      ],
+      "userName": "admin@satipasala.com",
+      "uid": "admin@satipasala.com",
+      "description": "",
+      "nic": "",
+      "email": "admin@satipasala.com",
+      "_organizationsInfo": [
+        "Sri Lanka"
+      ],
+      "id": "admin@satipasala.com",
+      "addressInfo": {
+        "city": {
+          "id": "1",
+          "description": "",
+          "active": "Yes",
+          "state": {
+            "active": "Yes",
+            "shortName: ": "WP",
+            "country": {
+              "shortName": "LK",
+              "name": "Sri Lanka",
+              "emojiU": "U+1F1F1 U+1F1F0",
+              "languages": [
+                "si",
+                "ta"
+              ],
+              "id": "206",
+              "currency": "LKR",
+              "native": "śrī laṃkāva",
+              "capital": "Colombo",
+              "phone": "94",
+              "continent": "AS",
+              "emoji": "🇱🇰"
+            },
+            "name": "Western Province",
+            "id": "1",
+            "description": ""
+          },
+          "country": {
+            "native": "śrī laṃkāva",
+            "capital": "Colombo",
+            "phone": "94",
+            "continent": "AS",
+            "emoji": "🇱🇰",
+            "shortName": "LK",
+            "name": "Sri Lanka",
+            "emojiU": "U+1F1F1 U+1F1F0",
+            "languages": [
+              "si",
+              "ta"
+            ],
+            "id": "206",
+            "currency": "LKR"
+          },
+          "name": "Colombo"
+        },
+        "state": {
+          "description": "",
+          "active": "Yes",
+          "shortName: ": "WP",
+          "country": {
+            "id": "206",
+            "currency": "LKR",
+            "native": "śrī laṃkāva",
+            "capital": "Colombo",
+            "phone": "94",
+            "continent": "AS",
+            "emoji": "🇱🇰",
+            "shortName": "LK",
+            "name": "Sri Lanka",
+            "emojiU": "U+1F1F1 U+1F1F0",
+            "languages": [
+              "si",
+              "ta"
+            ]
+          },
+          "name": "Western Province",
+          "id": "1"
+        },
+        "country": {
+          "id": "206",
+          "currency": "LKR",
+          "native": "śrī laṃkāva",
+          "capital": "Colombo",
+          "phone": "94",
+          "continent": "AS",
+          "emoji": "🇱🇰",
+          "shortName": "LK",
+          "name": "Sri Lanka",
+          "emojiU": "U+1F1F1 U+1F1F0",
+          "languages": [
+            "si",
+            "ta"
+          ]
+        },
+        "street": "Malay"
+      },
+      "photoURL": "profile_pictures/admin@satipasala.com",
+      "createdAt": "2020-03-26T06:30:36.399Z",
+      "userRoleId": "SYSTEMADMIN",
+      "providerId": "password"
+    }
+  }
+}

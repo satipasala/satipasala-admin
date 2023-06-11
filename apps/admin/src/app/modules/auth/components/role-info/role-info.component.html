@@ -1,0 +1,6 @@
+<s-infinite-scroll-grid *ngIf="rolePermission" [addItemEnabled]="rolePermission.edit" [collectionName]="collection" [orderBy]="[]"
+  [searchBy]="searchBy" [filterBy]="filterBy" (onAddItem)="addNewRole()">
+  <ng-template let-item="item" let-i="i">
+    <admin-role-card [permission]="rolePermission" [role]="item"></admin-role-card>
+  </ng-template>
+</s-infinite-scroll-grid>

@@ -1,0 +1,28 @@
+<div class="dashboard-wrapper">
+  <div class="row">
+    <div class="col">
+      <admin-dashboard-card-component [image]="'assets/images/img_avatar2.png'" [title]="'Users'"
+                                      [stat]="userCount" [actionIcon1]="'settings'"
+                                      (clickAction1Emitter)="userView()"></admin-dashboard-card-component>
+    </div>
+    <div class="col">
+      <admin-dashboard-card-component [image]="'assets/images/host.jpeg'" [title]="'Hosts'"
+                                      [stat]="hostCount" [actionIcon1]="'settings'"
+                                      (clickAction1Emitter)="hostView()"></admin-dashboard-card-component>
+    </div>
+    <div class="col">
+      <admin-dashboard-card-component [image]="'assets/images/questionnaire.jpg'" [title]="'Questionnaires'"
+                                      [stat]="questionnaireCount" [actionIcon1]="'settings'"
+                                      (clickAction1Emitter)="questionView()"></admin-dashboard-card-component>
+    </div>
+    <div class="col">
+      <admin-dashboard-card-component [image]="'assets/images/course.png'" [title]="'Courses'"
+                                      [stat]="courseCount" [actionIcon1]="'settings'"
+                                      (clickAction1Emitter)="courseView()"></admin-dashboard-card-component>
+    </div>
+  </div>
+  <admin-google-map-component class="row"></admin-google-map-component>
+</div>
+<!--
+
+<div class="svgBackground"></div>-->

@@ -1,0 +1,75 @@
+
+@import "../../../../../../../../libs/base/src/lib/global-scss/mixins";
+
+
+
+.card-img-top {
+  @include border-radiusk(65px);
+}
+
+ul {
+  text-align: justify;
+  padding: 10px 15px;
+  margin: 3px 0;
+}
+
+li {
+  display: block;
+  display: inline-block;
+  margin-right: 8px;
+  vertical-align: middle;
+  position: relative;
+  p {
+    display: inline-block;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    vertical-align: bottom;
+
+  }
+  &:last-child {
+    margin-right: 0;
+  }
+}
+
+.dark {
+  ul {
+    padding: 12px 15px;
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.02);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    li {
+      display: block;
+      padding: 8px 0;
+      font-size: 20px;
+      p, .mat-icon {
+        color: var(--white);
+        margin: 0 2px;
+        display: block;
+      }
+
+      img {
+        border: 2px solid var(--light-font-color);
+        max-width: 65px;
+      }
+      .icon{
+        @include icon();
+        .mat-icon{
+          display: inline-block;
+          font-size: 1.5em;
+          position: relative;
+          top: -4px;
+        }
+      }
+    }
+  }
+}
+
+
+.display-block{
+  display: block;
+}
+
+.sma-font-size{
+  font-size: var(--small-font-size);
+  color: var(--light-font-color)!important;
+}

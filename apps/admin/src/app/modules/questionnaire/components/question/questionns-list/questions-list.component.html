@@ -1,0 +1,37 @@
+<s-infinite-scroll-grid *ngIf="rolePermission" [addItemEnabled]="rolePermission.edit" [collectionName]="collection" [orderBy]="orderBy" [searchBy]="searchBy" (onAddItem)="addNewQuestion()">
+  <ng-template let-item="item" let-i="i">
+    <mat-card class="" [ngClass]="item.disabled == true ?'disable-block':''">
+      <mat-card-header>
+        <img mat-card-avatar style="width: 52px;height: 52px"
+             src="assets/images/question.png" [alt]="item.name">
+        <mat-card-title>{{ item?.label}}</mat-card-title>
+        <!--  <mat-card-subtitle>{{item?.level.name}}</mat-card-subtitle>-->
+      </mat-card-header>
+
+      <mat-card-content>
+        <span [matTooltip]="item?.questionType.label"><strong><mat-icon >merge_type</mat-icon>{{item?.questionType.name}}</strong></span>
+        <span matTooltip="Scoring Mechanism"> <strong><mat-icon >swap_vert</mat-icon>{{item?.scoringMechanism.type}}</strong></span>
+        <mat-chip-list *ngFor=" let label of item?.chipList">
+          <mat-chip>{{label.name}}</mat-chip>
+        </mat-chip-list>
+        <p>{{item?.description}} </p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-icon-button (click)="editQuestion(item)" *ngIf="rolePermission.edit">
+          <mat-icon matTooltip="Edit Question">edit</mat-icon>
+        </button>
+        <button *ngIf="item?.disabled && rolePermission.edit; else enableQuestionBlock" mat-icon-button (click)="openDialog(item, false)">
+          <mat-icon matTooltip="Enable Question">speaker_notes</mat-icon>
+        </button>
+        <ng-template #enableQuestionBlock>
+          <button mat-icon-button (click)="openDialog(item, true)" *ngIf="rolePermission.edit">
+            <mat-icon matTooltip="Disable Question">speaker_notes_off</mat-icon>
+          </button>
+        </ng-template>
+        <button mat-icon-button (click)="viewQuestion(item)" >
+          <mat-icon matTooltip="view Question">visibility</mat-icon>
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </ng-template>
+</s-infinite-scroll-grid>

@@ -1,0 +1,14 @@
+:host{
+  .mat-dialog-content{
+    padding: 0;
+  }
+  .mat-list-option{
+    &:nth-child(odd){
+      background: var(--lightGray);
+    }
+  }
+
+  .ma-t-20{
+    margin-top: 20px;
+  }
+}

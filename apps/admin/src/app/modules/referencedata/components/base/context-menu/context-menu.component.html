@@ -1,0 +1,15 @@
+
+
+<button *ngIf="canEdit" mat-icon-button (click)="delete()">
+  <mat-icon matTooltip="Delete">delete_forever</mat-icon>
+</button>
+
+<button id="contextMenuEditBtn" *ngIf="canEdit" mat-icon-button (click)="edit()">
+  <mat-icon matTooltip="Edit">edit</mat-icon>
+</button>
+
+
+<button *ngIf="canView" mat-icon-button (click)="view()">
+  <mat-icon matTooltip="View">visibility</mat-icon>
+</button>
+

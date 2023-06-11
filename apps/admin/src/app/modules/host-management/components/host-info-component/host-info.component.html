@@ -1,0 +1,40 @@
+<mat-card class="" [class.disable-block]="host.disabled" *ngIf="permission">
+  <mat-card-header>
+    <img mat-card-avatar style="width: 52px;height: 52px" src="assets/images/host.jpeg" alt="host?.name">
+    <mat-card-title >{{ host?.name}}</mat-card-title>
+    <mat-card-subtitle>{{host?.type?.name}}</mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content>
+    <p>{{host?.description}}</p>
+  </mat-card-content>
+  <mat-card-actions>
+
+    <button mat-icon-button (click)="showLocations(host)">
+      <mat-icon matTooltip="Locations">location_on</mat-icon>
+    </button>
+
+    <button *ngIf="isEditable" mat-icon-button (click)="edit(host)">
+      <mat-icon matTooltip="Edit Host">edit</mat-icon>
+    </button>
+
+    <button *ngIf="host.disabled && permission.edit; else enableHostBlock" mat-icon-button (click)="openDialog(host, false)">
+      <mat-icon matTooltip="Enable Host">location_searching</mat-icon>
+    </button>
+
+    <ng-template #enableHostBlock>
+      <button *ngIf="permission.edit" mat-icon-button (click)="openDialog(host, true)" >
+        <mat-icon matTooltip="Disable Host">location_disabled</mat-icon>
+      </button>
+    </ng-template>
+
+    <button mat-icon-button (click)="view(host)">
+      <mat-icon matTooltip="View Host">visibility</mat-icon>
+    </button>
+
+    <button *ngIf="permission.edit" mat-icon-button (click)="addStudents(host)">
+      <mat-icon matTooltip="Assign Students">add</mat-icon>
+    </button>
+
+  </mat-card-actions>
+</mat-card>

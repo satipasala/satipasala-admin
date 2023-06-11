@@ -1,0 +1,28 @@
+<h2 mat-dialog-title>Event Category</h2>
+<mat-dialog-content [formGroup]="formGroup" novalidate class="ref-dialog">
+
+  <mat-form-field>
+    <input id="eventCategoryName" matInput placeholder="Name" formControlName="name" (ngModelChange)="onNameChange($event)" i18n-placeholder="@@name">
+    <mat-error *ngIf="formGroup.controls['name'].hasError('required')" i18n="@@didYouForgetToInputValue">
+      Event category is required
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-select placeholder="Active" formControlName="active" i18n-placeholder="@@active">
+      <mat-option value="Yes">Yes</mat-option>
+      <mat-option value="No">No</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field>
+    <input id="eventCategoryDescription" matInput placeholder="Description" formControlName="description" i18n-placeholder="@@description">
+  </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button *ngIf="dataObj.type === 'view'" mat-flat-button color="primary" (click)="cancel()" i18n="@@ok">OK
+  </button>
+  <button *ngIf="dataObj.type !== 'view'" (click)="onSave()" mat-flat-button color="primary"
+    [disabled]="formGroup.invalid" i18n="@@save">Save
+  </button>
+  <button *ngIf="dataObj.type !== 'view'" mat-flat-button color="accent" (click)="cancel()"
+    i18n="@@cancel">Cancel</button>
+</mat-dialog-actions>

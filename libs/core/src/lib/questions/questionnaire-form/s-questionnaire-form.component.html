@@ -1,0 +1,3 @@
+<!--<dynamic-form-component [fields]="this.questionnaire?.list.values"></dynamic-form-component>-->
+<s-dynamic-stepper-form [fields]="questions" (onSubmit)="onSubmit.emit($event)" [disableSubmit]="disableSubmit"
+    [form]="form"></s-dynamic-stepper-form>

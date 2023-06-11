@@ -1,0 +1,114 @@
+<mat-sidenav-container class="sidenav-container sathi-sidenav" autosize>
+  <mat-sidenav #mainNav [opened]="navOpened" mode="side" [mode]="mode" class="mat-elevation-z10" style="width:300px;"
+               [fixedInViewport]="false">
+    <mat-list dense>
+      <user-profile-subicon ngClass="dark"></user-profile-subicon>
+      <mat-nav-list id="leftMainNav" class="left-menu">
+        <mat-list-item *ngFor="let nav of navList" (click)="setCurrentNavigation(nav)" [class.buttonselected]="nav == navActive">
+          <button [id]="getMenuButtonId(nav)" mat-button class="nav">
+            <img width="32" height="32" src="assets/nav/{{nav.icon}}.svg">
+            <span i18n="@@categoryName">{nav.categoryName, select, Dashboard {Dashboard} Auth Management {Auth Management} User Management {User Management} Organization Management {Organization Management} Questionnaire Management {Questionnaire Management} Program Management {Program Management} Activity Management {Activity Management} Event Management {Event Management}  File Management {File Management} Translations {Translations} ssr {ssr} Reference Data{Reference Data}}</span>
+          </button>
+        </mat-list-item>
+      </mat-nav-list>
+    </mat-list>
+  </mat-sidenav>
+
+  <mat-sidenav #subNav color="primary" class="mat-right-drawer pop-image" mode='over' position="end" (closedStart)="goBack()"
+    [fixedInViewport]="true">
+    <mat-sidenav-container  class=" pop-image" >
+      <img mat-card-image class="side-bar-loading" src="assets/images/loading.gif" alt="Please wait..." *ngIf="showIndicator">
+      <mat-card class="main">
+        <button id="closeSubNav" mat-fab aria-label="close icon" class="close-icon" color="accent" (click)=" subNav.close()">
+          <mat-icon>close</mat-icon>
+        </button>
+
+        <router-outlet name="leftsidebar" (activate)="leftSideBarActivated(subNav)"
+                       (deactivate)="leftSideBarDeActivated(subNav)"></router-outlet>
+      </mat-card>
+
+      <mat-sidenav #subNav2 color="primary" class="mat-right-drawer pop-image" mode='over' position="left" (closedStart)="goBack()"
+                   [fixedInViewport]="true">
+        <img mat-card-image class="side-bar-loading" src="assets/images/loading.gif" alt="Please wait..." *ngIf="showIndicator">
+        <mat-card class="main">
+          <button id="closeSubNav2" mat-fab aria-label="close icon" class="close-icon" color="accent" (click)=" subNav2.close();$event.stopPropagation()">
+            <mat-icon>close</mat-icon>
+          </button>
+
+          <router-outlet name="leftsidebar2" (activate)="leftSideBarActivated(subNav2)"
+                         (deactivate)="leftSideBarDeActivated(subNav2)"></router-outlet>
+        </mat-card>
+      </mat-sidenav>
+    </mat-sidenav-container>
+  </mat-sidenav>
+
+  <mat-sidenav-content class="mat-sidenav-content">
+    <mat-toolbar class="main-nav mat-elevation-z4">
+      <!-- color="primary" -->
+      <button mat-icon-button (click)="toggleMenu(mainNav)" class="icon-padding nav_animation" [ngClass]="{'open': !mainNav.opened }" >
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+      </button>
+      <p class="main_title"> {{title}} </p>
+
+      <!-- This fills the remaining space of the current row -->
+      <span class="fill-remaining-space"></span>
+
+      <admin-search-filter></admin-search-filter>
+      <!-- <div class="main-search">
+        <input id="search" name="search" type="text"  placeholder="search...">
+        <button> <mat-icon aria-hidden="true">search</mat-icon></button>
+      </div>-->
+
+      <ul class="header-right-side">
+        <li>
+          <button mat-icon-button matBadge="8" matBadgePosition="before" matBadgeColor="accent">
+            <mat-icon aria-hidden="true">notifications</mat-icon>
+          </button>
+        </li>
+        <li>
+          <button mat-icon-button id="userLogoutMenuButton">
+            <user-profile></user-profile>
+          </button>
+        </li>
+        <li>
+          <button mat-icon-button [matMenuTriggerFor]="lan" class="icon">
+            <mat-icon >more_vert</mat-icon>
+          </button>
+          <mat-menu #lan="matMenu">
+            <a mat-menu-item href="/si" [class.lang-selected]="locale == 'si'">
+              <mat-icon>language</mat-icon>
+              <span>Sinhala</span>
+            </a>
+            <a mat-menu-item href="/ta" [class.lang-selected]="locale == 'ta'">
+              <mat-icon>language</mat-icon>
+              <span>Tamil</span>
+            </a>
+            <a mat-menu-item href="/en" [class.lang-selected]="locale == 'en'">
+              <mat-icon>language</mat-icon>
+              <span>English</span>
+            </a>
+          </mat-menu>
+        </li>
+      </ul>
+
+    </mat-toolbar>
+    <div class="routerWrapper">
+      <notification-message></notification-message>
+      <s-router-tab *ngIf="nav" [navigation]="nav" ></s-router-tab>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+
+<mat-menu x-position="before" #menu="matMenu">
+  <button mat-menu-item routerLink="/profile">
+    <mat-icon aria-hidden="true">settings</mat-icon>
+    Settings
+  </button>
+  <button mat-menu-item routerLink="/profile">
+    <mat-icon aria-hidden="true">account_box</mat-icon>
+    Profile
+  </button>
+</mat-menu>

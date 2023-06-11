@@ -1,0 +1,6 @@
+<s-infinite-scroll-grid *ngIf="rolePermission" [addItemEnabled]="rolePermission.edit" [collectionName]="collection"
+  [searchBy]="searchBy" [orderBy]="orderBy" (onAddItem)="addNewActivity()">
+  <ng-template let-item="item" let-i="i">
+    <admin-activity-info-component [activity]="item"></admin-activity-info-component>
+  </ng-template>
+</s-infinite-scroll-grid>

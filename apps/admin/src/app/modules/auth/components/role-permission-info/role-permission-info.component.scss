@@ -1,0 +1,15 @@
+//@import "../../../card_format";
+
+:host{
+  //--s-grid-template-columns: 1fr;
+
+  .boxs{
+    margin: 0;
+  }
+  .mat-radio-button ~ .mat-radio-button {
+    margin-left: 16px;
+  }
+  .mat-tab-header{
+    margin: 0!important;
+  }
+}

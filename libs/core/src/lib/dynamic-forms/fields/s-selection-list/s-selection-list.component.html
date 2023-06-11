@@ -1,0 +1,9 @@
+<mat-selection-list #list>
+  <mat-list-option *ngFor="let option of field.options">
+    {{option.label}}
+  </mat-list-option>
+</mat-selection-list>
+
+<p>
+  GeoChartOptions selected: {{list.selectedOptions.selected.length}}
+</p>

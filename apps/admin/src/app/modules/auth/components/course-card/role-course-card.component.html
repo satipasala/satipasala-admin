@@ -1,0 +1,31 @@
+<form [formGroup]="courseForm" class="form_wrapper" *ngIf="rolePermission">
+  <mat-card class="" [class.select-course]="courseForm.controls['roleCourseCheckBox'].value">
+    <mat-card-header>
+      <mat-card-title>{{ course?.name}}</mat-card-title>
+    </mat-card-header>
+    <img mat-card-image class="margin_0" src="assets/images/v-mindful-walking.png" alt="">
+    <mat-card-content>
+      <p>{{course?.description}}</p>
+      <p class="card_matbages">
+        <span matTooltip="Activities">
+          <mat-icon [matBadge]="getActivityCount(course)" matBadgeColor="accent">accessibility</mat-icon>
+          <span class="cdk-visually-hidden"></span>
+        </span>
+
+        <span matTooltip="facilitators">
+          <mat-icon matBadge="{{course?.facilitatorsCount}}" matBadgeColor="accent">emoji_people</mat-icon>
+          <span class="cdk-visually-hidden"></span>
+        </span>
+
+        <span matTooltip="Feedbacks">
+          <mat-icon matBadge="{{course?.status}}" matBadgeColor="accent">feedback</mat-icon>
+          <span class="cdk-visually-hidden"></span>
+        </span>
+      </p>
+    </mat-card-content>
+    <mat-card-actions  *ngIf="rolePermission.edit" class="padding_20">
+      <mat-slide-toggle formControlName="roleCourseMandatory" (click)="isReadyForSubmission()">Mandatory</mat-slide-toggle>
+      <mat-checkbox class="float-right" formControlName="roleCourseCheckBox" #roleCourseCheckBox (click)="isReadyForSubmission()"></mat-checkbox>
+    </mat-card-actions>
+  </mat-card>
+</form>

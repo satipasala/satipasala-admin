@@ -1,0 +1,14 @@
+
+<div [formGroup]="form">
+  <input matInput placeholder="{{field.label}}" [formControlName]="field.id" >
+</div>
+ <!--
+<mat-form-field class="full-width">
+  <input matInput placeholder="First Name" formControlName="firstName">
+  <mat-error *ngIf="userForm.controls['firstName'].hasError('required')">
+    First Name is <strong>required</strong>
+  </mat-error>
+</mat-form-field>-->
+
+<!--matInput  [formControlName]="field.name"
+[value]="field.value" [name]="field.name" [(ngModel)]="field.value" ngDefaultContro-->l

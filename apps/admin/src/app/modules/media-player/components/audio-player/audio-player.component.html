@@ -1,0 +1,26 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12" style="margin-top: 20px;">
+      <mat-card style="background-color: #f8f8f8; margin: 50px 0;">
+        <mat-card-header>
+          <mat-card-title>Audio Files Manager</mat-card-title>
+          <mat-card-subtitle>drop and play your file below</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content class="row justify-contents-around mat-basic-player">
+          <div class="col py-3 pl-5">
+            <div>
+              <app-file-upload [fileTypeData]="fileType"></app-file-upload>
+            </div>
+          </div>
+          <div class="col">
+<!--removed bcause material 9 support isn't available-->
+           <!-- <mat-basic-audio-player class="col-12 col-md-6" [audioUrl]="msbapAudioUrl" [title]="msbapTitle"
+                                    [displayTitle]="msbapDisplayTitle"></mat-basic-audio-player>-->
+          </div>
+        </mat-card-content>
+        <div>
+        </div>
+      </mat-card>
+    </div>
+  </div>
+</div>

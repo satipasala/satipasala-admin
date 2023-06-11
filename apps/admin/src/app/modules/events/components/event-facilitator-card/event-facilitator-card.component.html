@@ -1,0 +1,18 @@
+<form [formGroup]="form">
+  <mat-card class="" [class.select-course]="facilitatorCheckBox.checked">
+    <mat-card-header>
+      <img *ngIf="imageUrl | async as ptUrl" mat-card-avatar style="width: 52px;height: 52px" [src]="ptUrl"
+        alt="No Image" alt="Avatar">
+      <mat-card-title>{{user.displayName }}</mat-card-title>
+      <mat-card-subtitle class="subtitle-with-icon">
+        <mat-icon>email</mat-icon>{{user?.email}}
+      </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-actions class="padding_20" [class.hideSelection]="mode === 'view'">
+      <mat-checkbox formControlName="facilitatorCheckBox"
+                    (change)='updateFacilitators(user, $event.checked)'
+                    #facilitatorCheckBox [disabled]="mode === 'view'"></mat-checkbox>
+      <mat-chip class="role" selcted color="primary">{{user?.userRole?.name}}</mat-chip>
+    </mat-card-actions>
+  </mat-card>
+</form>

@@ -1,0 +1,20 @@
+
+<div class="row">
+  <div class="col">
+    <mat-form-field>
+      <input matInput  (keyup)="search($event)">
+    </mat-form-field>
+  </div>
+  <ul *ngFor="let ele of validResults">
+    <li>{{ele}}</li>
+  </ul>
+</div>
+
+<div>
+  <h3>Results!</h3>
+  <div *ngIf="downloadURL">
+    <img [src]="downloadURL" alt="No Image">
+    <br>
+    <a [href]="downloadURL" target="_blank" rel="noopener">Download Me!</a>
+  </div>
+</div>

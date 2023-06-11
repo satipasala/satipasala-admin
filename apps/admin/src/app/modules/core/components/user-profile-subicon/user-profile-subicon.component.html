@@ -1,0 +1,8 @@
+<div  [ngClass]="sub_profile">
+  <ul>
+    <li><img class="card-img-top" [src]="imageUrl | async"></li>
+    <li><p>{{ user?.displayName }}</p>
+      <p class="sma-font-size">{{ user?.email }}</p></li>
+  </ul>
+</div>
+

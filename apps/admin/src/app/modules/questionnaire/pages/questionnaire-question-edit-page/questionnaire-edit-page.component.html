@@ -1,0 +1,27 @@
+<!--<mat-spinner *ngIf="!currentQuestionnaire"></mat-spinner>-->
+<form [formGroup]="questionForm" (ngSubmit)="onSubmit(questionForm.value)" *ngIf="currentQuestionnaire && questionForm">
+  <div class="mat-tab-header mat-tab-header-questionnaire margin_LR_4">
+    <div class="matMenu">
+      <mat-form-field class="full-width padding_LF">
+        <input id="questionnaireName" required matInput placeholder="Questionnaire Name" formControlName="questionnaireName"
+          [(ngModel)]="currentQuestionnaire.name" [readonly]="mode === 'edit'? true : false">
+        <mat-error *ngIf="questionForm.controls['questionnaireName'].hasError('required')">
+          Question <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+    </div>
+  </div>
+  <s-infinite-scroll-grid [addItemEnabled]="true" [collectionName]="'questions'" [orderBy]="orderBy"
+    formArrayName="items" class="popup_margin_top_110">
+    <ng-template let-item="item" let-i="i">
+      <admin-questionnaire-question-card [questionnaire]="currentQuestionnaire" [question]="item"
+        [formGroup]="questionForm">
+      </admin-questionnaire-question-card>
+    </ng-template>
+  </s-infinite-scroll-grid>
+  <mat-card-actions class="infinite-action-wrapper">
+    <button mat-flat-button color="primary" [disabled]="!questionForm.dirty" type="submit">Submit
+    </button>
+    <button mat-raised-button color="accent" type="button" (click)="back()">Cancel</button>
+  </mat-card-actions>
+</form>

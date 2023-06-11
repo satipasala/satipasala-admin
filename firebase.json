@@ -1,0 +1,73 @@
+{
+  "firestore": {
+    "rules": "firestore.rules",
+    "indexes": "firestore.indexes.json"
+  },
+  "functions": {
+    "predeploy": "npm --prefix functions run build"
+  },
+  "hosting": [
+    {
+      "target": "admin",
+      "public": "./dist/apps/admin",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
+      "redirects": [
+        {
+          "source": "/",
+          "destination": "/en",
+          "type": 301
+        }
+      ],
+      "rewrites": [
+        {
+          "source": "/api/resetAuthUserPassword",
+          "function": "resetAuthUserPassword"
+        },
+        {
+          "source": "/en{,/**}",
+          "destination": "/en/index.html"
+        },
+        {
+          "source": "/si{,/**}",
+          "destination": "/si/index.html"
+        },
+        {
+          "source": "/ta{,/**}",
+          "destination": "/ta/index.html"
+        }
+      ],
+      "headers": [
+        {
+          "source": "**/*.@(eot|otf|ttf|ttc|woff|font.css)",
+          "headers": [
+            {
+              "key": "Access-Control-Allow-Origin",
+              "value": "*"
+            }
+          ]
+        },
+        {
+          "source": "**/*.@(jpg|jpeg|gif|png)",
+          "headers": [
+            {
+              "key": "Cache-Control",
+              "value": "max-age=7200"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "storage": {
+    "rules": "storage.rules"
+  },
+  "emulators": {
+    "firestore": {
+      "port": "5002"
+    }
+  }
+}

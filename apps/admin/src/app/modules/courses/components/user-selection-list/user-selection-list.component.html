@@ -1,0 +1,31 @@
+
+  <mat-card-header>
+    <admin-search-filter></admin-search-filter>
+  </mat-card-header>
+  <mat-card-content>
+
+      <s-infinite-scroll-grid [addItemEnabled]="false" *ngIf="filterBy && orderBy"
+                              [collectionName]="collection"
+                              [orderBy]="orderBy"
+                              [filterBy]="filterBy"
+                              [searchBy]="searchBy" >
+        <ng-template let-item="item" let-i="i">
+          <admin-course-student-card *ngIf="course" [course]="course"
+                                     [subscriptionField]="'courseSubscriptions'"
+                                     [user]="item"
+                                     (onUserUpdate)="addUserUpdates($event)"
+                                      ></admin-course-student-card>
+          <admin-course-student-card *ngIf="program" [course]="program"
+                                     [subscriptionField]="'programSubscriptions'"
+                                     [user]="item"
+                                     (onUserUpdate)="addUserUpdates($event)"
+                                      ></admin-course-student-card>
+        </ng-template>
+      </s-infinite-scroll-grid>
+
+  </mat-card-content>
+  <mat-card-actions class="infinite-action-wrapper">
+    <button mat-flat-button color="accent" type="button" (click)="back()">Cancel</button>
+    <button mat-flat-button color="primary"  type="button" [disabled]="updatedUsers.size<=0" (click)="onSubmit()">Submit</button>
+  </mat-card-actions>
+

@@ -1,0 +1,13 @@
+<div class="main-search">
+  <input id="search" name="search" type="text" placeholder="search..." [formControl]="searchTerm">
+
+  <button *ngIf="searchTerm.value.length === 0; else clearSearchBlock" class="search-button">
+    <mat-icon aria-hidden="true">search</mat-icon>
+  </button>
+  <ng-template #clearSearchBlock>
+    <button (click)="clearSearch()" class="search-button">
+      <mat-icon aria-hidden="true">close</mat-icon>
+    </button>
+  </ng-template>
+
+</div>

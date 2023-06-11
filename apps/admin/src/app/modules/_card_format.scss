@@ -1,0 +1,164 @@
+@import "../../../../../libs/base/src/lib/global-scss/variables";
+@import "../../../../../libs/base/src/lib/global-scss/mixins";
+
+.full-width-table {
+  width: 100%;
+}
+
+.disable-block{
+  text-decoration: line-through;
+  background-color: var(--dar_gary);
+}
+
+
+.mat-mini-fab{
+  height: 30px;
+  width: 30px;
+}
+
+
+.mat-card{
+  background: var(--white);
+  padding: 0;
+  transition: transform .2s;
+  @include box_ShadowNone();
+  @include border-radiusk(0);
+  border: 1px solid var(--border);
+  position: relative;
+  height: 100%;
+  &:hover{
+    border: 1px solid var(--border);
+    background: var(--card-bg-hover);
+    transform: scale(1.03);
+    box-shadow: 0px 5px 16px -6px rgba(0,0,0,0.2);
+  }
+  .mat-card-header, .mat-card-content{
+    padding:var(--padding);
+  }
+  .mat-card-content{
+   margin-bottom: 60px;
+    text-align: justify;
+  }
+  .mat-card-header{
+    border-bottom: 1px solid var(--border);
+  }
+  .mat-card-actions{
+    padding: 5px 0;
+    border-top: 1px solid var(--border);
+    margin: 0;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    button{
+      color: var(--icon-color);
+      &:hover, &:focus{
+        background: var(--white);
+      }
+    }
+  }
+}
+
+
+.subtitle-with-icon{
+  color:var(--font-color);
+  .mat-icon{
+    vertical-align: middle;
+    padding-right: 1px;
+    font-size: 20px;
+    position: relative;
+    top: 2px;
+  }
+}
+
+
+.sathi-icon{
+  color: var(--light-perpal);
+  vertical-align: middle;
+  .mat-icon{
+    background: var(--silver_100);
+    @include border-radiusk(50px);
+    padding: 5px;
+    font-size: 20px;
+    vertical-align: middle;
+    text-align: center;
+    line-height: 25px;
+    margin-right: 2px;
+    display: inline-block;
+  }
+  span{
+    font-size: 18px;
+  }
+}
+
+
+.disable-block{
+  text-decoration: line-through;
+  background: var(--card_disable);
+  &:hover{
+    transform: scale(1);
+    background: var(--card_disable);
+  }
+  .mat-card-content{
+    strong{
+      .mat-icon{
+        background: var(--card_disable_content_icon)!important;
+      }
+    }
+  }
+}
+
+
+.mat-card-content{
+  strong{
+    color: var(--icon-color);
+    margin-right: 8px;
+    display: inline-block;
+    .mat-icon{
+      position: relative;
+      top: 6px;
+      background: var(--lightGray);
+      @include border-radiusk(50px);
+      margin-right: 5px;
+      padding: 1px;
+    }
+  }
+}
+
+
+.card_matbages{
+  padding-top: 15px;
+  > span {
+    display: inline-block;
+    padding-right: 25px;
+  }
+}
+
+@mixin select-course {
+  background: var(--card_selected_bg);
+  color: var(--white);
+  transform: scale(1);
+  .subtitle-with-icon{
+    color: var(--white);
+  }
+  .sathi-icon{
+    color: var(--white);
+    .mat-icon{
+      background: var(--icon-color);
+    }
+  }
+  .mat-card-header, .mat-card-actions{
+    border-color:var(--card_selected_bg) ;
+  }
+}
+.select-course{
+  @include select-course();
+  &:hover{
+    cursor: auto;
+    @include select-course();
+  }
+}
+
+.mat-card-title{
+  padding-top: 5px;
+}

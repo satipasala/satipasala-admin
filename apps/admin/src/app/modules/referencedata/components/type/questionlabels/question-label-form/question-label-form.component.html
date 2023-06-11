@@ -1,0 +1,32 @@
+<h2 mat-dialog-title>Question Label</h2>
+<mat-dialog-content [formGroup]="formGroup" novalidate class="ref-dialog">
+  <mat-form-field>
+    <input id="questionLabelName" matInput placeholder="Label" formControlName="label">
+    <mat-error *ngIf="formGroup.controls['label'].hasError('required')"
+               i18n="@@didYouForgetToInputValue">
+      Did you forget to input a value?
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <input id="questionLabelType" matInput placeholder="Type" formControlName="type" i18n-placeholder="@@type">
+  </mat-form-field>
+  <mat-form-field>
+    <input id="questionLabelCategory" matInput placeholder="Category" formControlName="category">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-select placeholder="Active" formControlName="active" i18n-placeholder="@@active">
+      <mat-option value="Yes">Yes</mat-option>
+      <mat-option value="No">No</mat-option>
+    </mat-select>
+  </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions>
+
+  <button *ngIf="dataObj.type === 'view'" mat-flat-button color="primary" (click)="cancel()" i18n="@@ok">OK
+  </button>
+  <button *ngIf="dataObj.type !== 'view'" mat-flat-button color="primary" (click)="onSave()"
+          [disabled]="formGroup.invalid" i18n="@@save">Save
+  </button>
+  <button *ngIf="dataObj.type !== 'view'" mat-flat-button color="accent" (click)="cancel()" i18n="@@cancel">Cancel</button>
+</mat-dialog-actions>
+

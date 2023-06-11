@@ -1,0 +1,41 @@
+<mat-card class="">
+  <mat-card-header>
+    <div mat-card-avatar class="example-header-image"></div>
+    <mat-card-title>{{question?.description}}</mat-card-title>
+    <mat-card-subtitle>Description</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-list>
+      <mat-list-item>
+        <mat-icon mat-list-icon>title</mat-icon>
+        <h4 mat-line>Question Type</h4>
+        <p mat-line> {{question?.questionType.name}} </p>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-divider></mat-divider>
+      <mat-list-item>
+        <mat-icon mat-list-icon>radio_button_checked</mat-icon>
+        <h4 mat-line>Question Level</h4>
+        <p mat-line> {{question?.questionLevel.name}} </p>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item>
+        <mat-icon mat-list-icon>score</mat-icon>
+        <h4 mat-line>Scoring Mechanism</h4>
+        <p mat-line> {{question?.scoringMechanism.name}} </p>
+        <p mat-line> {{question?.scoringMechanism.type}} </p>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item>
+        <mat-icon mat-list-icon>label</mat-icon>
+        <h4 mat-line>Labels</h4>
+        <mat-chip color="accent" *ngFor="let label of question?.labels"> {{label.label?label.label:label.name}} </mat-chip>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+    </mat-list>
+  </mat-card-content>
+</mat-card>
+
+
+
+

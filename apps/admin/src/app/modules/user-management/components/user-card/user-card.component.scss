@@ -1,0 +1,9 @@
+@import "../../../card_format";
+.role{
+  float: right;
+  padding: 6px;
+  max-width: 125px;
+  margin: 6px 10px 6px 6px;
+  text-overflow: clip;
+  white-space: nowrap;
+}

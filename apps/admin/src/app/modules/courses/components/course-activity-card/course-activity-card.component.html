@@ -1,0 +1,17 @@
+<form [formGroup]="activityForm">
+  <mat-card class="" [class.select-course]="activityCheckBox.checked">
+    <mat-card-header>
+      <mat-card-title>{{activity?.name }}</mat-card-title>
+      <mat-card-subtitle class="subtitle-with-icon">
+        <mat-icon>Description</mat-icon>{{activity?.type.name}}
+      </mat-card-subtitle>
+    </mat-card-header>
+    &nbsp;
+    <mat-card-content>
+      <p> Type : {{activity?.description}}</p>
+    </mat-card-content>
+    <mat-card-actions class="padding_20">
+      <mat-checkbox formControlName="activityCheckBox" #activityCheckBox></mat-checkbox>
+    </mat-card-actions>
+  </mat-card>
+</form>

@@ -1,0 +1,12 @@
+
+.selectA_scroll{
+  height: 50vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  margin: 8px 0;
+}
+.activity-grid{
+  height: calc(100vh - 300px);
+  width: 90%;
+  display: block;
+}

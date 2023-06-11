@@ -1,0 +1,7 @@
+<s-infinite-scroll-grid #userGrid *ngIf=" orderBy" [addItemEnabled]="false" [collectionName]="'audit_log'"
+                        [orderBy]="orderBy"  [searchBy]="searchBy" >
+  <ng-template let-item="item" let-i="i">
+     <admin-audit-item [auditInfo]="item" ></admin-audit-item>
+
+  </ng-template>
+</s-infinite-scroll-grid>

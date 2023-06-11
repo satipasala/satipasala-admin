@@ -1,0 +1,187 @@
+<form *ngIf="userForm" [formGroup]="userForm" novalidate (ngSubmit)="onSubmit()" autocomplete="off">
+
+  <div class="headerName"><h3><strong>{{(mode === 'new') ? 'New User Registration' : user?.displayName}}</strong></h3>
+  </div>
+
+  <mat-card *ngIf="!isMinimalMode()" class="bacground-image"
+            style="background-image: url('assets/images/add_image.jpg')">
+    <app-file-upload fileTypeData="image" [simplified]="true" [multiple]="false" loc="profile_pictures"
+                     [stName]="userForm.value['email']"
+                     (uploadComplete)="onUploadSuccess()"
+                     (removePreview)="resetUserLoadedImage()"
+                     [defaultUrl]="photoUrl"></app-file-upload>
+  </mat-card>
+
+  <mat-accordion [multi]="isMinimalMode()">
+
+    <mat-expansion-panel [expanded]="true">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Login Details
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="First Name*" formControlName="firstName" #firstName [maxLength]="25">
+            <mat-hint align="end">{{firstName.value?.length || 0}}/25</mat-hint>
+            <mat-error *ngIf="userForm.controls['firstName'].hasError('required')">
+              First Name is <strong>required </strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Last Name" formControlName="lastName">
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Admission Number" formControlName="admissionNo">
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Email" #email formControlName="email" [autocomplete]="'off'" [readonly]="true"
+                   (focus)="mode === 'edit'?email.readOnly = true:email.readOnly = false;"
+
+                   required>
+            <mat-error *ngIf="userForm.controls['email'].hasError('required')">
+              Email is <strong>required</strong>
+            </mat-error>
+            <mat-error *ngIf="userForm.controls['email'].hasError('email')">
+              Email format is not correct
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col" *ngIf="mode !== 'edit'">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Password" [type]="hide ? 'password' : 'text'" [autocomplete]="'off'"
+                   formControlName="password"
+                   required #password>
+            <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            <mat-hint align="end">{{password.value?.length || 0}}/Minimum 6</mat-hint>
+            <mat-error *ngIf="userForm.controls['password'].hasError('required')">
+              Password is <strong>required</strong>
+            </mat-error>
+            <mat-error *ngIf="userForm.controls['password'].hasError('minlength')">
+              Password should contain at least 6 characters
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+    </mat-expansion-panel>
+
+
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Personal Details
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput [matDatepicker]="picker" placeholder="Date of Birth" formControlName="dob" required>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker startView="multi-year" [startAt]="startDate"></mat-datepicker>
+          </mat-form-field>
+        </div>
+        <div class="col" *ngIf="this.mode != this.minimalMode">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="NIC" formControlName="nic">
+          </mat-form-field>
+        </div>
+        <div class="col" *ngIf="this.mode != this.minimalMode">
+          <mat-form-field class="full-width">
+            <input matInput type="tel" placeholder="Phone Number" formControlName="phoneNumber" #phoneNumber
+                   [maxLength]="10">
+            <mat-hint align="end">{{phoneNumber.value?.length || 0}}/10</mat-hint>
+            <mat-error *ngIf="userForm.controls['phoneNumber'].hasError('pattern')">
+              Phone number is not 10 digits
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <mat-form-field class="full-width" *ngIf="this.mode != this.minimalMode">
+          <mat-select placeholder="Preferred Medium" formControlName="preferredMedium" [compareWith]="compareItems">
+            <mat-option *ngFor="let medium of mediums" [value]="medium">
+              {{medium.name}} ({{medium.native}})
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="row" *ngIf="this.mode != this.minimalMode">
+        <admin-address-form [parentForm]="userForm" class="full-width"></admin-address-form>
+      </div>
+      <div class="row" *ngIf="this.mode != this.minimalMode">
+        <mat-form-field class="full-width">
+            <textarea matInput placeholder="Additional Info" formControlName="description"
+                      matAutosizeMinRows=3></textarea>
+        </mat-form-field>
+      </div>
+    </mat-expansion-panel>
+
+
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Organization
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <div class="row">
+        <s-search-box  style="width: 80%" [searchControlName]="'organizationInfo'" [parentForm]="userForm"
+                      [searchFields]="defaultSearchFields"
+                      [collectionName]="'hosts'" [displayField]="'name'" [orderBy]="hostOrderBy"
+                      [filterBy]="hostFilterBy"
+                      [batchSize]="10" [fieldWidth]="'full-width'" [placeholder]="'Organization*'"
+                      (valueChange)="setOrganization($event)" [readonly]="mode === 'view'">
+          <ng-template let-option="option">
+            <div style="display: flex;flex-direction: row;">  {{option['name']}} (
+              <div style="text-transform: capitalize;font-style: italic;font-size: 11px;font-weight: bold">
+                {{option.addressInfo.state.name}}-{{option.addressInfo.city.name}}</div>)
+            </div>
+
+          </ng-template>
+        </s-search-box>
+      </div>
+    </mat-expansion-panel>
+
+
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Role & Privileges
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <div class="row">
+        <div class="col">
+          <mat-form-field>
+            <mat-select placeholder="Role*"
+                        [disabled]=" loggedInUser?.userRole.roleLevel.access_level<=20  || (mode=='edit' && loggedInUser?.email === user?.email) "
+                        formControlName="userRole" [compareWith]="compareRoles">
+              <mat-option *ngFor="let userRole of userRoles" [value]="userRole">
+                {{userRole.name}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="userForm.controls['userRole'].hasError('required')">
+              User Role is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+    </mat-expansion-panel>
+
+  </mat-accordion>
+
+  <mat-card-actions class="margin_top_20_LRB_0">
+    <button mat-flat-button color="primary" type="submit" [disabled]="userForm.invalid"
+            [innerText]="getSubmitCaption()"></button>
+    <button mat-flat-button color="accent" type="button" (click)="back()">Cancel</button>
+  </mat-card-actions>
+</form>

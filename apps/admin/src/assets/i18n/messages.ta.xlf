@@ -1,0 +1,399 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="en" datatype="plaintext" original="ng2.template">
+    <body>
+      <trans-unit id="no" datatype="html">
+        <source>No</source>
+        <target>இல்லை</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../../libs/base/src/lib/core-components/confirmation-dialog/confirmation-dialog.component.html</context>
+          <context context-type="linenumber">10</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="yes" datatype="html">
+        <source>Yes</source>
+        <target>ஆம்</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">../../libs/base/src/lib/core-components/confirmation-dialog/confirmation-dialog.component.html</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="logout" datatype="html">
+        <source>Logout</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/core/components/user-profile/user-profile.component.html</context>
+          <context context-type="sourcefile">src/app/modules/core/components/user-profile-subicon/user-profile-subicon.component.html</context>
+          <context context-type="linenumber">19</context>
+        </context-group>
+      <target>வெளியேறு</target></trans-unit>
+      <trans-unit id="categoryName" datatype="html">
+        <source>{VAR_SELECT, select, Dashboard {Dashboard} Auth Management {Auth Management} User Management {User Management} Organization Management {Organization Management} Questionnaire Management {Questionnaire Management} Program Management {Program Management} Event Management {Event Management} File Management {File Management} Translations {Translations} ssr {ssr} Reference Data{Reference Data}  Audit Log {Audit Log}}</source>
+        <target>{VAR_SELECT, select, Dashboard {அறை} Auth Management {அங்கீகார மேலாண்மை} User Management {பயனர் மேலாண்மை} Organization Management {தொகுப்பாளர் மேலாண்மை} Questionnaire Management {கேள்வித்தாளை மேலாண்மை} Program Management {கோர்ஸ் மேலாண்மை} Event Management {நிகழ்ச்சி மேலாண்மை} File Management {கோப்பு மேலாண்மை} Translations {மொழிபெயர்ப்பு} ssr {ssr} Reference Data{குறிப்பு தரவு}  Audit Log {தணிக்கை பதிவு}}</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/app-shell/app-shell-component/app-shell.component.html</context>
+          <context context-type="linenumber">35</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="subCategoryName" datatype="html">
+        <source>{VAR_SELECT, select, Roles {Roles} Permissions {Permissions} Overview {Overview} Create User {Create User} Manage Users {Manage Users} Text Search {Text Search} Add Host {Add Host} Manage Organizations {Manage Organizations} Manage Questionnaire {Manage Questionnaire} Questions {Questions} Courses {Courses} Feedbacks {Feedbacks} Personal Notes {Personal Notes} Assignments {Assignments} Image Upload {Image Upload} PDF Upload {PDF Upload} Audio Files {Audio Files} Glossary {Glossary}  Activity Types {Activity Types} Question Types {Question Types}  Activities {Activities} Organization Types {Organization Types} Languages {Languages} School Types {School Types} Audit Info {Audit Info}}</source>
+        <target>{VAR_SELECT, select, Roles {பாத்திரங்கள்} Permissions {அனுமதிகள்} Overview {கண்ணோட்டம்} Create User {பயனரை உருவாக்குங்கள்} Manage Users {பயனர்களை நிர்வகிக்கவும்} Text Search {உரை தேடல்} Add Host {ஹோஸ்டைச் சேர்க்கவும்} Manage Organizations {ஹோஸ்ட்களை நிர்வகிக்கவும்} Manage Questionnaire {கேள்வித்தாளை நிர்வகிக்கவும்} Questions {கேள்விகள்} Courses {படிப்புகள்} Feedbacks {பின்னூட்டங்களை} Personal Notes {தனிப்பட்ட குறிப்புகள்} Assignments {பணிகள்} Image Upload {பட பதிவேற்றம்} PDF Upload {PDF பதிவேற்றம்} Audio Files {ஆடியோ கோப்புகள்} Glossary {சொற்களஞ்சியம்} Activity Types {செயல்பாட்டு வகைகள்} Question Types {கேள்வி வகைகள்}  Activities {நடவடிக்கைகள்} Organization Types {அமைப்பு வகைகள்} Languages {மொழிகளை} School Types {பள்ளி வகைகள்}  Audit Info {தணிக்கை தகவல்}}</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/app-shell/app-shell-component/app-shell.component.html</context>
+          <context context-type="linenumber">45</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="id" datatype="html">
+        <source>ID</source>
+        <target>ஐடி</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/translation/components/glossary-table/glossary-table.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/referencedata/components/type/questiontypes/question-type-form/question-type-form.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/referencedata/components/type/questiontypes/questiontypes.component.html</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="uid" datatype="html">
+        <source>UID</source>
+        <target>UID</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/translation/components/glossary-table/glossary-table.component.html</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="lang" datatype="html">
+        <source>Language</source>
+        <target>மொழி</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/translation/components/glossary-table/glossary-table.component.html</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="model" datatype="html">
+        <source>Model</source>
+        <target>மாதிரி</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/translation/components/glossary-table/glossary-table.component.html</context>
+          <context context-type="linenumber">19</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/translation/pages/translation-page/translation-page.component.html</context>
+          <context context-type="linenumber">27</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="translated" datatype="html">
+        <source>Translated</source>
+        <target>மொழிபெயர்க்கப்பட்ட</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/translation/components/glossary-table/glossary-table.component.html</context>
+          <context context-type="linenumber">24</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="traslatedPhrase" datatype="html">
+        <source>Translated Phrase</source>
+        <target>மொழிபெயர்க்கப்பட்ட சொற்றொடர்</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/translation/components/glossary-table/glossary-table.component.html</context>
+          <context context-type="linenumber">29</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="translatePhrases" datatype="html">
+        <source>Translate Phrases</source>
+        <target>மொழிபெயர்க்கப்பட்ட சொற்றொடர்</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/translation/pages/translation-page/translation-page.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="didYouForgetToInputPhrase" datatype="html">
+        <source>
+          Did you forget to input a phrase to translate?
+        </source>
+        <target>
+          மொழிபெயர்க்க ஒரு சொற்றொடரை உள்ளிட மறந்துவிட்டீர்களா?
+        </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/translation/pages/translation-page/translation-page.component.html</context>
+          <context context-type="linenumber">9</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="phraseToConver" datatype="html">
+        <source>Phrase to Convert</source>
+        <target>மாற்றுவதற்கான சொற்றொடர்</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/translation/pages/translation-page/translation-page.component.html</context>
+          <context context-type="linenumber">12</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="language" datatype="html">
+        <source>Language</source>
+        <target>மொழி</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/translation/pages/translation-page/translation-page.component.html</context>
+          <context context-type="linenumber">18</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="submit" datatype="html">
+        <source>Submit</source>
+        <target>சமர்ப்பி</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/translation/pages/translation-page/translation-page.component.html</context>
+          <context context-type="linenumber">35</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="activityType" datatype="html">
+        <source>Activity Type</source>
+        <target>செயல்பாட்டு வகை</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/referencedata/components/type/activitytypes/activity-type-form/activity-type-form.component.html</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/referencedata/components/type/questiontypes/question-type-form/question-type-form.component.html</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/referencedata/components/type/activities/activity-form/activity-form.component.html</context>
+          <context context-type="linenumber">1</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="name" datatype="html">
+        <source>Name</source>
+        <target>பெயர்</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/referencedata/components/type/activitytypes/activity-type-form/activity-type-form.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/referencedata/components/type/activitytypes/activitytypes.component.html</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/referencedata/components/type/questiontypes/question-type-form/question-type-form.component.html</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/referencedata/components/type/questiontypes/questiontypes.component.html</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/referencedata/components/type/activities/activity-form/activity-form.component.html</context>
+          <context context-type="linenumber">4</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/referencedata/components/type/activities/activity.component.html</context>
+          <context context-type="linenumber">7</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="didYouForgetToInputValue" datatype="html">
+        <source>
+          Did you forget to input a value?
+        </source>
+        <target>
+          மதிப்பை உள்ளிட மறந்துவிட்டீர்களா?
+        </target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/referencedata/components/type/activitytypes/activity-type-form/activity-type-form.component.html</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/referencedata/components/type/questiontypes/question-type-form/question-type-form.component.html</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/referencedata/components/type/questiontypes/question-type-form/question-type-form.component.html</context>
+          <context context-type="linenumber">13</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/referencedata/components/type/activities/activity-form/activity-form.component.html</context>
+          <context context-type="linenumber">6</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/referencedata/components/type/activities/activity-form/activity-form.component.html</context>
+          <context context-type="linenumber">15</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="active" datatype="html">
+        <source>Active</source>
+        <target>செயலில்</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/referencedata/components/type/activitytypes/activity-type-form/activity-type-form.component.html</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/referencedata/components/type/activitytypes/activitytypes.component.html</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/referencedata/components/type/questiontypes/question-type-form/question-type-form.component.html</context>
+          <context context-type="linenumber">30</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/referencedata/components/type/questiontypes/questiontypes.component.html</context>
+          <context context-type="linenumber">36</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/referencedata/components/type/activities/activity-form/activity-form.component.html</context>
+          <context context-type="linenumber">32</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/referencedata/components/type/activities/activity.component.html</context>
+          <context context-type="linenumber">32</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="description" datatype="html">
+        <source>Description</source>
+        <target>விளக்கம்</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/referencedata/components/type/activitytypes/activity-type-form/activity-type-form.component.html</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/referencedata/components/type/activitytypes/activitytypes.component.html</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/referencedata/components/type/activities/activity-form/activity-form.component.html</context>
+          <context context-type="linenumber">29</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/referencedata/components/type/activities/activity.component.html</context>
+          <context context-type="linenumber">27</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="cancel" datatype="html">
+        <source>Cancel</source>
+        <target>ரத்து</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/referencedata/components/type/activitytypes/activity-type-form/activity-type-form.component.html</context>
+          <context context-type="linenumber">21</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/referencedata/components/type/questiontypes/question-type-form/question-type-form.component.html</context>
+          <context context-type="linenumber">37</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/referencedata/components/type/activities/activity-form/activity-form.component.html</context>
+          <context context-type="linenumber">39</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="ok" datatype="html">
+        <source>OK</source>
+        <target>சரி</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/referencedata/components/type/activitytypes/activity-type-form/activity-type-form.component.html</context>
+          <context context-type="linenumber">22</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/referencedata/components/type/questiontypes/question-type-form/question-type-form.component.html</context>
+          <context context-type="linenumber">38</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/referencedata/components/type/activities/activity-form/activity-form.component.html</context>
+          <context context-type="linenumber">40</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="save" datatype="html">
+        <source>Save</source>
+        <target>சேமி</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/referencedata/components/type/activitytypes/activity-type-form/activity-type-form.component.html</context>
+          <context context-type="linenumber">25</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/referencedata/components/type/questiontypes/question-type-form/question-type-form.component.html</context>
+          <context context-type="linenumber">41</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/referencedata/components/type/activities/activity-form/activity-form.component.html</context>
+          <context context-type="linenumber">43</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="type" datatype="html">
+        <source>Type</source>
+        <target>வகை</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/referencedata/components/type/questiontypes/question-type-form/question-type-form.component.html</context>
+          <context context-type="linenumber">18</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/referencedata/components/type/questiontypes/questiontypes.component.html</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/referencedata/components/type/activities/activity-form/activity-form.component.html</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/referencedata/components/type/activities/activity.component.html</context>
+          <context context-type="linenumber">12</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="label" datatype="html">
+        <source>Label</source>
+        <target>லேபிள்</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/referencedata/components/type/questiontypes/question-type-form/question-type-form.component.html</context>
+          <context context-type="linenumber">21</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/referencedata/components/type/questiontypes/questiontypes.component.html</context>
+          <context context-type="linenumber">21</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="fieldType" datatype="html">
+        <source>Field Type</source>
+        <target>புல வகை</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/referencedata/components/type/questiontypes/question-type-form/question-type-form.component.html</context>
+          <context context-type="linenumber">24</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/referencedata/components/type/questiontypes/questiontypes.component.html</context>
+          <context context-type="linenumber">26</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="answerType" datatype="html">
+        <source>Answer Type</source>
+        <target>பதில் வகை</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/referencedata/components/type/questiontypes/question-type-form/question-type-form.component.html</context>
+          <context context-type="linenumber">27</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/referencedata/components/type/questiontypes/questiontypes.component.html</context>
+          <context context-type="linenumber">31</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="gradable" datatype="html">
+        <source>Is Gradable</source>
+        <target>தரப்படுத்தக்கூடியது</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/referencedata/components/type/activities/activity-form/activity-form.component.html</context>
+          <context context-type="linenumber">20</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/referencedata/components/type/activities/activity.component.html</context>
+          <context context-type="linenumber">17</context>
+        </context-group>
+      </trans-unit>
+      <trans-unit id="maxPoints" datatype="html">
+        <source>Max Points</source>
+        <target>அதிகபட்ச புள்ளிகள்</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/referencedata/components/type/activities/activity-form/activity-form.component.html</context>
+          <context context-type="linenumber">26</context>
+        </context-group>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/modules/referencedata/components/type/activities/activity.component.html</context>
+          <context context-type="linenumber">22</context>
+        </context-group>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

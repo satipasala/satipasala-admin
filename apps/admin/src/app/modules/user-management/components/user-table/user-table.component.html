@@ -1,0 +1,9 @@
+<admin-user-filter style="margin-bottom: 160px!important" (applyFilters)="setFilterBy($event)"></admin-user-filter>
+
+<s-infinite-scroll-grid #userGrid *ngIf="rolePermission && filterBy && orderBy" [addItemEnabled]="rolePermission.edit" [collectionName]="collection"
+  [orderBy]="orderBy" [filterBy]="filterBy" [searchBy]="searchBy" class="" (onAddItem)="addNewUser()"
+  class="popup_margin_top">
+  <ng-template let-item="item" let-i="i">
+    <admin-user-card [user]="item" [currentUser]="currentUser"></admin-user-card>
+  </ng-template>
+</s-infinite-scroll-grid>

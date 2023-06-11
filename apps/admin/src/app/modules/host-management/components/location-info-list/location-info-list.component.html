@@ -1,0 +1,10 @@
+<s-infinite-scroll-grid [addItemEnabled]="true" *ngIf="locationArray" [dataArray]="locationArray">
+  <ng-template let-item="item" let-i="i">
+    <admin-location-info-card [location]="item"></admin-location-info-card>
+  </ng-template>
+</s-infinite-scroll-grid>
+
+<!-- To test if loctions are being received -->
+<!-- <div class="" *ngFor="let location of locationList">
+  <p>{{location.name}}</p>
+</div> -->

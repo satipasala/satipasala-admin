@@ -1,0 +1,24 @@
+<form *ngIf="form" (ngSubmit)="onFormSubmit()" [formGroup]="form" class="form-horizontal">
+<!--  <mat-card class="">-->
+    <mat-card-header>
+      <mat-card-title>{{title}}</mat-card-title>
+    </mat-card-header>
+<!--    <mat-card-content>-->
+      <div *ngFor="let field of fields" class="field-margin">
+        <mat-form-field  [appearance]="isMatFormFieldType(field)?'none':'standard'"   >
+          <satipasala-field-builder [showLabel]="showLabels" [field]="field" [form]="form" placeholder="{{field.label}}"></satipasala-field-builder>
+          <mat-icon *ngIf="field.icon" matSuffix>{{field.icon}}</mat-icon>
+          <!--<mat-hint>Errors appear instantly!</mat-hint>-->
+         <!-- <s-field-error [field]="field" [formControl]="formControl"></s-field-error>-->
+        </mat-form-field>
+
+      </div>
+
+<!--    </mat-card-content>-->
+
+    <mat-card-actions *ngIf="!disableSubmit && form">
+      <button mat-raised-button color="primary" [disabled]="!form?.valid" type="submit">Submit</button>
+      <button mat-raised-button color="primary" [disabled]="!form?.valid" type="button">Clear</button>
+    </mat-card-actions>
+<!--  </mat-card>-->
+</form>

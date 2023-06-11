@@ -1,0 +1,45 @@
+<h2 mat-dialog-title>Location Type</h2>
+<mat-dialog-content [formGroup]="formGroup" novalidate class="ref-dialog">
+  <mat-form-field>
+    <input matInput placeholder="Name" formControlName="name" i18n-placeholder="@@name">
+    <mat-error *ngIf="formGroup.controls['name'].hasError('required')"
+               i18n="@@didYouForgetToInputValue">
+      Did you forget to input a value?
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-select placeholder="Active" formControlName="active" i18n-placeholder="@@active">
+      <mat-option value="Yes">Yes</mat-option>
+      <mat-option value="No">No</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Display Name" formControlName="displayName">
+    <mat-error *ngIf="formGroup.controls['name'].hasError('required')"
+               i18n="@@didYouForgetToInputValue">
+      Display name is required.
+    </mat-error>
+  </mat-form-field>
+  <!--<mat-form-field>-->
+    <!--<mat-label>Organization Type</mat-label>-->
+    <!--<mat-select formControlName="organizationType" required>-->
+      <!--<mat-option>&#45;&#45;</mat-option>-->
+      <!--<mat-option *ngFor="let orgType of organizationTypes | async" [value]="orgType">-->
+        <!--{{orgType.name}}-->
+      <!--</mat-option>-->
+    <!--</mat-select>-->
+
+    <!--<mat-error *ngIf="formGroup.controls['organizationType'].hasError('required')">Please choose a Org Type</mat-error>-->
+
+  <!--</mat-form-field>-->
+
+</mat-dialog-content>
+<mat-dialog-actions>
+
+  <button *ngIf="dataObj.type === 'view'" mat-flat-button color="primary" (click)="cancel()" i18n="@@ok">OK
+  </button>
+  <button *ngIf="dataObj.type !== 'view'" mat-flat-button color="primary" (click)="onSave()"
+          [disabled]="formGroup.invalid" i18n="@@save">Save
+  </button><button *ngIf="dataObj.type !== 'view'" mat-flat-button color="accent" (click)="cancel()" i18n="@@cancel">Cancel</button>
+</mat-dialog-actions>
+

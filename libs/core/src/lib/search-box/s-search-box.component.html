@@ -1,0 +1,13 @@
+<mat-form-field [formGroup]="parentForm" class='full-width'>
+  <input type="text" matInput [formControl]="searchFormControl" [matAutocomplete]="auto" [placeholder]="placeholder"
+    [readonly]="readonly" #searchInput>
+  <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFunction"(optionSelected)='onSelectedOption(true,$event.option.value)'>
+    <mat-option *ngFor="let option of infinite; let i = index;" [value]="option">
+      <div *ngIf="!templateVariable">{{option[displayField]}}</div>
+      <ng-container *ngTemplateOutlet="templateVariable;context: {option: option,i:i}"></ng-container>
+    </mat-option>
+  </mat-autocomplete>
+  <mat-error *ngIf="searchFormControl.invalid && (searchFormControl.dirty || searchFormControl.touched)">
+    {{requiredField}} is required
+  </mat-error>
+</mat-form-field>

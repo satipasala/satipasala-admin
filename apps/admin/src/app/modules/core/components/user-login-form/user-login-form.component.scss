@@ -1,0 +1,138 @@
+admin-user-login-form {
+  height: 100vh;
+  display: block;
+}
+
+.mat-card {
+  padding: 30px;
+  box-sizing: border-box;
+  width: 330px;
+  box-shadow: none;
+  transition: transform .2s;
+
+  &:hover {
+    transform: scale(1.03);
+    box-shadow: 0px 5px 16px -6px rgba(0, 0, 0, 0.2);
+  }
+
+  button {
+    width: 100%
+  }
+  .mat-card-actions {
+    margin: 0;
+  }
+
+  .mat-card-title {
+    margin-bottom: 30px;
+    font-size: 20px;
+    color: rgb(187, 187, 187);
+  }
+
+  .mat-raised-button {
+    font-size: 18px;
+    border-radius: 23px;
+    padding: 6px;
+    box-shadow: none;
+  }
+
+  h2 {
+    margin: 0;
+  }
+}
+
+.social-login {
+  display: flex;
+  flex-direction: column;
+  padding-top: 50px;
+}
+
+.seperator {
+  height: 330px;
+  margin: 0 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  p {
+    display: flex;
+    border: 1px solid rgba(0, 0, 0, .1);
+    width: 30px;
+    height: 30px;
+    border-radius: 19px;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    color: rgba(0, 0, 0, .3);
+    margin: 5px;
+    background: rgba(255, 255, 255, .1);
+  }
+}
+
+%social-button {
+  padding: 15px;
+  border-radius: 30px;
+  text-align: left;
+  padding-left: 28px;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  border: 0;
+  margin-bottom: 30px;
+  outline: none;
+}
+
+.google {
+  @extend %social-button;
+  background-size: 34px;
+  background-color: #dc4e41;
+  background-position: 18px center;
+
+  &:hover {
+    background-color: #c9382b;
+  }
+}
+
+.facebook {
+  @extend %social-button;
+  background-size: 34px;
+  background-color: #236cbc;
+  background-position: 18px center;
+
+  &:hover {
+    background-color: #155ca8;
+  }
+}
+
+.twitter {
+  @extend %social-button;
+  background-size: 34px;
+  background-color: #34a8f0;
+  background-position: 18px center;
+
+  &:hover {
+    background-color: #1d94dd;
+  }
+}
+
+.login-box {
+  float: left;
+}
+
+.error-nofication {
+  text-align: left;
+  padding: 20px;
+  color: red;
+  font-weight: bold;
+}
+
+.login-notification {
+  text-align: center;
+  font-weight: bold;
+  color: green;
+}
+
+.side-bar-loading{
+  width: 300px;
+  left: 50%;
+  position: absolute;
+  margin-left: -150px;
+}

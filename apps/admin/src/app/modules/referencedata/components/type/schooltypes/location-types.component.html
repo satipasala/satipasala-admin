@@ -1,0 +1,10 @@
+<div class="">
+  <s-infinite-scroll-grid *ngIf="rolePermission" [addItemEnabled]="rolePermission.edit" [dataSource]="dataSource" [orderBy]="[{fieldPath: 'name', directionStr: 'asc'}]" (onAddItem)="addNew()" >
+    <ng-template let-item="item" let-i="i">
+      <admin-base-ref-data-card [refDataObj]="item" [title]="item?.name" [image]="'assets/images/organization_type_2.png'"
+                                [subTitle]="item?.displayName"
+                                (onContextMenuCommand)="onContextMenuCommand($event)">
+      </admin-base-ref-data-card>
+    </ng-template>
+  </s-infinite-scroll-grid>
+</div>

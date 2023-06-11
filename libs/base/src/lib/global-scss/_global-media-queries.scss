@@ -1,0 +1,53 @@
+
+
+//Admin Mobile
+@media (max-width: 800px) {
+  :root {
+    --hedaerHeight: 75px;
+    --tabWrapperHeight: 125px;
+  }
+  .main-nav {
+    height: var(--hedaerHeight) !important;
+    padding-bottom: 38px;
+    padding-top: 15px;
+    box-shadow: none;
+  }
+
+  .sidenav-container {
+    margin-top: 0 !important;
+  }
+  .routerWrapper {
+    margin-top: var(--hedaerHeight);
+
+      .mat-tab-header {
+        background: var(--hedarBG);
+
+        .mat-tab-list {
+          .mat-tab-label-content {
+            color: var(--light-font-color);
+            .mat-icon {
+
+            }
+          }
+        }
+      }
+
+  }
+}
+
+
+.mat-ink-bar{
+  background: var(--selected-color)!important;
+  height: 3px!important;
+}
+::-webkit-scrollbar {
+  width: 3px;
+}
+
+::-webkit-scrollbar-track {
+  //-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #bfbfbf;
+}

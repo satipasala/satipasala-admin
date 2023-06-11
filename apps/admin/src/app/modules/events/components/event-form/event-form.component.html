@@ -1,0 +1,349 @@
+<form [formGroup]="eventForm" *ngIf="satiEvent">
+  <mat-horizontal-stepper labelPosition="bottom" #stepper [linear]="this.mode==='add'">
+
+    <mat-step>
+      <ng-template matStepLabel>Info</ng-template>
+
+      <mat-card *ngIf="mode !== 'add'" class="margin_bottom_10 bacground-image"
+                [style.background-image]="'url('+defaultImage+')'" >
+        <app-file-upload #uploadComponent fileTypeData="image" [simplified]="true" [multiple]="true"
+                         loc="event_pictures" [stName]="eventForm.value['id']" [defaultUrl]="satiEvent.imgUrls[0]"
+                         (uploadComplete)="addOrUpdateEvent()" [disabled]="mode === 'view'"></app-file-upload>
+      </mat-card>
+
+      Coordinator Details
+      <div class="row">
+        <div class="col">
+          <s-search-box [searchControlName]="'coordinatorInfo'" [parentForm]="eventForm"
+
+                        [searchFields]="facilitatorSearchFields" [collectionName]="'users'"
+                        [displayField]="facilitatorDisplayField"
+                        [orderBy]="facilitatorOrderBy" [batchSize]="5" [fieldWidth]="'full-width'"
+                        [placeholder]="'Facilitator Name*'" (valueChange)="onSelectCoodinator($event)"
+                        [readonly]="mode === 'view'">
+          </s-search-box>
+        </div>
+
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput type="email" placeholder="Email" [(ngModel)]="coodinatorEmail"
+                   [ngModelOptions]="{standalone: true}" [readonly]="true">
+          </mat-form-field>
+        </div>
+
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput type="tel" placeholder="Contact Number" [(ngModel)]="coodinatorNumber"
+                   [ngModelOptions]="{standalone: true}" [maxLength]="10" [readonly]="mode === 'view'">
+          </mat-form-field>
+        </div>
+      </div>
+
+      <admin-event-user-card *ngIf="coordinator" [user]="coordinator"></admin-event-user-card>
+
+      <mat-card-actions class="margin_top_20_LRB_0">
+        <button mat-button matStepperNext>Next</button>
+      </mat-card-actions>
+    </mat-step>
+
+    <mat-step>
+      <ng-template matStepLabel>Program Details</ng-template>
+      <div class="row">
+        <div class="col">
+          <div class="row">
+            <s-search-box [searchControlName]="'program'"
+                          [parentForm]="eventForm"
+                          [searchFields]="defaultSearchFields"
+                          [collectionName]="'programs'"
+                          [displayField]="defaultDisplayField" [orderBy]="defaultOrderBy"
+                          [batchSize]="5" [fieldWidth]="'full-width'" [placeholder]="'Program Name*'"
+                          (valueChange)="onSelectProgram($event)" [readonly]="mode === 'view'">
+            </s-search-box>
+          </div>
+
+          <div class="column" *ngIf="mode !== 'view'; else elseBlock">
+            <mat-chip-list>
+              <div *ngFor="let course of program?.courses | keyvalue">
+                <mat-chip>
+                  <mat-checkbox #checkbox [checked]="isCourseChecked(course.value)"
+                                (change)="onActivityChange(checkbox.checked, course.key, course.value)"
+                                class="mr-10"></mat-checkbox>
+                  {{course.value.name}}
+                </mat-chip>
+              </div>
+            </mat-chip-list>
+          </div>
+          <ng-template #elseBlock>
+            <mat-chip-list>
+              <mat-chip *ngFor="let course of program?.courses | keyvalue" color="accent"
+                        [selected]="course.value.active === 'Yes'">{{course.value.name}}</mat-chip>
+            </mat-chip-list>
+          </ng-template>
+
+        </div>
+
+        <div class="col">
+          Participation Details
+          <form [formGroup]="participants">
+            <div class="row">
+              <mat-form-field class="full-width">
+                <input matInput type="number" placeholder="No of Adults" formControlName="numberOfAdults"
+                       [readonly]="mode === 'view'">
+                <mat-error *ngIf="participants.controls['numberOfAdults'].hasError('required')">
+                  Number of adult participants is required!
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="row">
+              <mat-form-field class="full-width">
+                <input matInput type="number" placeholder="No of Children (5-18)" formControlName="numberOfChildren"
+                       [readonly]="mode === 'view'">
+                <mat-error *ngIf="participants.controls['numberOfChildren'].hasError('required')">
+                  Number of childern participants is required!
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="row">
+              <mat-form-field class="full-width">
+                <input matInput type="number" placeholder="No of Males" formControlName="numberOfMales"
+                       [readonly]="mode === 'view'">
+                <mat-error *ngIf="participants.controls['numberOfMales'].hasError('required')">
+                  Number of male participants is required!
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="row">
+              <mat-form-field class="full-width">
+                <input matInput type="number" placeholder="No of Females" formControlName="numberOfFemales"
+                       [readonly]="mode === 'view'">
+                <mat-error *ngIf="participants.controls['numberOfFemales'].hasError('required')">
+                  Number of female participants is required!
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="row">
+              <mat-form-field class="full-width">
+                <input matInput type="number" placeholder="Total No of Participants*"
+                       formControlName="numberOfParticipants"
+                       [readonly]="mode === 'view'">
+                <mat-error *ngIf="participants.controls['numberOfParticipants'].hasError('required')">
+                  Number of total participants is required!
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <mat-card-actions class="margin_top_20_LRB_0">
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext>Next</button>
+      </mat-card-actions>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel> Event/Venue</ng-template>
+
+      Event Details
+
+      <div class="row">
+        <div class="col">
+          <s-search-box [searchControlName]="'host'" [parentForm]="eventForm" [searchFields]="defaultSearchFields"
+                        [collectionName]="'hosts'" [displayField]="defaultDisplayField" [orderBy]="defaultOrderBy"
+                        [batchSize]="5"
+                        [fieldWidth]="'full-width'" [placeholder]="'Organization Name*'"
+                        (valueChange)="onSelectHost($event)"
+                        [readonly]="mode === 'view'">
+          </s-search-box>
+        </div>
+
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput type="text" placeholder="Organization Type*" [(ngModel)]="organizationType"
+                   [ngModelOptions]="{standalone: true}" [readonly]="true">
+          </mat-form-field>
+        </div>
+
+        <div class="col">
+          <mat-form-field class="full-width">
+            <mat-select placeholder="Event Category" formControlName="category" [(value)]="selectedEventCategory"
+                        [disabled]="mode === 'view'">
+              <mat-option *ngFor="let eventCategory of eventCategories" [value]="eventCategory.id">
+                {{eventCategory.name}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="eventForm.controls['category'].hasError('required')">
+              Event category is required
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Event Type" formControlName="type" [readonly]="mode === 'view'">
+            <mat-error *ngIf="eventForm.controls['type'].hasError('required')">
+              Event type is required!
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput type="date" placeholder="Start Date*" formControlName="startDate"
+                   [readonly]="mode === 'view'">
+            <mat-error *ngIf="eventForm.controls['startDate'].hasError('required')">
+              Start is required!
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Event Name*" formControlName="name" [readonly]="true">
+            <mat-error *ngIf="eventForm.controls['name'].hasError('required')">
+              Event name is required!
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <!-- <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput type="date" placeholder="End Date" formControlName="endDate" [readonly]="mode === 'view'">
+          </mat-form-field>
+        </div> -->
+      </div>
+
+      <!-- <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput type="time" placeholder="Start Time" formControlName="startTime"
+              [readonly]="mode === 'view'">
+          </mat-form-field>
+        </div>
+
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input matInput type="time" placeholder="End Time" formControlName="endTime" [readonly]="mode === 'view'">
+          </mat-form-field>
+        </div>
+      </div> -->
+
+
+      <div class="col">
+        Venue Details
+        <admin-address-form [parentForm]="eventForm" [disabled]="mode === 'view'"></admin-address-form>
+      </div>
+      <div class="col"  *ngIf="mode !== 'view'; else elseLocationBlock">
+        Locations
+        <mat-chip-list>
+          <div *ngFor="let location of host?.locations | keyvalue">
+            <mat-chip>
+              <mat-checkbox #checkbox [checked]="isLocationChecked(location.value)"
+                            (change)="onLocationChange(checkbox.checked, location.key, location.value)"
+                            class="mr-10"></mat-checkbox>
+              {{location.value.name}}
+            </mat-chip>
+          </div>
+        </mat-chip-list>
+      </div>
+      <ng-template #elseLocationBlock>
+        <mat-chip-list>
+          <mat-chip *ngFor="let location of host?.locations| keyvalue" color="accent"
+                    [selected]="!location.value.isDisabled">{{location.value.name}}</mat-chip>
+        </mat-chip-list>
+      </ng-template>
+
+      <mat-card-actions class="margin_top_20_LRB_0">
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext>Next</button>
+      </mat-card-actions>
+
+    </mat-step>
+
+
+    <mat-step>
+      <ng-template matStepLabel>Facilitator Details</ng-template>
+      <div class="facilitatorsDiv">
+        <admin-search-filter></admin-search-filter>
+        <div class="row facilitators">
+          <div class="col">
+            <s-infinite-scroll-grid [addItemEnabled]="true"
+                                    [collectionName]="'users'"
+                                    [filterBy]="facilitatorFilterBy"
+                                    [orderBy]="facilitatorOrderBy"
+                                    [searchBy]="facilitatorSearchBy"
+                                   class="event_edit_popup_margin_top">
+              <ng-template let-item="item" let-i="i">
+                <admin-event-facilitator-card [mode]="mode"
+                                              [controlName]="'facilitators'"
+                                              [event]="satiEvent"
+                                              [user]="item"
+                                              [formGroup]="facilitatorForm">
+                </admin-event-facilitator-card>
+              </ng-template>
+            </s-infinite-scroll-grid>
+          </div>
+        </div>
+      </div>
+
+      <mat-card-actions class="margin_top_20_LRB_0">
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext>Next</button>
+      </mat-card-actions>
+    </mat-step>
+
+    <mat-step>
+      <ng-template matStepLabel>Participant Details</ng-template>
+      <div class="facilitatorsDiv">
+        <admin-search-filter></admin-search-filter>
+        <div class="row facilitators">
+          <div class="col">
+            <s-infinite-scroll-grid [addItemEnabled]="true"
+                                    [collectionName]="'users'"
+                                    [orderBy]="usersOrderBy"
+                                    [searchBy]="facilitatorSearchBy"
+                                    class="event_edit_popup_margin_top">
+              <ng-template let-item="item" let-i="i">
+                <admin-event-facilitator-card [mode]="mode"
+                                              [controlName]="'participation'"
+                                              [event]="satiEvent"
+                                              [user]="item"
+                                              [formGroup]="participationForm"
+                >
+                </admin-event-facilitator-card>
+              </ng-template>
+            </s-infinite-scroll-grid>
+          </div>
+        </div>
+      </div>
+
+      <mat-card-actions class="margin_top_20_LRB_0">
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext>Next</button>
+      </mat-card-actions>
+    </mat-step>
+
+    <mat-step optional>
+      <ng-template matStepLabel>Comments & Special Details</ng-template>
+      <div class="row">
+        <mat-form-field class="full-width">
+          <textarea matInput placeholder="Additional Info" formControlName="description" matAutosizeMinRows=3
+                    [readonly]="mode === 'view'"></textarea>
+        </mat-form-field>
+      </div>
+      <mat-card-actions class="margin_top_20_LRB_0" *ngIf="mode !== 'view'">
+        <button mat-flat-button color="accent" type="button" (click)="back()">
+          Cancel
+        </button>
+        <button mat-flat-button color="primary" type="submit" [disabled]="!eventForm?.valid" (click)="onSubmit()">
+          {{mode === 'edit' ? "Submit" : "Add"}}
+        </button>
+      </mat-card-actions>
+    </mat-step>
+
+  </mat-horizontal-stepper>
+
+
+</form>

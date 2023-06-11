@@ -1,0 +1,77 @@
+//.dashboard-wrapper {
+//  margin: 20px;
+//}
+
+:host {
+  width: 100%;
+  height: 100%;
+  --mat-tab-margin: 0;
+}
+
+mat-tab-group {
+  width: calc(100% - 210px);
+}
+
+admin-dashboard-event-filter {
+  margin-left: 10px;
+  width: 200px;
+}
+
+.dashboard-wrapper {
+  margin: 20px;
+}
+
+
+.common-margin {
+  margin: 20px;
+}
+
+
+.event-overview {
+  height: 96%;
+  display: flex;
+  flex-direction: row;
+}
+
+.participantsStats {
+  height: 100%;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr;
+  grid-template-areas: ' male-female-chart adults-children-chart'
+}
+
+.courseStats {
+  height: 100%;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr;
+  grid-template-areas:  'event-courses-chart  event-activities-chart'
+}
+
+.histogram-chart {
+  grid-area: histogram-chart;
+  align-items: center;
+}
+
+.male-female-chart {
+  grid-area: male-female-chart;
+  align-items: center;
+}
+
+.adults-children-chart {
+  grid-area: adults-children-chart;
+  align-items: center;
+}
+
+.event-courses-chart {
+  grid-area: event-courses-chart;
+  align-items: center;
+}
+
+.event-activities-chart {
+  grid-area: event-activities-chart;
+  align-items: center;
+}

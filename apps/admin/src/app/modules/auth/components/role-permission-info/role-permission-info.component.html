@@ -1,0 +1,83 @@
+<form [formGroup]="roleForm">
+  <div class="boxs">
+    <div class="row">
+      <mat-form-field class="margin_LF_10">
+        <input id="roleName" matInput placeholder="Role Name" formControlName="name">
+        <mat-error *ngIf="roleForm.controls['name'].hasError('required')"
+                   i18n="@@didYouForgetToInputValue">
+          Did you forget to input a value?
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="row">
+      <mat-form-field>
+        <mat-select id="roleLevel" placeholder="Role Level*" formControlName="roleLevel"
+                    [compareWith]="compareRoleLevel">
+          <mat-option *ngFor="let roleLevel of roleLevels" [value]="roleLevel">
+            {{roleLevel.name}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="roleForm.controls['roleLevel'].hasError('required')">
+          User Role Level is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="margin_LF_10">
+        <mat-select id="roleOrganizationType" placeholder="ORG Types*" formControlName="allowedOrgTypes" multiple [compareWith]="compareOrgTypes">
+          <mat-option *ngFor="let orgType of orgTypes" [value]="orgType">{{orgType.name}}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="roleForm.controls['allowedOrgTypes'].hasError('required')">
+          Organization Types <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+      <form [formGroup]="permissionLevelGroupFrom">
+        <mat-form-field>
+          <mat-select id="roleViewPermissionLevel" placeholder="View Permission Level*" formControlName="view"
+                      [compareWith]="comparePermissionLevel">
+            <mat-option *ngFor="let permissionLevel of permissionLevels" [value]="permissionLevel">
+              {{permissionLevel.name}}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="permissionLevelGroupFrom.controls['view'].hasError('required')">
+            View Permission Level <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="margin_LF_10">
+          <mat-select id="roleEditPermissionLevel" placeholder="Edit Permission Level*" formControlName="edit"
+                      [compareWith]="comparePermissionLevel">
+            <mat-option *ngFor="let permissionLevel of permissionLevels" [value]="permissionLevel">
+              {{permissionLevel.name}}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="permissionLevelGroupFrom.controls['edit'].hasError('required')">
+            Edit Permission Level <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+      </form>
+
+
+    </div>
+  </div>
+
+
+  <mat-card>
+    <div class="" style="height: 65vh !important;">
+      <s-infinite-scroll-grid *ngIf="dataSource" [dataSource]="dataSource" [addItemEnabled]="true"
+                              [orderBy]="[{fieldPath: 'name', directionStr: 'asc'}]"
+                              class="permission">
+        <ng-template let-item="item" let-i="i">
+          <admin-permission [permission]="item"
+                            [editPermissionLevel]="permissionLevelGroupFrom.controls['edit'].value"
+                            [viewPermissionLevel]="permissionLevelGroupFrom.controls['view'].value">
+          </admin-permission>
+        </ng-template>
+      </s-infinite-scroll-grid>
+    </div>
+  </mat-card>
+  <mat-card-actions class="margin_0">
+    <button mat-flat-button color="primary" type="submit" [disabled]="roleForm.invalid"
+            (click)="'new'=== mode?addNewRole():savePermission()">
+      Submit
+    </button>
+  </mat-card-actions>
+</form>

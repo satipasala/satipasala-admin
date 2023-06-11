@@ -1,0 +1,92 @@
+
+  <form *ngIf="simplified" [formGroup]="uploadForm" (ngSubmit)="putFiles()">
+
+    <input #photoInput class="fileUpload"  type="file" formControlName="document" accept='image/*' (change)="preview($event)" ng2FileSelect [accept]="fileTypeData" [uploader]="uploader" [multiple]="multiple" [disabled]="disabled"/>
+    <div class="drop-zone">
+       <div ng2FileDrop (onFileDrop)="preview($event)" [uploader]="uploader" class="dropzone-small" (click)="disabled?'':photoInput.click()">
+         <div *ngIf="uploads; else currentAvatar">
+           <div *ngFor="let upload of uploads" >
+             <img mat-card-avatar [src]="upload.url">
+           </div>
+         </div>
+
+         <ng-template #currentAvatar>
+           <div *ngIf="imageUrl | async as ptUrl">
+             <img mat-card-avatar [src]="ptUrl">
+           </div>
+         </ng-template>
+       </div>
+      <div *ngIf="defaultUrl" class="upload_de_bu">
+        <button type="button" mat-icon-button>
+          <mat-icon (click)="removeUploadedImage()">delete</mat-icon>
+        </button>
+      </div>
+       <div *ngFor="let upload of uploads"  class="upload_de_bu">
+          <button type="button" mat-icon-button>
+          <mat-icon (click)="deleteRow(upload.item)">delete</mat-icon>
+          </button>
+       </div>
+    </div>
+    <div *ngIf="startUpload" width="45%">
+      <div *ngFor="let upload of uploads">
+        <upload-task (onSucess)="deleteRowOnUploadSuccess($event)" [upload]="upload" [storageLoc]="loc" [storeName]="stName"></upload-task>
+      </div>
+    </div>
+
+  </form>
+
+  <form *ngIf="!simplified" [formGroup]="uploadForm" (ngSubmit)="putFiles()">
+
+      <input #photoInput class="fileUpload" formControlName="document"  type="file" (change)="preview($event)" ng2FileSelect [accept]="fileTypeData" [uploader]="uploader" [multiple]="multiple"/><br/>
+      <div class="drop-zone">
+        <div ng2FileDrop (onFileDrop)="preview($event)" [uploader]="uploader" class="dropzone" (click)="photoInput.click()">
+          <p class="msg">Click or Drag and drop files to upload</p>
+        </div>
+      </div>
+      <div>
+        <button mat-raised-button color="accent"  [disabled]="noneSelected()" type="submit">Upload</button>
+      </div>
+
+      <table>
+        <thead>
+        <tr>
+          <th *ngIf="isMediaType()" width="20%">
+            Preview
+          </th>
+          <th width="20%">
+            File Name
+          </th>
+          <th width="15%">
+            Size
+          </th>
+          <th *ngIf="!startUpload"  width="10%">
+            Remove
+          </th>
+          <th *ngIf="startUpload"  width="45%">
+            Progress
+          </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let upload of uploads">
+          <th *ngIf="isMediaType()" width="20%">
+            <img mat-card-avatar [src]="upload.url" alt="No image"/>
+          </th>
+          <th width="20%">
+            {{ upload.item.file.name}}
+          </th>
+          <th width="15%">
+            {{ upload.size }}
+          </th>
+          <th *ngIf="!startUpload" class="text-center" width="10%">
+            <mat-icon (click)="deleteRow(upload.item)">delete</mat-icon>
+          </th>
+          <th *ngIf="startUpload" width="45%">
+            <upload-task (onSucess)="deleteRowOnUploadSuccess($event)" [upload]="upload" [storageLoc]="loc" [storeName]="stName"></upload-task>
+          </th>
+        </tr>
+        </tbody>
+      </table>
+
+
+  </form>

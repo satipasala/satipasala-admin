@@ -1,0 +1,45 @@
+@import "variables";
+@import "global_class";
+@import "global-media-queries";
+@mixin headers($name, $height, $background, $color) {
+  .header-#{$name} {
+    background: $background;
+    position: relative;
+    min-height: $height;
+    width: 100%;
+    color: $color;
+  }
+}
+@mixin box_ShadowNone {
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+}
+
+@mixin gridcolumns($size, $gap){
+  .grid-col-#{$size}{
+    display: grid;
+    grid-template-columns: repeat($size, 1fr);
+    grid-gap:$gap;
+  }
+}
+// #Border radius shorthand
+@mixin border-radiusk($radius) {
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+  -ms-border-radius: $radius;
+  -o-border-radius: $radius;
+  border-radius: $radius;
+}
+//@function v($var) {
+//  @return var(--#{$var});
+//}
+
+
+@mixin icon {
+  width: 35px;
+  height: 35px;
+  // background: var(--lightGray);
+  border: 2px solid var(--white);
+
+}
+

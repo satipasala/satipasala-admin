@@ -1,0 +1,10 @@
+<h1 mat-dialog-title>Change organization state</h1>
+<p mat-line>Please confirm state update to {{getHostStatusToBeChanged()}} organization</p>
+<mat-dialog-content class="ref-dialog">
+</mat-dialog-content>
+<div mat-dialog-actions>
+
+  <button mat-flat-button color="primary" (click)="confirmHostStateChange()" cdkFocusInitial>Ok</button>
+  <button mat-flat-button color="accent" (click)="cancelUpdate()">Cancel</button>
+</div>
+

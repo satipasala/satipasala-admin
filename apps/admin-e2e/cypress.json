@@ -1,0 +1,11 @@
+{
+  "fileServerFolder": "./",
+  "fixturesFolder": "./src/fixtures",
+  "integrationFolder": "./src/integration",
+  "supportFile": "./src/support/index.ts",
+  "video": false,
+  "videosFolder": "../../dist/out-tsc/apps/admin-e2e/videos",
+  "screenshotsFolder": "../../dist/out-tsc/apps/admin-e2e/screenshots",
+  "chromeWebSecurity": false,
+  "baseUrl": "http://localhost:4000"
+}

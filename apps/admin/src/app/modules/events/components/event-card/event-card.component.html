@@ -1,0 +1,123 @@
+<mat-card class="" [ngClass]="satiEvent.disabled ?'disable-block':''" *ngIf="permission" (click)="viewEvent(satiEvent)">
+  <mat-card-header>
+    <img mat-card-sm-image mat-card-avatar style="width: 52px;height: 52px" [src]="imageUrl|async"
+         [alt]="satiEvent?.name">
+    <mat-card-title>
+      {{getEventName()}}
+    </mat-card-title>
+    <mat-card-subtitle>
+      <mat-chip *ngIf="satiEvent.host"  >{{satiEvent?.host.name}}</mat-chip>
+    </mat-card-subtitle>
+    <mat-card-subtitle >
+      <strong matTooltip="Event Type">
+        {{satiEvent?.type}}
+      </strong>
+    </mat-card-subtitle>
+    <mat-card-subtitle style="margin-bottom: 0px">
+      <div class="flag">{{satiEvent.addressInfo.country.emoji}} </div>
+      <div> {{satiEvent.addressInfo.country.name}}, {{satiEvent.addressInfo.city.name}}</div>
+    </mat-card-subtitle>
+
+  </mat-card-header>
+
+  <mat-card-content >
+    <!-- <p class="location_img"><img src="assets/images/location.jpg"><span>{{satiEvent?.location?.name}}</span></p>-->
+    <div class="row">
+      <p matTooltip="Start"><strong>
+        <mat-icon>date_range</mat-icon>
+        {{satiEvent.startDate}}
+
+        <!--<mat-icon class="location_icon">access_alarm</mat-icon>
+        {{satiEvent.startTime ? (satiEvent.startTime) : ''}} -->
+      </strong></p>
+
+    </div>
+    <mat-divider></mat-divider>
+
+    <div class="row">
+   <!--   <div class="col-8" style="width: 100%">
+        &lt;!&ndash;<p matTooltip="End">
+          <strong>
+            <mat-icon>date_range</mat-icon>
+            {{satiEvent.endDate}}
+            <mat-icon class="location_icon">access_alarm</mat-icon>
+            {{satiEvent.endTime ? (satiEvent.endTime) : ''}}
+          </strong></p>&ndash;&gt;
+        <p>
+          <strong>
+            <mat-chip-list aria-label="Course selected">
+              <mat-chip matTooltip="Hosted organization" color="warn">{{satiEvent.host.name}}</mat-chip>
+            </mat-chip-list>
+          </strong>
+        </p>
+
+
+      </div>-->
+      <div class="col-4" style="width: 100%">
+        <p matTooltip="Males">
+          <strong>
+            <fa-icon [icon]="male"></fa-icon>
+            Males : {{satiEvent.participants.numberOfMales}}
+          </strong>
+        </p>
+        <p matTooltip="Females">
+          <strong>
+            <fa-icon [icon]="female"></fa-icon>
+            Female : {{satiEvent.participants.numberOfFemales}}
+          </strong>
+        </p>
+        <p matTooltip="Adults">
+          <strong>
+            <fa-icon [icon]="male"></fa-icon>
+            Adults : {{satiEvent.participants.numberOfAdults}}
+          </strong>
+        </p>
+        <p matTooltip="Children">
+          <strong>
+            <fa-icon [icon]="child"></fa-icon>
+            Children : {{satiEvent.participants.numberOfChildren}}
+          </strong>
+        </p>
+      </div>
+    </div>
+
+
+  </mat-card-content>
+  <mat-card-actions align="start">
+    <button *ngIf="permission.edit" mat-icon-button
+            event-stop-propagation
+            (click)="openDeleteDialog(event)">
+      <mat-icon matTooltip="Delete">delete_forever</mat-icon>
+    </button>
+
+    <button *ngIf="event.disabled && permission.edit; else enableEventBlock" mat-icon-button
+            event-stop-propagation
+            (click)="openDialog(event, false)">
+      <mat-icon matTooltip="Enable event">event_available</mat-icon>
+    </button>
+
+    <ng-template #enableEventBlock>
+      <button *ngIf="permission.edit" mat-icon-button
+              event-stop-propagation
+              (click)="openDialog(event, true)">
+        <mat-icon matTooltip="Disable event">event_busy</mat-icon>
+      </button>
+    </ng-template>
+    <button mat-icon-button *ngIf="isAuthorizedToEdit"
+            event-stop-propagation
+            (click)="addSessions(event)">
+      <mat-icon matTooltip="Add new session">add</mat-icon>
+    </button>
+
+    <button mat-icon-button
+            event-stop-propagation
+            (click)="viewSessions(satiEvent)">
+      <mat-icon matTooltip="View sessions">event_note</mat-icon>
+    </button>
+    <button mat-icon-button
+            event-stop-propagation
+            (click)="editEvent(satiEvent)" *ngIf="permission.edit">
+      <mat-icon matTooltip="Manage event">edit</mat-icon>
+    </button>
+  </mat-card-actions>
+</mat-card>

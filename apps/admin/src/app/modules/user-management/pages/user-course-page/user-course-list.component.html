@@ -1,0 +1,14 @@
+<form *ngIf="selectedUser" [formGroup]="userCourseForm" (ngSubmit)="onSubmit(userCourseForm.value)">
+  <s-infinite-scroll-grid [addItemEnabled]="true" [collectionName]="'courses'" [orderBy]="orderBy"
+    formArrayName="items">
+    <ng-template let-item="item" let-i="i">
+      <admin-user-course-card [formGroup]="userCourseForm" [course]="item" [selectedUser]="selectedUser"
+        [dbUser]="dbUser"></admin-user-course-card>
+    </ng-template>
+  </s-infinite-scroll-grid>
+  <mat-card-actions class=" infinite-action-wrapper">
+    <button mat-raised-button color="primary" [disabled]="!userCourseForm.dirty" type="submit">Submit
+    </button>
+    <button mat-flat-button color="accent" type="button" (click)="back()">Cancel</button>
+  </mat-card-actions>
+</form>

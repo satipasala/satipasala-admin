@@ -1,0 +1,90 @@
+
+
+:root{
+  --white:#fff;
+  --black:#000;
+  //--menuBG: #2b5876;
+  --menuBG: #1e3c72;
+  --menuBG2: #4e4376;
+  --hedarBG: #214964;
+  --light-font-color:#E9EAEB;
+  --menu-icon:#F9CB67;
+  --selected-color:#FF6D00;
+  --lightGray:#BEC4C6;
+  --dar_gary:#999999;
+  --silver: #f9f9f9;
+  --light-font-color:#b0c7d6;
+  --dark-font-color: #696969;
+  --icon-color: #634792;
+  --font-color:#5d68d9;
+  --selected-color:#f96c1d;
+  --lightGray:#f6f6f6;
+  --dar_gary:#999999;
+  --silver: #f9f9f9;
+  --silver_100: #e2e2e2;
+  --border: #e1e1e1;
+  --blue: #0275d8;
+  --card-bg-hover: #ecebf1;
+  --light-perpal: #303f9f;
+  --card_disable:#e5e5e5;
+  --card_disable_content_icon:#cbcbcb;
+  --card_selected_bg:#3752a7;
+  --error:#b61717;
+
+  //  padding
+  --top_bottom: 0.5em;
+  --top_right: 0.5em;
+  --hedaerHeight:100px;
+  --padding: 15px;
+  --card-icon-padding: 8px;
+
+  //fontsize
+  --fontSize: 1em;
+  --small-font-size: 16px;
+
+  //web
+  --web_bg: #f1f1f1;
+  --dark_browen:#543201;
+  --light:#eee;
+
+  //web
+  --web_bg: #f1f1f1;
+  --dark_browen:#543201;
+  --light:#eee;
+}
+
+
+
+//for Admin
+$menu_leftBG: var(--menuBG);
+$a_headerBG: var(--hedarBG);
+$primary:$menu_leftBG;
+$white: var(--white);
+$black: var(--black);
+
+//pading
+$paading_top_bottom: var(--top_bottom);
+$menu_textcol: #859DA5;
+$blue: #0275d8 !default;
+$teal: #5bc0de !default;
+$purple: #613d7c !default;
+
+
+// mobile and web
+$gray-dark: #222;
+$gray: #212121;
+$gray-light: #666;
+$gray-lighter: #bbb;
+
+$pink: #ff5b77 !default;
+$green: #5cb85c !default;
+$header:black !default;
+$white:#fff !default;
+$green:green !default;
+
+$grid_gutter: 0.5rem;
+$red: #d9534f !default;
+$orange: #f0ad4e !default;
+$yellow: #ffd500 !default;
+
+

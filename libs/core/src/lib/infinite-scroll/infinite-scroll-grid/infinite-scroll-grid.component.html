@@ -1,0 +1,20 @@
+
+<ng-container>
+  <!--item size should be an input (autosize option is disabled since it has bugs)-->
+  <cdk-virtual-scroll-viewport itemSize="20" >
+
+    <s-grid class="infinite-grid">
+      <ng-container *cdkVirtualFor="let item of infinite; let i = index;">
+        <s-grid-tile>
+          <ng-container *ngTemplateOutlet="templateVariable;context: {item: item,i:i}"></ng-container>
+        </s-grid-tile>
+      </ng-container>
+
+    </s-grid>
+  </cdk-virtual-scroll-viewport>
+  <button *ngIf="addItemEnabled" mat-fab aria-label="Example icon-button with a heart icon" class="addItem"
+          (click)="addNew()" id="addNewItem">
+    <mat-icon>add</mat-icon>
+  </button>
+
+</ng-container>

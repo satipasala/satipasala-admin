@@ -1,0 +1,7 @@
+<s-infinite-scroll-grid *ngIf="rolePermission && filterBy" [addItemEnabled]="rolePermission.edit"
+  [collectionName]="collection" [orderBy]="orderBy" [searchBy]="searchBy" [filterBy]="filterBy"
+  (onAddItem)="addNewHost()">
+  <ng-template let-item="item" let-i="i">
+    <admin-host-info-component [permission]="rolePermission" [host]="item"></admin-host-info-component>
+  </ng-template>
+</s-infinite-scroll-grid>

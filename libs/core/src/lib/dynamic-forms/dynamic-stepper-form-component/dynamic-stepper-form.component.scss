@@ -1,0 +1,23 @@
+.mat-stepper-vertical{
+  background: none;
+  .mat-step {
+    margin: 6px 0;
+    background: var(--white);
+  }
+  .mat-vertical-content-container{
+    &:before{
+      border: none;
+    }
+  }
+}
+.mat-form-field-infix{
+  width: 100%!important;
+}
+
+.mat-vertical-content{
+  padding-bottom: 0;
+}
+
+.hideButton{
+  display: none !important;
+}

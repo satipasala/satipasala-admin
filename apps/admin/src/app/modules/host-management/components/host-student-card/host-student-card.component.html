@@ -1,0 +1,24 @@
+<div id="action-description">
+</div>
+<form [formGroup]="studentForm">
+      <mat-card class="" [class.select-course]="studentCheckBox.checked">
+        <mat-card-header>
+          <img *ngIf="imageUrl | async as ptUrl" mat-card-avatar style="width: 52px;height: 52px"  [src]="ptUrl" alt="No Image" alt="Avatar">
+          <mat-card-title >{{user.displayName }}</mat-card-title>
+          <mat-card-subtitle class="subtitle-with-icon"><mat-icon>email</mat-icon>{{user?.email}}</mat-card-subtitle>
+        </mat-card-header>
+          &nbsp;
+        <mat-card-content>
+          <p> Location : {{user?.locationInfo?.name}}</p>
+          <!-- <div class="sathi-icon" color="accent">
+            <mat-icon matTooltip="Phone Number">phone</mat-icon>
+            <span> {{user?.phoneNumber}}</span>
+          </div> -->
+        </mat-card-content>
+        <mat-card-actions class="padding_20">
+              <mat-checkbox formControlName="studentCheckBox" #studentCheckBox></mat-checkbox>
+          </mat-card-actions>
+      </mat-card>
+
+</form>
+

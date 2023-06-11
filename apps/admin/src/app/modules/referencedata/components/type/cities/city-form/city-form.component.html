@@ -1,0 +1,70 @@
+<h2 mat-dialog-title>City</h2>
+<mat-dialog-content [formGroup]="formGroup" novalidate class="ref-dialog">
+  <mat-form-field>
+    <input id="cityName" matInput placeholder="Name" formControlName="name" i18n-placeholder="@@name" (blur)="onChangeCityName($event.value)">
+    <mat-error *ngIf="formGroup.controls['name'].hasError('required')"
+               i18n="@@didYouForgetToInputValue">
+      Did you forget to input a value?
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field>
+
+    <input id="cityCountry" type="text"
+           placeholder="Country*"
+           aria-label="Country"
+           matInput
+           formControlName="country"
+           [matAutocomplete]="autoCountry" >
+    <mat-autocomplete #autoCountry="matAutocomplete"  (optionSelected)="selectedCountry($event.option.value)" [displayWith]="nameDisplayFunc"  >
+      <mat-option *ngFor="let country of filteredCountries|async" [value]="country">{{country.name}}</mat-option>
+    </mat-autocomplete>
+
+  <!--  <mat-select placeholder="Country" formControlName="country" [compareWith]="compareItems"  (selectionChange)="selectedCountry($event.value)">
+      <mat-option *ngFor="let country of countries" [value]="country">{{country.name}}</mat-option>
+    </mat-select>-->
+    <mat-error *ngIf="formGroup.controls['country'].hasError('required')"
+               i18n="@@didYouForgetToInputValue">
+      Did you forget to input a value?
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <input id="cityState" type="text"
+           placeholder="State/Province*"
+           aria-label="State/Province*"
+           matInput
+           formControlName="state"
+           [matAutocomplete]="autoState" >
+    <mat-autocomplete #autoState="matAutocomplete"  (optionSelected)="selectedState($event.option.value)" [displayWith]="nameDisplayFunc"  >
+      <mat-option *ngFor="let state of filteredStates|async" [value]="state">{{state.name}}</mat-option>
+    </mat-autocomplete>
+    <!--<mat-select placeholder="State" formControlName="state" [compareWith]="compareItems" >
+      <mat-option *ngFor="let state of filteredStates" [value]="state">{{state.name}}</mat-option>
+    </mat-select>-->
+    <mat-error *ngIf="formGroup.controls['state'].hasError('required')"
+               i18n="@@didYouForgetToInputValue">
+      Did you forget to input a value?
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input id="cityLatitude" matInput placeholder="Latitude" formControlName="latitude">
+  </mat-form-field>
+  <mat-form-field>
+    <input id="cityLongitude" matInput placeholder="Longitude" formControlName="longitude">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-select placeholder="Active" formControlName="active" i18n-placeholder="@@active">
+      <mat-option value="Yes">Yes</mat-option>
+      <mat-option value="No">No</mat-option>
+    </mat-select>
+  </mat-form-field>
+<mat-dialog-actions>
+
+  <button *ngIf="dataObj.type === 'view'" mat-flat-button color="primary" (click)="cancel()" i18n="@@ok">OK
+  </button>
+  <button *ngIf="dataObj.type !== 'view'" mat-flat-button color="primary" (click)="onSave()"
+          [disabled]="formGroup.invalid" i18n="@@save">Save
+  </button>
+  <button *ngIf="dataObj.type !== 'view'" mat-flat-button color="accent" (click)="cancel()" i18n="@@cancel">Cancel</button>
+</mat-dialog-actions>
+

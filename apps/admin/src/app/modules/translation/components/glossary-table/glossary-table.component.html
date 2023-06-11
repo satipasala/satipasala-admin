@@ -1,0 +1,50 @@
+<div class="">
+  <table mat-table class="full-width-table" [dataSource]="dataSource" matSort aria-label="Elements">
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header i18n="@@id">ID</th>
+      <td mat-cell *matCellDef="let row">{{row.id}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="uid">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header i18n="@@uid">UID</th>
+      <td mat-cell *matCellDef="let row">{{row.uid}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="lang">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header i18n="@@lang">Language</th>
+      <td mat-cell *matCellDef="let row">{{row.lang}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="model">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header i18n="@@model">Model</th>
+      <td mat-cell *matCellDef="let row">{{row.model}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="translated">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header i18n="@@translated">Translated</th>
+      <td mat-cell *matCellDef="let row">{{row.translated}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="phrase">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header i18n="@@traslatedPhrase">Translated Phrase</th>
+      <td mat-cell *matCellDef="let row">{{row.phrase}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="edit">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header></th>
+      <td mat-cell *matCellDef="let row">
+        <admin-context-menu></admin-context-menu>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+
+  <mat-paginator #paginator [length]="100"
+                 [pageIndex]="0"
+                 [pageSize]="10"
+                 [pageSizeOptions]="[5, 10, 15, 20] " (page)="loadMore($event)">
+  </mat-paginator>
+</div>

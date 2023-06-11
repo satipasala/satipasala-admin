@@ -1,0 +1,37 @@
+<form [formGroup]="hostStudentForm" (ngSubmit)="onSubmit(hostStudentForm.value)">
+  <div class="mat-tab-header margin_LR_4">
+    <div class="matMenu">
+      <mat-form-field appearance="outline" class="full-width padding_LF">
+        <mat-label><b>{{locationDropDownPlaceholder}}</b></mat-label>
+        <mat-select [(value)]="selectedClassKey" required>
+          <mat-option *ngFor="let hostLocation of hostLocations" [value]="hostLocation.id">
+            {{ hostLocation.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <mat-form-field appearance="outline" class="padding_LF margin_L10" *ngIf="activeHostCount > 0">
+      <mat-label><b>Selection</b></mat-label>
+      <mat-select [(value)]="selectedAssignment">
+        <mat-option value="class">Assigned Students</mat-option>
+        <mat-option value="host">All Students</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+  </div>
+
+  <s-infinite-scroll-grid *ngIf="host && activeHostCount > 0" [addItemEnabled]="true" [collectionName]="'users'"
+    [orderBy]="orderBy" [filterBy]="filterBy" class="popup_margin_top_93">
+    <ng-template let-item="item" let-i="i">
+      <admin-host-student-card [selectedClassKey]="selectedClassKey" [user]="item" [formGroup]="hostStudentForm"
+        (assignedStudent)="assignedStudents($event)"></admin-host-student-card>
+    </ng-template>
+  </s-infinite-scroll-grid>
+
+  <mat-card-actions class="infinite-action-wrapper">
+    <button mat-flat-button color="primary" [disabled]='!hostStudentForm.dirty' type="submit">Submit
+    </button>
+    <button mat-flat-button color="accent" type="button" (click)="back()">Cancel</button>
+  </mat-card-actions>
+</form>

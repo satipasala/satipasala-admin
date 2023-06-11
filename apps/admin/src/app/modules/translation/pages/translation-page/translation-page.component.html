@@ -1,0 +1,47 @@
+<form [formGroup]="translationForm" novalidate (ngSubmit)="onSubmit()">
+  <mat-card class="shipping-card">
+    <mat-card-header>
+      <mat-card-title i18n="@@translatePhrases">Translate Phrases</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="row">
+        <mat-form-field class="full-width">
+          <mat-error *ngIf="translationForm.controls['phrase'].hasError('required')" i18n="@@didYouForgetToInputPhrase">
+            Did you forget to input a phrase to translate?
+          </mat-error>
+          <input matInput placeholder="Phrase to Convert" formControlName="phrase" i18n-placeholder="@@phraseToConver">
+        </mat-form-field>
+      </div>
+      <div class="row">
+        <div class="col">
+          <mat-form-field>
+            <mat-label i18n="@@language">Language</mat-label>
+            <mat-select formControlName="lang">
+              <mat-option value="si">සිංහල</mat-option>
+              <mat-option value="ta">தமிழ்</mat-option>
+              <mat-option value="en">English</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-label i18n="@@model">Model</mat-label>
+          <mat-radio-group formControlName="model" class="translation-radio-group">
+            <mat-radio-button value="nmt" class="translation-radio-button">NMT</mat-radio-button>
+            <mat-radio-button value="base" class="translation-radio-button">PBMT</mat-radio-button>
+          </mat-radio-group>
+        </div>
+        <div class="col">
+          <mat-card-actions class="right-align">
+            <button mat-raised-button color="primary" type="submit" [disabled]="translationForm.invalid"
+                    i18n="@@submit">Submit
+            </button>
+          </mat-card-actions>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</form>
+
+<admin-glossary-table></admin-glossary-table>
+
+

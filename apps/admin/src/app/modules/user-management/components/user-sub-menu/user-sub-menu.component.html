@@ -1,0 +1,17 @@
+<button mat-icon-button [matMenuTriggerFor]="menu">
+  <mat-icon>more_vert</mat-icon>
+</button>
+<mat-menu #menu="matMenu">
+  <button mat-menu-item  (click)="edit()">
+    <mat-icon>edit</mat-icon>
+    <span>Edit User</span>
+  </button>
+  <button mat-menu-item>
+    <mat-icon>notifications_off</mat-icon>
+    <span>Disable User</span>
+  </button>
+  <button mat-menu-item  (click)="viewCourses()">
+    <mat-icon>chrome_reader_mode</mat-icon>
+    <span>View Courses</span>
+  </button>
+</mat-menu>

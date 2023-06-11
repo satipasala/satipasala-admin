@@ -1,0 +1,88 @@
+<form [formGroup]="addressForm" class="address-form">
+
+  <div class="row">
+
+    <div class="col">
+      <mat-form-field class="full-width">
+        <input id="streetName" matInput placeholder="Street" formControlName="street" autocomplete="off" [readonly]="disabled">
+      </mat-form-field>
+    </div>
+
+    <div class="col">
+      <mat-form-field class="full-width">
+
+        <input id="cityName" type="text"
+               placeholder="City*"
+               aria-label="City*"
+               matInput
+               [disabled]="disabled"
+               formControlName="city"
+               [matAutocomplete]="autoCity" >
+        <mat-autocomplete #autoCity="matAutocomplete"  (optionSelected)="selectedCity($event.option.value)" [displayWith]="nameDisplayFunc"  >
+          <mat-option *ngFor="let city of filteredCities|async" [value]="city">{{city.name}}</mat-option>
+        </mat-autocomplete>
+
+       <!-- <mat-select placeholder="City*" formControlName="city" (selectionChange)="selectedCity($event.value)"
+                    [compareWith]="compareItems" [disabled]="disabled">
+          <mat-option *ngFor="let city of filteredCities" [value]="city">{{city.name}}</mat-option>
+        </mat-select>-->
+        <mat-error *ngIf="addressForm.controls['city'].hasError('required')"
+                   i18n="@@didYouForgetToInputValue">
+          City is required
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+
+    <div class="col">
+      <mat-form-field class="full-width">
+        <input type="text"
+               placeholder="State/Province*"
+               aria-label="State/Province*"
+               matInput
+               [disabled]="disabled"
+               formControlName="state"
+               [matAutocomplete]="autoState" >
+        <mat-autocomplete #autoState="matAutocomplete"  (optionSelected)="selectedState($event.option.value)" [displayWith]="nameDisplayFunc"  >
+          <mat-option *ngFor="let state of filteredStates|async" [value]="state">{{state.name}}</mat-option>
+        </mat-autocomplete>
+
+     <!--
+        <mat-select placeholder="State/Province*" formControlName="state"
+                    [compareWith]="compareItems" [disabled]="disabled" (selectionChange)="selectedState($event.value)">
+          <mat-option *ngFor="let state of filteredStates" [value]="state">{{state.name}}</mat-option>
+        </mat-select>-->
+        <mat-error *ngIf="addressForm.controls['state'].hasError('required')"
+                   i18n="@@didYouForgetToInputValue">
+                   State is required
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+
+    <div class="col">
+      <mat-form-field class="full-width">
+        <input type="text"
+               placeholder="Country*"
+               aria-label="Country"
+               matInput
+               [disabled]="disabled"
+               formControlName="country"
+               [matAutocomplete]="autoCountry" >
+        <mat-autocomplete #autoCountry="matAutocomplete"  (optionSelected)="selectedCountry($event.option.value)" [displayWith]="nameDisplayFunc"  >
+          <mat-option *ngFor="let country of filteredCountries|async" [value]="country">{{country.name}}</mat-option>
+        </mat-autocomplete>
+
+        <!--<mat-select placeholder="Country*" formControlName="country" [compareWith]="compareItems" [disabled]="disabled"
+                    (selectionChange)="selectedCountry($event.value)">
+          <mat-option *ngFor="let country of countries" [value]="country">{{country.name}}</mat-option>
+        </mat-select>-->
+        <mat-error *ngIf="addressForm.controls['country'].hasError('required')"
+                   i18n="@@didYouForgetToInputValue">
+          Country is required
+        </mat-error>
+      </mat-form-field>
+
+    </div>
+  </div>
+</form>

@@ -1,0 +1,244 @@
+@use '@angular/material' as mat;
+@import "../../../../../../../libs/base/src/lib/global-scss/variables";
+@import "../../../../../../../libs/base/src/lib/global-scss/mixins";
+@import "menu-icon";
+@import "main_menu";
+@import "comman";
+
+//header
+.mat-toolbar {
+  background: none;
+  @include box_ShadowNone();
+
+  .mat-icon {
+    font-size: 34px;
+  }
+}
+
+.mat-toolbar-row, .mat-toolbar-single-row {
+  height: var(--hedaerHeight);
+}
+
+
+.sidenav-container {
+  position: absolute;
+  top: 0px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: var(--lightGray);
+}
+
+
+.icon-padding {
+  margin-left: 3px;
+  margin-right: 3px;
+}
+
+.nav-list-exp {
+  padding: 0 !important;
+}
+
+.nav-list-item {
+  background: $menu_leftBG; //added by Dimuthu
+  transition: background 0.2s linear;
+}
+
+.mat-icon-active mat-icon {
+  transition: color 0.2s linear;
+  color:  $primary !important;
+}
+
+.nav-category-open {
+  transition: color 0.2s linear;
+  color: $primary !important;
+}
+
+.nav-list-item-text {
+  padding-left: 18px;
+  font-size: 0.8em;
+  color: green; //text color of side menu
+}
+
+.lang-nav {
+  font-size: 16px;
+
+}
+
+h5 {
+  font-size: 15px;
+}
+
+.mat-sidenav, .mat-drawer-inner-container, .mat-expansion-panel-header { //added by Dimuthu
+  // background:  mat.get-color-from-palette($accent, lighter);
+  background-color: rgb(8, 24, 78); //aded by dinushi
+  overflow: hidden;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+
+.mat-expansion-panel-header:focus, .mat-expansion-panel-header:hover,
+.mat-expansion-panel-header:visited, .mat-expansion-panel-header:active, .mat-expansion-panel-content,
+.mat-expansion-panel-header {
+  // background-color: $menu_leftBG;
+  background-color: rgb(8, 24, 78);
+  border-radius: 0px;
+  display: flex;
+  align-items: center;
+
+}
+
+
+// ***sidebar subitem selecting color***
+.mat-expansion-panel:not(.mat-expanded) .mat-expansion-panel-header:not([aria-disabled=true]):hover,
+.mat-expanded {
+  background-color: darken( #1e3c72, 10%) !important;
+}
+
+
+// .mat-expanded, .list-subCategory, .mat-line {
+//   background-color: #2D2E35;
+//   color: #758F98;
+//   border-radius: 0px;
+// }
+
+
+.nav-list-item-text {
+  display: flex;
+  align-items: center;
+}
+
+.nav-list-icon {
+  margin-left: 5px;
+}
+
+.fill-remaining-space {
+  /* This fills the remaining space, by using flexbox.
+     Every toolbar row uses a flexbox row layout. */
+  flex: 1 1 auto;
+}
+
+
+.translation-lang-select {
+  bottom: 0;
+  height: 50px;
+  position: fixed;
+  margin: 5px;
+  width: 15px;
+}
+
+.translation-lang-select > div {
+  margin: 5px;
+}
+
+.lang-nav {
+  margin: 5px;
+  color: #159610;
+  font-weight: 100;
+  text-decoration: none;
+}
+
+.lang-selected {
+  color: #e8e315;
+  font-weight: 500;
+}
+
+
+// ***nav bar subitem font color***
+
+.mat-list-item {
+  &:hover {
+    .mat-line {
+      color: $white
+    }
+  }
+}
+
+
+ul.header-right-side {
+  padding: 0;
+
+  li {
+    list-style: none;
+    display: inline-block;
+    position: relative;
+    vertical-align: top;
+    min-width: 60px;
+    margin-top: 10px;
+  }
+
+
+  // ***notification icon***
+  .mat-badge-content {
+    left: -1px !important;
+    top: -4px !important;
+    background: var(--selected-color);
+  }
+}
+
+
+.mat-sidenav-content {
+  overflow: hidden;
+  height: 100%;
+}
+
+.mat-right-drawer {
+  background-color: #eeeeee;
+}
+
+.close-icon {
+  position: absolute;
+  top: -23px;
+  right: -30px;
+  z-index: 2;
+}
+
+.banner {
+  background: var(--menuBG);
+  min-height: 127px;
+
+  h1 {
+    color: #fff;
+    margin: 0;
+  }
+}
+
+.main {
+  max-width: 900px;
+  margin: 0 auto;
+  //height: 90%; /* Need to change in future (temp solution) */
+  margin-top: 40px;
+  background: var(--lightGray);
+  min-height:92vh;
+}
+
+.mat-elevation-z10 {
+  width: 300px;
+}
+
+
+.main_title {
+  font-size: 16px;
+  color: var(--menuBG2);
+  padding-left: 15px;
+}
+
+ .pop-image{
+   background-image: url("../../../../assets/images/popup-bg.svg")!important;
+   background-repeat: no-repeat;
+   background-size: cover;
+   background-color: var(--menuBG2);
+ }
+
+ .side-bar-loading{
+   width: 100px;
+   left: 50%;
+   position: absolute;
+   margin-left: -50px;
+   top: 40px;
+   z-index: 2;
+ }
+

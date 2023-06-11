@@ -1,0 +1,10 @@
+<div *ngFor="let validator of field.validators" >
+  <mat-error *ngIf="formControl.hasError(validator.type)">
+    {{field.label}} hasError {{validator.name}}
+  </mat-error>
+
+<!--  <mat-error *ngIf="userForm.controls['firstName'].hasError('required')">
+    First Name is <strong>required</strong>
+  </mat-error>-->
+</div>
+

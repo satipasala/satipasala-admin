@@ -1,0 +1,58 @@
+<img mat-card-image class="side-bar-loading" src="assets/images/login_loading.gif" alt="Please wait..." *ngIf="showIndicator">
+<div class="login-notification">{{notification}}</div>
+<div class="error-nofication">{{error}}</div>
+<div class="sati-div">
+
+  <div class="login-box">
+    <mat-card class="login-card">
+      <h2>Satipasala</h2>
+      <mat-card-title>Sign In</mat-card-title>
+
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <mat-card-content>
+          <div class="row">
+            <div class="col">
+              <mat-form-field class="width-100">
+                <input id="userEmail" matInput placeholder="Email" formControlName="email" type="email">
+                <mat-error>
+                  Email must be a valid email address (myname@gmail.com)!
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <mat-form-field class="width-100">
+                <input  id="userPassword" matInput placeholder="Password" formControlName="password" type="password">
+                <mat-error>
+                  Password is required!
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+        </mat-card-content>
+        <mat-card-actions>
+          <button id="userLoginButton" mat-flat-button  color="primary" type="submit" [disabled]="!loginForm?.valid">Sign In</button>
+        </mat-card-actions>
+      </form>
+      <!-- </span> -->
+    </mat-card>
+  </div>
+  <div class="seperator login-box">
+    <p>OR</p>
+  </div>
+  <div class="login-box">
+    <mat-card class="social-login">
+      <mat-card-title>Connect with Social Media</mat-card-title>
+      <button (click)="signInWithOAuthLogin('Google')" class="social-button google">
+        <i class="fa fa-google fa-lg"></i> Connect with Google
+      </button>
+      <button (click)="signInWithOAuthLogin('Facebook')" class="social-button facebook">
+        <i class="fa fa-facebook fa-lg"></i> Connect with Facebook
+      </button>
+      <button (click)="signInWithOAuthLogin('Twitter')" class="social-button twitter">
+        <i class="fa fa-twitter fa-lg"></i> Connect with Twitter
+      </button>
+    </mat-card>
+  </div>
+</div>

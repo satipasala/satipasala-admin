@@ -1,0 +1,62 @@
+<div class="container-fluid event-overview common-margin">
+  <mat-tab-group mat-align-tabs="start" id="tab-group">
+    <mat-tab label="Total Events">
+      <ng-template matTabContent>
+        <admin-dashboard-event-geo-chart  class="geo-chart"
+                                         [selectedCountry]="filterSession?.country"
+                                         [selectedState]="filterSession?.state"
+                                         [selectedCity]="filterSession?.city"
+                                         [selectedOrganization]="filterSession?.organization">
+
+        </admin-dashboard-event-geo-chart>
+      </ng-template>
+
+    </mat-tab>
+
+    <mat-tab label="Events Locations">
+      <ng-template matTabContent>
+        <admin-dashboard-event-map
+                                   [selectedCountry]="filterSession?.country"
+                                   [selectedState]="filterSession?.state"
+                                   [selectedCity]="filterSession?.city"
+                                   [selectedOrganization]="filterSession?.organization"
+        ></admin-dashboard-event-map>
+      </ng-template>
+    </mat-tab>
+
+    <mat-tab label="Participants Stats">
+      <ng-template matTabContent>
+        <div class="participantsStats">
+          <admin-dashboard-event-male-female-chart class="male-female-chart"
+                                                   [selectedCountry]="filterSession?.country"
+                                                   [selectedState]="filterSession?.state"
+                                                   [selectedCity]="filterSession?.city"
+                                                   [selectedOrganization]="filterSession?.organization"
+          ></admin-dashboard-event-male-female-chart>
+          <admin-dashboard-event-adults-children-chart class="adults-children-chart"
+                                                       [selectedCountry]="filterSession?.country"
+                                                       [selectedState]="filterSession?.state"
+                                                       [selectedCity]="filterSession?.city"
+                                                       [selectedOrganization]="filterSession?.organization">
+          </admin-dashboard-event-adults-children-chart>
+
+        </div>
+      </ng-template>
+    </mat-tab>
+    <mat-tab label="Event Categorization">
+      <ng-template matTabContent>
+        <admin-dashboard-event-category-chart
+                                              [selectedCountry]="filterSession?.country"
+                                              [selectedState]="filterSession?.state"
+                                              [selectedCity]="filterSession?.city"
+                                              [selectedOrganization]="filterSession?.organization">
+
+        </admin-dashboard-event-category-chart>
+      </ng-template>
+    </mat-tab>
+  </mat-tab-group>
+  <admin-dashboard-event-filter (filterStateChange)="onFilterSessionChange($event)"></admin-dashboard-event-filter>
+
+
+</div>
+

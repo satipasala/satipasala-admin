@@ -1,0 +1,15 @@
+<div class="">
+  <s-infinite-scroll-grid *ngIf="rolePermission" [addItemEnabled]="rolePermission.edit" [dataSource]="dataSource" [orderBy]="[{fieldPath: 'name', directionStr: 'asc'}]" (onAddItem)="addNew()" >
+    <ng-template let-item="item" let-i="i">
+      <admin-base-ref-data-card [refDataObj]="item" [title]="item?.label?item.label:item.name" [image]="'assets/images/question_label_1.png'"
+                                [subTitle]="item?.type"
+                                (onContextMenuCommand)="onContextMenuCommand($event)">
+        <ng-template>
+          <mat-chip-list aria-label="Attributes" >
+            <mat-chip color="primary" selected>{{item.category}}</mat-chip>
+          </mat-chip-list>
+        </ng-template>
+      </admin-base-ref-data-card>
+    </ng-template>
+  </s-infinite-scroll-grid>
+</div>

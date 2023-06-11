@@ -1,0 +1,49 @@
+<h2 mat-dialog-title>Organization Type</h2>
+<mat-dialog-content [formGroup]="formGroup" novalidate class="ref-dialog">
+  <mat-form-field>
+    <input id="orgTypeName" matInput placeholder="Name" formControlName="name" i18n-placeholder="@@name">
+    <mat-error *ngIf="formGroup.controls['name'].hasError('required')"
+               i18n="@@didYouForgetToInputValue">
+      Did you forget to input a value?
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-select placeholder="Active" formControlName="active" i18n-placeholder="@@active">
+      <mat-option value="Yes">Yes</mat-option>
+      <mat-option value="No">No</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field>
+    <input id="orgTypeDescription" matInput placeholder="Description" formControlName="description" i18n-placeholder="@@description">
+  </mat-form-field>
+
+  <h3>Locations</h3>
+  <mat-selection-list >
+    <mat-list-item *ngFor="let location of locations">
+      <h3 mat-line>{{location.displayName}}</h3>
+      <p mat-line>{{location.name}}</p>
+    </mat-list-item>
+    <mat-divider></mat-divider>
+    <mat-list-item *ngIf="dataObj.type === 'edit'">
+      <mat-form-field appearance="standard">
+        <input id="orgLocationName" matInput placeholder="Name" [(ngModel)]="newItem.name" [ngModelOptions]="{standalone: true}">
+      </mat-form-field>
+      <mat-form-field appearance="standard">
+        <input id="orgLocationDisplayName" matInput placeholder="Display Name" [(ngModel)]="newItem.displayName" [ngModelOptions]="{standalone: true}" (keydown)="$event.stopPropagation()">
+      </mat-form-field>
+      <button id="saveOrgLocation" mat-icon-button matSuffix mat-button (click)="addNewItem(newItem)">
+        <mat-icon>add_circle</mat-icon>
+      </button>
+    </mat-list-item>
+  </mat-selection-list>
+</mat-dialog-content>
+<mat-dialog-actions>
+
+  <button *ngIf="dataObj.type === 'view'" mat-flat-button color="primary" (click)="cancel()" i18n="@@ok">OK
+  </button>
+  <button *ngIf="dataObj.type !== 'view'" mat-flat-button color="primary" (click)="onSave()"
+          [disabled]="formGroup.invalid" i18n="@@save">Save
+  </button>
+  <button *ngIf="dataObj.type !== 'view'" mat-flat-button color="accent" (click)="cancel()" i18n="@@cancel">Cancel</button>
+</mat-dialog-actions>
+

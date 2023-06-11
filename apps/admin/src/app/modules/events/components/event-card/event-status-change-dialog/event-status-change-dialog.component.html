@@ -1,0 +1,8 @@
+<h1 mat-dialog-title>Change event state</h1>
+<p mat-line>Please confirm state update to {{getStateToChange()}} event</p>
+<mat-dialog-content class="ref-dialog">
+</mat-dialog-content>
+<div mat-dialog-actions>
+  <button mat-flat-button color="primary" (click)="onEventStateChange()" cdkFocusInitial>Ok</button>
+  <button mat-flat-button color="accent" (click)="onCancelChange()">Cancel</button>
+</div>

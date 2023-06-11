@@ -1,0 +1,23 @@
+@import "../../../card_format";
+
+.mat-card-content {
+  margin-bottom: 0 !important;
+}
+
+.mat-card-actions {
+  padding: 0 !important;
+  border-top: none !important;
+  left: auto !important;
+  margin-bottom: 0 !important;
+}
+
+.mat-card-stat {
+  font-size: 25px !important;
+  color: #f96c1d;
+  margin-bottom: 0 !important;
+}
+
+:host {
+  position: relative;
+  display: block;
+}

@@ -1,0 +1,45 @@
+<h2 mat-dialog-title>Event Category</h2>
+<mat-dialog-content [formGroup]="formGroup" novalidate class="ref-dialog">
+
+  <mat-form-field>
+    <input matInput placeholder="Dashboard Name" formControlName="name" (ngModelChange)="onNameChange($event)" i18n-placeholder="@@name">
+    <mat-error *ngIf="formGroup.controls['name'].hasError('required')" i18n="@@didYouForgetToInputValue">
+      Dashboard Name required
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-select placeholder="Active" formControlName="active" i18n-placeholder="@@active">
+      <mat-option value="Yes">Yes</mat-option>
+      <mat-option value="No">No</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <button mat-icon-button (click)="addItem()"><mat-icon>add</mat-icon></button>
+  <div formArrayName="dashboards" *ngFor="let linkFormGroup of getLinksFormArray(); let control = index">
+    <ng-container [formGroup]="linkFormGroup" >
+      <mat-form-field>
+        <input matInput placeholder="Name" formControlName="name">
+        <mat-error *ngIf="linkFormGroup['controls']['name'].hasError('required')">
+          Name is required
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="Link" formControlName="link">
+        <mat-error *ngIf="linkFormGroup['controls']['link'].hasError('required')" >
+          Link is required
+        </mat-error>
+      </mat-form-field>
+
+    </ng-container>
+  </div>
+
+
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button *ngIf="dataObj.type === 'view'" mat-flat-button color="primary" (click)="cancel()" i18n="@@ok">OK
+  </button>
+  <button *ngIf="dataObj.type !== 'view'" (click)="onSave()" mat-flat-button color="primary"
+    [disabled]="formGroup.invalid" i18n="@@save">Save
+  </button>
+  <button *ngIf="dataObj.type !== 'view'" mat-flat-button color="accent" (click)="cancel()"
+    i18n="@@cancel">Cancel</button>
+</mat-dialog-actions>

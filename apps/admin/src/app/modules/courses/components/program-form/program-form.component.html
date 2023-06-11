@@ -1,0 +1,75 @@
+<form *ngIf="program" [formGroup]="programForm">
+  <h2 class="h2_margin_ra h2_matBadge">{{formTitle}}</h2>
+
+  <mat-horizontal-stepper labelPosition="bottom" #stepper [linear]="false">
+    <mat-step>
+      <ng-template matStepLabel>Info</ng-template>
+      Program Details
+      <div class="row">
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input type="text" matInput placeholder="Program name" formControlName="name" [(ngModel)]="program.name"
+                   [readonly]="mode === 'edit'? true : false">
+          </mat-form-field>
+        </div>
+
+        <div class="col">
+          <mat-form-field class="full-width">
+            <textarea matInput placeholder="Description" formControlName="description" rows="1"
+                      [(ngModel)]="program.description"></textarea>
+          </mat-form-field>
+        </div>
+        <div class="col">
+          <mat-form-field class="full-width">
+            <input type="number" matInput placeholder="Number of Facilitators" formControlName="facilitatorsCount"
+                   [(ngModel)]="program.facilitatorsCount">
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <mat-form-field>
+            <input type="number" matInput placeholder="Number of Feedback" formControlName="numberOfFeedback"
+                   [(ngModel)]="program.numberOfFeedback">
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col full-width">
+          <h5>Select Questionnaire</h5>
+          <mat-radio-group required [(value)]="questionnaire" (change)="questionnaire=$event.value"
+                           class="mat-radio-button_MR">
+            <mat-radio-button [value]="value.name" *ngFor=" let value of questionnaires"> {{value.name}}
+            </mat-radio-button>
+          </mat-radio-group>
+        </div>
+      </div>
+      <mat-card-actions class="margin_top_20_LRB_0">
+        <button mat-button matStepperNext>Next</button>
+      </mat-card-actions>
+    </mat-step>
+
+    <mat-step>
+      <ng-template matStepLabel>Courses</ng-template>
+
+      <div class="row activity-grid">
+        <div class="col">
+          <s-infinite-scroll-grid [addItemEnabled]="false"
+                                  [collectionName]="'courses'"
+                                  [searchBy]="searchBy"
+                                  [orderBy]="orderBy" class="role_edit_popup_margin_top">
+            <ng-template let-item="item" let-i="i">
+              <admin-program-course-card [program]="program" [course]="item"  [formGroup]="coursesForm">
+              </admin-program-course-card>
+            </ng-template>
+          </s-infinite-scroll-grid>
+        </div>
+      </div>
+      <mat-card-actions class="margin_top_20_LRB_0" *ngIf="mode !== 'view'">
+        <button mat-flat-button color="accent" type="button" (click)="back()"> Cancel</button>
+        <button mat-flat-button color="primary" type="submit" [disabled]="!programForm?.valid"
+                (click)="onSubmit()"> {{mode === 'edit' ? "Submit" : "Add"}} </button>
+      </mat-card-actions>
+    </mat-step>
+  </mat-horizontal-stepper>
+</form>

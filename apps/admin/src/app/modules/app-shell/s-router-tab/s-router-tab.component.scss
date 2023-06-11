@@ -1,0 +1,37 @@
+@import "../../../../../../../libs/base/src/lib/global-scss/variables";
+
+.mat-ink-bar{
+  background: var(--selected-color);
+  height: 3px;
+
+}
+
+.admin-tab-content{
+  position: absolute;
+  width: 100%;
+  height: calc(100vh - 163px);
+}
+
+.tablink:hover {
+  color: var(--selected-color);
+}
+
+
+.tablink:active{
+  color: var(--selected-color);
+}
+
+.selected{
+  color: var(--selected-color);
+  opacity: 1;
+}
+
+
+
+.mat-tab-link {
+  height: 37px;
+  padding: 0 15px;
+  background: var(--light);
+  border-radius: 120px;
+  margin: 5px;
+}

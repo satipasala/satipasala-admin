@@ -1,0 +1,234 @@
+{
+  "roles": {
+    "SYSTEMADMIN": {
+      "allowedPermissions": {
+        "collection_programs": {
+          "name": "collection_programs",
+          "edit": true,
+          "id": "collection_programs",
+          "createdAt": "2019-04-18T18:25:43.511Z",
+          "description": "Programs Collection",
+          "view": true,
+          "updatedAt": "2019-04-18T18:25:43.511Z"
+        },
+        "collection_courses": {
+          "name": "collection_courses",
+          "edit": true,
+          "id": "collection_courses",
+          "createdAt": "2019-04-18T18:25:43.511Z",
+          "description": "Courses Collection",
+          "view": true,
+          "updatedAt": "2019-04-18T18:25:43.511Z"
+        },
+        "collection_users": {
+          "description": "Users Collection",
+          "view": true,
+          "updatedAt": "2019-04-18T18:25:43.511Z",
+          "name": "collection_users",
+          "edit": true,
+          "id": "collection_users",
+          "createdAt": "2019-04-18T18:25:43.511Z"
+        },
+        "collection_events": {
+          "view": true,
+          "updatedAt": "2019-04-18T18:25:43.511Z",
+          "name": "collection_events",
+          "edit": true,
+          "id": "collection_events",
+          "createdAt": "2019-04-18T18:25:43.511Z",
+          "description": "Events Collection"
+        },
+        "collection_feedbacks": {
+          "description": "Feedbacks Collection",
+          "view": true,
+          "updatedAt": "2019-04-18T18:25:43.511Z",
+          "name": "collection_feedbacks",
+          "edit": true,
+          "id": "collection_feedbacks",
+          "createdAt": "2019-04-18T18:25:43.511Z"
+        },
+        "collection_questionnaires": {
+          "description": "Questionnaires Collection",
+          "view": true,
+          "updatedAt": "2019-04-18T18:25:43.511Z",
+          "name": "collection_questionnaires",
+          "edit": true,
+          "id": "collection_questionnaires",
+          "createdAt": "2019-04-18T18:25:43.511Z"
+        },
+        "collection_hosts": {
+          "view": true,
+          "updatedAt": "2019-04-18T18:25:43.511Z",
+          "name": "collection_hosts",
+          "edit": true,
+          "id": "collection_hosts",
+          "createdAt": "2019-04-18T18:25:43.511Z",
+          "description": "Hosts Collection"
+        },
+        "collection_questions": {
+          "updatedAt": "2019-04-18T18:25:43.511Z",
+          "name": "collection_questions",
+          "edit": true,
+          "id": "collection_questions",
+          "createdAt": "2019-04-18T18:25:43.511Z",
+          "description": "Questions Collection",
+          "view": true
+        },
+        "collection_referencedata": {
+          "description": "Reference Data Collection",
+          "view": true,
+          "updatedAt": "2019-04-18T18:25:43.511Z",
+          "name": "collection_referencedata",
+          "edit": true,
+          "id": "collection_referencedata",
+          "createdAt": "2019-04-18T18:25:43.511Z"
+        },
+        "collection_roles": {
+          "description": "Roles Collection",
+          "view": true,
+          "updatedAt": "2019-04-18T18:25:43.511Z",
+          "name": "collection_roles",
+          "edit": true,
+          "id": "collection_roles",
+          "createdAt": "2019-04-18T18:25:43.511Z"
+        }
+      },
+      "permissionLevelGroup": {
+        "view": {
+          "name": "Global",
+          "id": "global",
+          "access_level": 1000
+        },
+        "edit": {
+          "id": "global",
+          "access_level": 1000,
+          "name": "Global"
+        }
+      },
+      "id": "SYSTEMADMIN",
+      "isActive": true,
+      "roleLevel": {
+        "id": "super_admin",
+        "access_level": 60,
+        "name": "Super Admin"
+      },
+      "courses": {},
+      "name": "System Administrator"
+    },
+    "STUDENT": {
+      "allowedPermissions": {
+        "collection_programs": {
+          "name": "collection_programs",
+          "edit": false,
+          "id": "collection_programs",
+          "createdAt": "2019-04-18T18:25:43.511Z",
+          "description": "Programs Collection",
+          "view": true,
+          "updatedAt": "2019-04-18T18:25:43.511Z"
+        },
+        "collection_courses": {
+          "name": "collection_courses",
+          "edit": false,
+          "id": "collection_courses",
+          "createdAt": "2019-04-18T18:25:43.511Z",
+          "description": "Courses Collection",
+          "view": true,
+          "updatedAt": "2019-04-18T18:25:43.511Z"
+        },
+        "collection_users": {
+          "description": "Users Collection",
+          "view": true,
+          "updatedAt": "2019-04-18T18:25:43.511Z",
+          "name": "collection_users",
+          "edit": false,
+          "id": "collection_users",
+          "createdAt": "2019-04-18T18:25:43.511Z"
+        },
+        "collection_events": {
+          "view": true,
+          "updatedAt": "2019-04-18T18:25:43.511Z",
+          "name": "collection_events",
+          "edit": false,
+          "id": "collection_events",
+          "createdAt": "2019-04-18T18:25:43.511Z",
+          "description": "Events Collection"
+        },
+        "collection_feedbacks": {
+          "description": "Feedbacks Collection",
+          "view": true,
+          "updatedAt": "2019-04-18T18:25:43.511Z",
+          "name": "collection_feedbacks",
+          "edit": false,
+          "id": "collection_feedbacks",
+          "createdAt": "2019-04-18T18:25:43.511Z"
+        },
+        "collection_questionnaires": {
+          "description": "Questionnaires Collection",
+          "view": true,
+          "updatedAt": "2019-04-18T18:25:43.511Z",
+          "name": "collection_questionnaires",
+          "edit": false,
+          "id": "collection_questionnaires",
+          "createdAt": "2019-04-18T18:25:43.511Z"
+        },
+        "collection_hosts": {
+          "view": true,
+          "updatedAt": "2019-04-18T18:25:43.511Z",
+          "name": "collection_hosts",
+          "edit": false,
+          "id": "collection_hosts",
+          "createdAt": "2019-04-18T18:25:43.511Z",
+          "description": "Hosts Collection"
+        },
+        "collection_questions": {
+          "updatedAt": "2019-04-18T18:25:43.511Z",
+          "name": "collection_questions",
+          "edit": false,
+          "id": "collection_questions",
+          "createdAt": "2019-04-18T18:25:43.511Z",
+          "description": "Questions Collection",
+          "view": true
+        },
+        "collection_referencedata": {
+          "description": "Reference Data Collection",
+          "view": true,
+          "updatedAt": "2019-04-18T18:25:43.511Z",
+          "name": "collection_referencedata",
+          "edit": false,
+          "id": "collection_referencedata",
+          "createdAt": "2019-04-18T18:25:43.511Z"
+        },
+        "collection_roles": {
+          "description": "Roles Collection",
+          "view": true,
+          "updatedAt": "2019-04-18T18:25:43.511Z",
+          "name": "collection_roles",
+          "edit": false,
+          "id": "collection_roles",
+          "createdAt": "2019-04-18T18:25:43.511Z"
+        }
+      },
+      "permissionLevelGroup": {
+        "view": {
+          "name": "Global",
+          "id": "global",
+          "access_level": 1000
+        },
+        "edit": {
+          "id": "disabled",
+          "access_level": 0,
+          "name": "Disabled"
+        }
+      },
+      "id": "STUDENT",
+      "isActive": true,
+      "roleLevel": {
+        "id": "student",
+        "access_level": 20,
+        "name": "Student"
+      },
+      "courses": {},
+      "name": "Student"
+    }
+  }
+}

@@ -1,0 +1,8 @@
+<h1 mat-dialog-title>Delete Event</h1>
+<p mat-line>Please confirm delete {{selectedEvent.name}}</p>
+<mat-dialog-content class="ref-dialog">
+</mat-dialog-content>
+<div mat-dialog-actions>
+  <button mat-flat-button color="primary" (click)="onEventDelete()" cdkFocusInitial>Ok</button>
+  <button mat-flat-button color="accent" (click)="onCancelChange()">Cancel</button>
+</div>

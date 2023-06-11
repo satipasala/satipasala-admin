@@ -1,0 +1,350 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function hasRole(roleId) {
+      return get(/databases/$(database)/documents/roles/$(request.auth.uid)).data.role[userRole]
+    }
+
+    function signedIn() {
+      return request.auth.uid != null ;
+    }
+
+    function authorizationDisabled() {
+      return true ;
+    }
+
+    function createValidUser(){
+      return
+      request.resource.data.email.matches('.*@.*[.].*') &&
+      (!exists(/databases/$(database)/documents/users/$(request.resource.data.email))) &&
+      request.resource.data.userRoleId.length > 0 &&
+      request.resource.data.userName == request.resource.data.email &&
+      request.resource.data.password == request.resource.data.confirmPassword
+    }
+
+  // function validateQuestionnaireOnWrite(){
+    //   return
+    //   signedIn() &&
+    //   (!exists(/databases/$(database)/documents/questionnaires/$(request.resource.data.id))) &&
+    //   "collections_questionnaires_write" in request.auth.token.userPermissions;
+    // }
+
+    match /timerActivity/{user}/activityTimings/{activity} {
+      allow read, write: if true;
+    }
+
+    match /timerActivity/{activity} {
+      allow read, write: if true;
+    }
+
+    match /files/{files} {
+      allow read, write: if signedIn();
+    }
+
+    match /actionFeed/{actionFeed} {
+      allow read, write: if signedIn();
+    }
+
+    match /stats/{stat} {
+      allow read: if signedIn();
+      allow  write: if false;
+    }
+
+    match /enrollments/{enrollments} {
+      allow read: if signedIn();
+allow write: if false;
+    }
+
+
+    match /eventSessions/{eventSessions} {
+      allow read: if signedIn();
+allow write: if false;
+    }
+
+    match /programs/{program} {
+      allow read: if signedIn();
+  allow write: if false;
+    }
+
+  // match /questions/{questions} {
+    //  allow read, write: if signedIn();
+    // }
+
+
+    match /feedback/{feedback} {
+      allow read: if signedIn();
+      allow write: if false;
+    }
+
+    match /courseSubscriptions/{courseSubscriptions} {
+      allow read: if true;
+allow write: if false;
+    }
+
+    match /audit_log/{auditInfo} {
+      allow read: if signedIn();
+allow write: if false;
+    }
+
+    match /states/{state} {
+      allow read: if signedIn();
+allow write: if false;
+    }
+
+
+    match /cities/{city} {
+      allow read: if signedIn();
+allow write: if false;
+    }
+
+    // Global access is disabled, uncomment below lines to enable.
+  //match /{document=**} {
+    //allow read, write : if signedIn();
+    //}
+
+
+    function getUser() {
+      return get(/databases/$(database)/documents/users/$(request.auth.token.email)).data;
+    }
+
+    function getUserByEmail(email) {
+      return get(/databases/$(database)/documents/users/$(email)).data;
+    }
+
+    function isAuthorizedToHosts(mainPermission, user, host){
+      return user.userRole.isActive &&
+      user.userRole.allowedPermissions['collection_hosts'][mainPermission] &&
+      ( user.userRole.permissionLevelGroup[mainPermission].id == 'global'
+        ||  user.organizationInfo.id == host.id
+        || ( host.type.name in user.userRole.allowedOrgTypes
+        && ((user.userRole.permissionLevelGroup[mainPermission].id=='country' &&  user.addressInfo.country.id == host.addressInfo.country.id )
+        || (user.userRole.permissionLevelGroup[mainPermission].id=='district' &&  user.addressInfo.state.id == host.addressInfo.state.id )
+        || (user.userRole.permissionLevelGroup[mainPermission].id=='city' && user.addressInfo.city.id == host.addressInfo.city.id )
+        ||  (user.userRole.permissionLevelGroup[mainPermission].id=='organization' &&
+      user.organizationInfo.id == host.id )
+      )))
+    }
+
+
+    match /hosts/{hosts} {
+      allow read: if isAuthorizedToHosts(
+      'view',
+      getUser(),
+      resource.data);
+      allow write: if isAuthorizedToHosts(
+      'edit',
+      getUser(),
+      resource.data);
+    }
+
+
+    function isAuthorizedToEditUsers(mainPermission, user, targetUser, updatedTargetUser){
+      return isAuthtorisedToUser(mainPermission, user, targetUser)
+        && isAuthtorisedToUser(mainPermission, user, updatedTargetUser)
+        &&  updatedTargetUser.email == targetUser.email
+        &&  ( user.userRole.roleLevel.access_level > targetUser.userRole.roleLevel.access_level
+        || user.userRole.roleLevel.id=='super_admin' && user.email != updatedTargetUser.email
+        ||  ( user.email == updatedTargetUser.email
+        && user.userRole==updatedTargetUser.userRole )
+      )
+    }
+
+    function isAuthorizedToCreateUsers(mainPermission, user, newUser){
+      return isAuthtorisedToUser(mainPermission, user, newUser)
+        && newUser.password != null
+        && newUser.email != null
+        && user.userRole.roleLevel.access_level>=30
+    }
+
+
+    function isAuthtorisedToUser(mainPermission, user, targetUser){
+      return  (user.email == targetUser.email ) || (user.userRole.isActive
+        && user.userRole.allowedPermissions['collection_users'][mainPermission]
+        && (( user.userRole.permissionLevelGroup[mainPermission].id == 'global'
+        || ( isAuthorizedToOrganizationType(user, targetUser) &&
+      ( hasCountryLevelAccess(user,targetUser,mainPermission)
+        || hasDistrictLevelAccess(user,targetUser,mainPermission)
+        || hasCityLevelAccess(user,targetUser,mainPermission)
+        || hasOrganizationLevelAccess(user,targetUser,mainPermission)
+      )
+      )
+      ) || user.userRole.roleLevel.id=='super_admin'))
+       ;
+    }
+
+    function hasCountryLevelAccess(user,targetUser,mainPermission){
+      return user.userRole.permissionLevelGroup[mainPermission].id=='country'
+        &&  user.addressInfo.country.id == targetUser.addressInfo.country.id
+    }
+
+    function hasDistrictLevelAccess(user,targetUser,mainPermission){
+      return user.userRole.permissionLevelGroup[mainPermission].id=='district'
+        &&  user.addressInfo.state.id == targetUser.addressInfo.state.id
+    }
+
+    function hasCityLevelAccess(user,targetUser,mainPermission){
+      return  user.userRole.permissionLevelGroup[mainPermission].id=='city'
+        && user.addressInfo.city.id == targetUser.addressInfo.city.id
+    }
+
+    function hasOrganizationLevelAccess(user,targetUser,mainPermission){
+      return  user.userRole.permissionLevelGroup[mainPermission].id=='organization' &&
+      user.organizationInfo.id == targetUser.organizationInfo.id
+    }
+
+    function isAuthorizedToOrganizationType(user,targetUser){
+      return targetUser.organizationInfo.type.name in user.userRole.allowedOrgTypes ||
+      targetUser.organizationInfo.id ==  user.organizationInfo.id
+    }
+
+    function isAuthorizedToCourses(mainPermission, user){
+      return user.userRole.isActive && user.userRole.allowedPermissions['collection_courses'][mainPermission]
+    }
+
+  // function isAuthorizedToEditCourses(mainPermission, user){
+    //  return user.userRole.isActive && user.userRole.allowedPermissions['collection_courses'][mainPermission] &&
+    // (!exists(/databases/$(database)/documents/courses/$(request.resource.data.id)))
+    //}
+
+    function isAuthorizedToQuestionnaires(mainPermission, user){
+      return user.userRole.isActive && user.userRole.allowedPermissions['collection_questionnaires'][mainPermission]
+    }
+
+  // function isAuthorizedToEditQuestionnaires(mainPermission, user){
+    //  return user.userRole.isActive && user.userRole.allowedPermissions['collection_questionnaires'][mainPermission] &&
+    //  user.userRole.permissionLevelGroup[mainPermission].id == 'global' &&
+    //  (!exists(/databases/$(database)/documents/questionnaires/$(request.resource.data.id)))
+    // }
+
+    function isAuthorizedToQuestions(mainPermission, user){
+      return user.userRole.isActive && user.userRole.allowedPermissions['collection_questions'][mainPermission]
+    }
+
+  //function isAuthorizedToEditQuestions(mainPermission, user){
+    // return user.userRole.isActive && user.userRole.allowedPermissions['collection_questions'][mainPermission] &&
+    // (!exists(/databases/$(database)/documents/questions/$(request.resource.data.id)))
+    // }
+
+    match /hosts/{hosts} {
+      allow read: if isAuthorizedToHosts(
+      'view',
+      getUser(),
+      resource.data);
+      allow write: if isAuthorizedToHosts(
+      'edit',
+      getUser(),
+      resource.data);
+    }
+
+    match /users/{userInfo} {
+      allow read : if isAuthtorisedToUser(
+      'view',
+      getUser(),
+      resource.data);
+      allow update: if isAuthorizedToEditUsers(
+      'edit',
+      getUser(),
+      resource.data,request.resource.data);
+      allow create:if isAuthorizedToCreateUsers(
+      'edit',
+      getUser(), request.resource.data);
+    }
+
+    function isAllowedToReadRole(user,role){
+      return user.userRole.isActive
+        &&  (user.userRole.allowedPermissions['collection_roles']['view']
+        &&  (role.roleLevel.access_level <= user.userRole.roleLevel.access_level
+        ||  user.userRole.roleLevel.id == 'super_admin'))
+        ||  user.userRole.roleLevel.id==role.roleLevel.id
+    }
+
+    function isAllowedToUpdateRole(user){
+      return user.userRole.isActive
+        && user.userRole.roleLevel.id == 'super_admin'
+    }
+
+
+    function isAllowedToCreateRole(user){
+      return user.userRole.isActive
+        && user.userRole.roleLevel.id == 'super_admin'
+    }
+
+    match /roles/{roles} {
+      allow read:if isAllowedToReadRole(getUser(),resource.data);
+      allow update: if isAllowedToUpdateRole(getUser());
+      allow create:if isAllowedToCreateRole(getUser());
+    }
+
+    function isAllowedToRefData(mainPermission, user){
+      return user.userRole.isActive &&
+      user.userRole.allowedPermissions['collection_referencedata'][mainPermission]
+        ||  user.userRole.roleLevel.id == 'super_admin';
+    }
+
+    match /referencedata/{referencedataInfo} {
+      allow read : if isAllowedToRefData('view',getUser());
+      allow update: if isAllowedToRefData('edit',getUser());
+      allow create: if isAllowedToRefData('edit',getUser());
+    }
+
+
+    match /courses/{courses} {
+      allow read: if isAuthorizedToCourses(
+      'view',
+      getUser());
+      allow write: if isAuthorizedToCourses(
+      'edit',
+      getUser());
+    }
+
+    match /questionnaires/{questionnaires} {
+      allow read: if isAuthorizedToQuestionnaires(
+      'view',
+      getUser());
+      allow write: if isAuthorizedToQuestionnaires(
+      'edit',
+      getUser());
+    }
+
+    match /questions/{questions} {
+      allow read: if isAuthorizedToQuestions(
+      'view',
+      getUser());
+      allow write: if isAuthorizedToQuestions(
+      'edit',
+      getUser());
+    }
+
+    function isAuthorizedToEvents(mainPermission, user){
+      return user.userRole.isActive
+        && (user.userRole.allowedPermissions['collection_events'][mainPermission] ||
+      user.userRole.roleLevel.id == 'super_admin')
+    }
+
+    match /events/{event}{
+      allow read: if isAuthorizedToEvents(
+      'view',
+      getUser());
+      allow write: if isAuthorizedToEvents(
+      'edit',
+      getUser());
+    }
+
+    function isAuthorizedToActivities(mainPermission, user){
+      return user.userRole.isActive
+        && (user.userRole.allowedPermissions['collection_activities'][mainPermission] ||
+      user.userRole.roleLevel.id == 'super_admin')
+    }
+
+    match /activities/{activity} {
+      allow read : if isAuthorizedToActivities(
+      'view',
+      getUser());
+      allow write : if isAuthorizedToActivities(
+      'edit',
+      getUser());
+    }
+
+  }
+}

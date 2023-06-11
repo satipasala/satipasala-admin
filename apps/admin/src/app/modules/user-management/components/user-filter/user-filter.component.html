@@ -1,0 +1,60 @@
+<div class="sathi_form-field">
+  <div class="sathi_form-field_wrapper">
+  <div class="dropDowen" matTooltip="Status">
+    <div> <mat-icon>timelapse</mat-icon> </div>
+    <div>
+      <mat-select matNativeControl placeholder="Status" [(value)]="selectedStatus"
+                  (selectionChange)="filterByStatus($event.value)" class="solid">
+
+        <mat-option value="All">All</mat-option>
+        <mat-option *ngFor="let status of status" [value]="status">
+          {{status}}
+        </mat-option>
+      </mat-select>
+    </div>
+  </div>
+
+  <div class="dropDowen" matTooltip="Role">
+    <div> <mat-icon>timer</mat-icon> </div>
+    <div>
+      <mat-select matNativeControl placeholder="Role" [(value)]="selectedRole"
+                  (selectionChange)="filterByRole($event.value)" class="solid">
+        <mat-option value="All">All</mat-option>
+        <mat-option *ngFor="let userRole of roles | async" [value]="userRole.id">
+          {{userRole.name}}
+        </mat-option>
+      </mat-select>
+    </div>
+  </div>
+
+  <div class="dropDowen" matTooltip="Organization">
+    <div> <mat-icon>shutter_speed</mat-icon> </div>
+    <div style="height: 20px;display: block">
+<!--      <mat-select matNativeControl placeholder="Organization" [(value)]="selectedOrg"
+                  (selectionChange)="filterByOrg($event.value)" class="solid">
+        <mat-option value="All">All</mat-option>
+        <mat-option *ngFor="let org of organizations | async" [value]="org">
+          {{org.name}}
+        </mat-option>
+      </mat-select>-->
+
+      <s-search-box [searchControlName]="'organizationInfo'" [parentForm]="formGroup" [searchFields]="defaultHostSearchFields"
+                    [collectionName]="'hosts'" [displayField]="'name'" [orderBy]="hostOrderBy" [filterBy]="hostFilterBy"
+                    [batchSize]="10" [fieldWidth]="'full-width'" [placeholder]="'Organization*'"
+                    (valueChange)="filterByOrg($event)">
+        <ng-template let-option="option">
+          <div style="display: flex;flex-direction: row;">  {{option['name']}} (
+            <div style="text-transform: capitalize;font-style: italic;font-size: 11px;font-weight: bold">
+              {{option.addressInfo.state.name}}-{{option.addressInfo.city.name}}</div>)
+          </div>
+
+        </ng-template>
+      </s-search-box>
+    </div>
+  </div>
+    <div class="dropDowen">
+      <button mat-flat-button color="accent" (click)="clearFilterFields()">Clear</button>
+    </div>
+
+  </div>
+</div>

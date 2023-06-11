@@ -1,0 +1,45 @@
+<form [formGroup]="courseForm">
+
+  <mat-card class="" [class.select-course]="courseForm.controls['courseCheckBox'].value">
+    <mat-card-header>
+      <img mat-card-avatar style="width: 52px;height: 52px" src="assets/images/course.png" alt="course">
+      <mat-card-title>{{ course?.name}}</mat-card-title>
+
+    </mat-card-header>
+    <mat-card-content>
+      <p> {{course?.description}}</p>
+      <p class="card_matbages">
+        <span matTooltip="Activities">
+          <mat-icon [matBadge]="getActivityCount(course)" matBadgeColor="accent">accessibility</mat-icon>
+          <span class="cdk-visually-hidden"></span>
+        </span>
+
+        <span matTooltip="facilitators">
+          <mat-icon matBadge="{{course?.facilitatorsCount}}" matBadgeColor="accent">emoji_people</mat-icon>
+          <span class="cdk-visually-hidden"></span>
+        </span>
+
+        <span matTooltip="Status">
+          <mat-icon aria-hidden="false">snooze</mat-icon>
+          {{course?.status}}
+          <span class="cdk-visually-hidden"></span>
+        </span>
+      </p>
+
+    </mat-card-content>
+    <mat-card-actions class="padding_20">
+
+      <mat-checkbox class="pull-right" formControlName="courseCheckBox" #courseCheckBox
+        *ngIf="isAuthorizedToUpdateCourseState()"></mat-checkbox>
+
+      <mat-slide-toggle formControlName="mandatoryCourseSlider"
+        *ngIf="!isDbUser() && courseForm.controls['courseCheckBox'].value == true">
+        Mandatory</mat-slide-toggle>
+
+      <mat-chip-list aria-label="Attributes" *ngIf="!isAuthorizedToUpdateCourseState()">
+        <mat-chip color="accent" selected>Mandatory</mat-chip>
+      </mat-chip-list>
+
+    </mat-card-actions>
+  </mat-card>
+</form>

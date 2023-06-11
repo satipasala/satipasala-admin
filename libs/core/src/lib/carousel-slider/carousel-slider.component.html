@@ -1,0 +1,16 @@
+<section>
+  <div class="container">
+    <owl-carousel-o [options]="customOptions" (translated)="getPassedData($event)">
+      <ng-container *ngFor="let item of carouselData">
+        <ng-template carouselSlide [width]="item.width">
+          <div class="slider">
+            <a class="outer-link" href="https://www.google.com">
+              <p>{{item.text}}</p>
+            </a>
+            <img class="owl-lazy" [src]="[item.src]" alt="">
+          </div><!-- /.carousel-item team-member -->
+        </ng-template>
+      </ng-container>
+    </owl-carousel-o>
+  </div>
+</section>

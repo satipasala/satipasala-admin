@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "*": [
+        "types/*"
+      ]
+    },
+    "module": "commonjs",
+    "noImplicitReturns": true,
+    "noUnusedLocals": false,
+    "outDir": "lib",
+    "sourceMap": false,
+    "strict": false,
+    "target": "es2015",
+    "allowJs": true,
+    "types": [],
+    "experimentalDecorators": true
+  },
+  "compileOnSave": true,
+  "include": [
+    "src"
+  ]
+}

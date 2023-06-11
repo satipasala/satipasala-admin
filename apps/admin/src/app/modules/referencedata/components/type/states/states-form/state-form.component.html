@@ -1,0 +1,51 @@
+<h2 mat-dialog-title>State/Province</h2>
+<mat-dialog-content [formGroup]="formGroup" novalidate class="ref-dialog">
+
+  <mat-form-field>
+    <input id="stateName" matInput placeholder="Name" formControlName="name" i18n-placeholder="@@name">
+    <mat-error *ngIf="formGroup.controls['name'].hasError('required')"
+               i18n="@@didYouForgetToInputValue">
+      Did you forget to input a value?
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <input id="stateShortName" matInput placeholder="Short Name" formControlName="shortName">
+  </mat-form-field>
+  <mat-form-field>
+    <input id="stateCountry" type="text"
+           placeholder="Country*"
+           aria-label="Country"
+           matInput
+           formControlName="country"
+           [matAutocomplete]="autoCountry" >
+    <mat-autocomplete #autoCountry="matAutocomplete" [displayWith]="nameDisplayFunc"  >
+      <mat-option *ngFor="let country of filteredCountries|async" [value]="country">{{country.name}}</mat-option>
+    </mat-autocomplete>
+
+  <!--  <mat-select placeholder="Country" formControlName="country" [compareWith]="compareItems">
+      <mat-option *ngFor="let country of countries" [value]="country">{{country.name}}</mat-option>
+    </mat-select>-->
+    <mat-error *ngIf="formGroup.controls['country'].hasError('required')"
+               i18n="@@didYouForgetToInputValue">
+      Did you forget to input a value?
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-select placeholder="Active" formControlName="active" i18n-placeholder="@@active">
+      <mat-option value="Yes">Yes</mat-option>
+      <mat-option value="No">No</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field>
+    <input id="stateDescription" matInput placeholder="Description" formControlName="description" i18n-placeholder="@@description">
+  </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button *ngIf="dataObj.type !== 'view'" class="mat-raised-button" (click)="cancel()" i18n="@@cancel">Cancel</button>
+  <button *ngIf="dataObj.type === 'view'" class="mat-raised-button mat-primary" (click)="cancel()" i18n="@@ok">OK
+  </button>
+  <button *ngIf="dataObj.type !== 'view'" class="mat-raised-button mat-primary" (click)="onSave()"
+          [disabled]="formGroup.invalid" i18n="@@save">Save
+  </button>
+</mat-dialog-actions>
+

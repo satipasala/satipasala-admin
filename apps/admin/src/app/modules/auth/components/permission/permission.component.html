@@ -1,0 +1,21 @@
+<mat-card [id]="generateElementId(permission?.description)"><!--
+
+    <img mat-card-image  src="../../../../../assets/images/add_image.jpg">-->
+  <mat-card-content>
+    <mat-card-subtitle>{{permission?.description}}</mat-card-subtitle>
+    <mat-checkbox
+      (change)='onEditPermissionChange($event.checked)'
+      [(ngModel)]="permission.edit"
+      [disabled]="permission.disabled || editPermissionLevel?.access_level===0">
+      Edit
+    </mat-checkbox>
+
+    <mat-checkbox class="margin_LF_10"
+      (change)='onViewPermissionChange($event.checked)'
+      [(ngModel)]="permission.view"
+      [disabled]="permission.disabled || viewPermissionLevel?.access_level ===0">
+      View
+    </mat-checkbox>
+
+  </mat-card-content>
+</mat-card>

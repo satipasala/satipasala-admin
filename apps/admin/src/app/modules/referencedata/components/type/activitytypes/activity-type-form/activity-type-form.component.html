@@ -1,0 +1,67 @@
+<h2 mat-dialog-title i18n="@@activityType">Activity Type</h2>
+<mat-dialog-content [formGroup]="formGroup" novalidate class="ref-dialog">
+  <mat-form-field>
+    <input id="activityTypeName" matInput placeholder="Name" formControlName="name" i18n-placeholder="@@name">
+    <mat-error *ngIf="formGroup.controls['name'].hasError('required')"
+               i18n="@@didYouForgetToInputValue">
+      Did you forget to input a value?
+    </mat-error>
+  </mat-form-field>
+  <mat-label>Select Type</mat-label>
+    <mat-radio-group placeholder="Type" aria-label="Select Type" formControlName="contentType">
+      <mat-radio-button *ngFor="let type of contentType" [value]="type">{{type.name}}</mat-radio-button>
+      <!--I used if is "touched" to don't show the error until submit-->
+      <mat-error *ngIf="formGroup.get('contentType').touched && formGroup.get('contentType').invalid">Required</mat-error>
+    </mat-radio-group>
+
+  <mat-form-field class="example-chip-list" appearance="fill">
+    <mat-label>Select Tags</mat-label>
+    <mat-chip-list #chipList aria-label="Fruit selection">
+      <mat-chip
+        *ngFor="let fruit of tags"
+        [selectable]="selectable"
+        [removable]="removable"
+        (removed)="remove(fruit)">
+        {{fruit}}
+        <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+      </mat-chip>
+      <input
+        placeholder="Add Tags..."
+        #tagInput
+        [formControl]="tagCtrl"
+        [matAutocomplete]="auto"
+        [matChipInputFor]="chipList"
+        [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+        (matChipInputTokenEnd)="add($event)">
+    </mat-chip-list>
+    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+      <mat-option *ngFor="let fruit of filteredTags | async" [value]="fruit">
+        {{fruit}}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+
+
+  <mat-form-field>
+    <mat-select placeholder="Active" formControlName="active" i18n-placeholder="@@active">
+      <mat-option value="Yes">Yes</mat-option>
+      <mat-option value="No">No</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input id="activityDescription" matInput placeholder="Description" formControlName="description"
+           i18n-placeholder="@@description">
+  </mat-form-field>
+
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button *ngIf="dataObj.type === 'view'" mat-flat-button color="primary" (click)="cancel()" i18n="@@ok">OK
+  </button>
+  <button *ngIf="dataObj.type !== 'view'" (click)="onSave()" mat-flat-button color="primary"
+          [disabled]="formGroup.invalid" i18n="@@save">Save
+  </button>
+  <button *ngIf="dataObj.type !== 'view'" mat-flat-button color="accent" (click)="cancel()" i18n="@@cancel">Cancel
+  </button>
+</mat-dialog-actions>
+

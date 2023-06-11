@@ -1,0 +1,54 @@
+<div *ngIf="user; then authenticated else guest">
+  <!-- template will replace this div -->
+</div>
+
+<!-- User NOT logged in -->
+<ng-template #guest class="box">
+  <h3>GUEST</h3>
+  <p class="card-text">Login to get started...</p>
+  <button class="button" routerLink="/login">Login</button>
+</ng-template>
+
+<!-- User logged in -->
+<ng-template #authenticated>
+  <div *ngIf="user|async">
+    <button mat-icon-button [matMenuTriggerFor]="profile">
+      <img class="card-img-top" [src]="imageUrl" width=30px>
+    </button>
+    <!-- <mat-menu x-position="before" #profile="matMenu" class="user-seeting-drop padding_0">
+      <mat-card>
+        <img mat-card-image style="margin: 0 -16px" src="assets/images/user_profile_bg.jpg" alt="user imageu">
+        <mat-card-actions>
+          <button mat-button (click)="openDialog()">
+            <mat-icon aria-hidden="true">settings</mat-icon>
+            Settings
+          </button>
+          <button mat-button routerLink="/profile">
+            <mat-icon aria-hidden="true">account_box</mat-icon>
+            Profile
+          </button>
+          <button mat-button  class="icon" (click)="logout()">
+            <mat-icon aria-hidden="true">settings_power</mat-icon>
+            Logout
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </mat-menu> -->
+    <mat-menu #profile="matMenu">
+      <button mat-menu-item (click)="openDialog()">
+        <mat-icon aria-hidden="true">settings</mat-icon>
+        Settings
+      </button>
+      <button mat-menu-item routerLink="/profile">
+        <mat-icon aria-hidden="true">account_box</mat-icon>
+        Profile
+      </button>
+      <button mat-menu-item class="icon" id="userLogoutButton" (click)="logout()">
+        <mat-icon aria-hidden="true">settings_power</mat-icon>
+        Logout
+      </button>
+    </mat-menu>
+
+  </div>
+
+</ng-template>

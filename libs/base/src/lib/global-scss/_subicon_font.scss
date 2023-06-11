@@ -1,0 +1,108 @@
+[class^="icon-"], [class*=" icon-"] {
+  font-family: 'sathi_icon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 22px;
+  margin-right: 8px;
+}
+
+
+.icon-activities:before {
+  content: "\e900";
+}
+.icon-activity-types:before {
+  content: "\e901";
+}
+.icon-assignments:before {
+  content: "\e902";
+}
+.icon-audio_files:before {
+  content: "\e903";
+}
+.icon-audio_files:after {
+  content: "\e904";
+  margin-left: -1em;
+}
+
+.icon-cities:before {
+  content: "\e906";
+}
+.icon-programs:before {
+  content: "\e923";
+}
+
+.icon-courses:before {
+  content: "\e907";
+}
+.icon-event:before {
+  content: "\e908";
+}
+.icon-feedback:before {
+  content: "\e909";
+}
+.icon-image_upload:before {
+  content: "\e90a";
+}
+.icon-languages:before {
+  content: "\e90b";
+}
+.icon-location_types:before {
+  content: "\e90c";
+}
+.icon-manage_host:before {
+  content: "\e90d";
+}
+.icon-manage_user:before {
+  content: "\e90e";
+}
+.icon-manage_user:after {
+  content: "\e90f";
+  margin-left: -1em;
+  color: rgb(243, 109, 33);
+}
+
+.icon-organization-types:before {
+  content: "\e911";
+}
+.icon-pdf_upload:before {
+  content: "\e912";
+}
+.icon-pdf_upload:after {
+  content: "\e913";
+  margin-left: -1em;
+}
+
+.icon-permission:before {
+  content: "\e91c";
+}
+.icon-permission_level:before {
+  content: "\e91d";
+}
+.icon-province:before {
+  content: "\e91e";
+}
+.icon-question-lables:before {
+  content: "\e91f";
+}
+.icon-question:before {
+  content: "\e920";
+}
+.icon-question_type:before {
+  content: "\e921";
+}
+.icon-questionnaire_management:before {
+  content: "\e922";
+}
+.icon-roles:before {
+  content: "\e923";
+}
+.icon-roles:after {
+  content: "\e924";
+  margin-left: -1em;
+}

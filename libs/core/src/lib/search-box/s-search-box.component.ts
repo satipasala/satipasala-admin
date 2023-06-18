@@ -67,11 +67,7 @@ export class SSearchBoxComponent extends AbstractDataSourceManager implements On
     return this._placeholder;
   }
 
-
   formatRequiredFieldText(requiredTxt : string){
-    requiredTxt = requiredTxt.toLowerCase();
-    requiredTxt = requiredTxt.charAt(0).toUpperCase() + requiredTxt.slice(1);
-    requiredTxt = requiredTxt.slice(0, -1);
     this.requiredField = requiredTxt;
   }
   requiredField: string = 'Search text';

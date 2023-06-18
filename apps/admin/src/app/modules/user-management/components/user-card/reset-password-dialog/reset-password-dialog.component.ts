@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, Inject, ViewChild } from "@angular/core";
 import { User, AuthService } from "@satipasala/base";
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
-import {environment} from "../../../../../../environments/environment";
+import {environment} from "environments/environment";
 
 @Component({
   selector: 'reset-password-dialog',

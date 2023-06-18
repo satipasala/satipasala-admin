@@ -23,6 +23,7 @@ import {AddressFormComponent} from '../../../core/components/address-form/addres
 import {FilterGroup} from 'libs/base/src/lib/impl/FirebaseDataSource';
 import {Subscription} from "rxjs";
 import {Program} from "../../../../../../../../libs/base/src/lib/model/Course";
+import { SSelectBoxComponent } from 'libs/core/src/lib/select-box/s-select-box.component';
 
 @Component({
   selector: 'admin-event-form',

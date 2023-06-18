@@ -31,7 +31,7 @@ import {EventCategoryChart} from "./events/event-categroy-chart/event-category-c
 import {EventActivitiesChart} from "./events/event-activities-chart/event-activities-chart.component";
 import {EventCoursesChart} from "./events/event-courses-chart/event-courses-chart.component";
 import {EventsDashboardService} from "./events/events-dashboard.service";
-import {environment} from "../../../environments/environment";
+import {environment} from "environments/environment";
 import {EmbeddedDashboardPageComponent} from "./pages/embedded-dashboard/embedded-dashboard-page.component";
 
 @NgModule({

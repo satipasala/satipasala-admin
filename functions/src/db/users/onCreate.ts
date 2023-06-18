@@ -1,6 +1,7 @@
 import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin';
 import { getCustomClaims } from '../../utils/objectUtils';
+
 export const dbUsersOnCreate = functions.firestore
   .document('users/{userId}').onCreate((change, context) => {
     return new Promise((resolve, reject) => {
@@ -10,9 +11,12 @@ export const dbUsersOnCreate = functions.firestore
         createdAt: new Date().toISOString(),
         password:null //for the security reasons. we dont need password from here on.
       }, { merge: true }).then(() => {
-        admin.auth().getUser(newUser.email).then(value => {
-          if(value == null){
-            admin.auth().createUser({
+        admin.auth().getUserByEmail(newUser.email).then(value => {
+          updateNewAuthUser(newUser,value,resolve,reject);
+        }).catch((error) => {
+          if (error.code === 'auth/user-not-found') {
+             // User does not exist
+             admin.auth().createUser({
               email: newUser.email,
               emailVerified: false,
               password: newUser.password,
@@ -23,20 +27,18 @@ export const dbUsersOnCreate = functions.firestore
               //newUser =  updateCourseSubscriptions(newUser);
               //updates the user's courses from role
               updateNewAuthUser(newUser,userRecord,resolve,reject);
-            }).catch(error => {
-              console.error('Error creating auth user:', error);
-              reject('Error creating auth user:' + error);
+            }).catch(e => {
+              console.error('Error creating auth user:', e);
+              reject('Error creating auth user:' + e);
             });
           }else{
-            updateNewAuthUser(newUser,value,resolve,reject);
-          }
-        }).catch((error) => {
-          console.error('Error getting new user:');
-          reject('Error getting new user:' + error)
+            console.error('Error getting new user:'+ error);
+            reject('Error getting new user:' + error)
+          } 
         })
 
       }).catch((error) => {
-        console.error('Error creating new user:');
+        console.error('Error creating new user:'+ error);
         reject('Error creating new user:' + error)
       });
     });

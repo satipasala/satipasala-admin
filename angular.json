@@ -38,8 +38,8 @@
             "develop": {
               "fileReplacements": [
                 {
-                  "replace": "apps/admin/src/environments/environment.ts",
-                  "with": "apps/admin/src/environments/environment.develop.ts"
+                  "replace": "environments/environment.ts",
+                  "with": "environments/environment.develop.ts"
                 }
               ],
               "optimization": false,
@@ -63,8 +63,8 @@
             "develop-admin-en": {
               "fileReplacements": [
                 {
-                  "replace": "apps/admin/src/environments/environment.ts",
-                  "with": "apps/admin/src/environments/environment.develop.ts"
+                  "replace": "environments/environment.ts",
+                  "with": "environments/environment.develop.ts"
                 }
               ],
               "optimization": true,
@@ -90,8 +90,8 @@
             "develop-admin-si": {
               "fileReplacements": [
                 {
-                  "replace": "apps/admin/src/environments/environment.ts",
-                  "with": "apps/admin/src/environments/environment.develop.ts"
+                  "replace": "environments/environment.ts",
+                  "with": "environments/environment.develop.ts"
                 }
               ],
               "optimization": true,
@@ -117,8 +117,8 @@
             "develop-admin-ta": {
               "fileReplacements": [
                 {
-                  "replace": "apps/admin/src/environments/environment.ts",
-                  "with": "apps/admin/src/environments/environment.develop.ts"
+                  "replace": "environments/environment.ts",
+                  "with": "environments/environment.develop.ts"
                 }
               ],
               "optimization": true,
@@ -169,8 +169,8 @@
             "uat-admin-en": {
               "fileReplacements": [
                 {
-                  "replace": "apps/admin/src/environments/environment.ts",
-                  "with": "apps/admin/src/environments/environment.uat.ts"
+                  "replace": "environments/environment.ts",
+                  "with": "environments/environment.uat.ts"
                 }
               ],
               "optimization": true,
@@ -196,8 +196,8 @@
             "uat-admin-si": {
               "fileReplacements": [
                 {
-                  "replace": "apps/admin/src/environments/environment.ts",
-                  "with": "apps/admin/src/environments/environment.uat.ts"
+                  "replace": "environments/environment.ts",
+                  "with": "environments/environment.uat.ts"
                 }
               ],
               "optimization": true,
@@ -223,8 +223,8 @@
             "uat-admin-ta": {
               "fileReplacements": [
                 {
-                  "replace": "apps/admin/src/environments/environment.ts",
-                  "with": "apps/admin/src/environments/environment.uat.ts"
+                  "replace": "environments/environment.ts",
+                  "with": "environments/environment.uat.ts"
                 }
               ],
               "optimization": true,
@@ -275,8 +275,8 @@
             "staging-admin-en": {
               "fileReplacements": [
                 {
-                  "replace": "apps/admin/src/environments/environment.ts",
-                  "with": "apps/admin/src/environments/environment.staging.ts"
+                  "replace": "environments/environment.ts",
+                  "with": "environments/environment.staging.ts"
                 }
               ],
               "optimization": true,
@@ -302,8 +302,8 @@
             "staging-admin-si": {
               "fileReplacements": [
                 {
-                  "replace": "apps/admin/src/environments/environment.ts",
-                  "with": "apps/admin/src/environments/environment.staging.ts"
+                  "replace": "environments/environment.ts",
+                  "with": "environments/environment.staging.ts"
                 }
               ],
               "optimization": true,
@@ -329,8 +329,8 @@
             "staging-admin-ta": {
               "fileReplacements": [
                 {
-                  "replace": "apps/admin/src/environments/environment.ts",
-                  "with": "apps/admin/src/environments/environment.staging.ts"
+                  "replace": "environments/environment.ts",
+                  "with": "environments/environment.staging.ts"
                 }
               ],
               "optimization": true,
@@ -381,8 +381,8 @@
             "production-admin-en": {
               "fileReplacements": [
                 {
-                  "replace": "apps/admin/src/environments/environment.ts",
-                  "with": "apps/admin/src/environments/environment.prod.ts"
+                  "replace": "environments/environment.ts",
+                  "with": "environments/environment.prod.ts"
                 }
               ],
               "optimization": true,
@@ -408,8 +408,8 @@
             "production-admin-si": {
               "fileReplacements": [
                 {
-                  "replace": "apps/admin/src/environments/environment.ts",
-                  "with": "apps/admin/src/environments/environment.prod.ts"
+                  "replace": "environments/environment.ts",
+                  "with": "environments/environment.prod.ts"
                 }
               ],
               "optimization": true,
@@ -435,8 +435,8 @@
             "production-admin-ta": {
               "fileReplacements": [
                 {
-                  "replace": "apps/admin/src/environments/environment.ts",
-                  "with": "apps/admin/src/environments/environment.prod.ts"
+                  "replace": "environments/environment.ts",
+                  "with": "environments/environment.prod.ts"
                 }
               ],
               "optimization": true,
@@ -462,8 +462,8 @@
             "satipasala-admin": {
               "fileReplacements": [
                 {
-                  "replace": "apps/admin/src/environments/environment.ts",
-                  "with": "apps/admin/src/environments/environment.satipasala.ts"
+                  "replace": "environments/environment.ts",
+                  "with": "environments/environment.satipasala.ts"
                 }
               ],
               "optimization": true,
@@ -487,8 +487,8 @@
             "satipasala-admin-en": {
               "fileReplacements": [
                 {
-                  "replace": "apps/admin/src/environments/environment.ts",
-                  "with": "apps/admin/src/environments/environment.satipasala.ts"
+                  "replace": "environments/environment.ts",
+                  "with": "environments/environment.satipasala.ts"
                 }
               ],
               "optimization": true,
@@ -514,8 +514,8 @@
             "satipasala-admin-si": {
               "fileReplacements": [
                 {
-                  "replace": "apps/admin/src/environments/environment.ts",
-                  "with": "apps/admin/src/environments/environment.satipasala.ts"
+                  "replace": "environments/environment.ts",
+                  "with": "environments/environment.satipasala.ts"
                 }
               ],
               "optimization": true,
@@ -541,8 +541,8 @@
             "satipasala-admin-ta": {
               "fileReplacements": [
                 {
-                  "replace": "apps/admin/src/environments/environment.ts",
-                  "with": "apps/admin/src/environments/environment.satipasala.ts"
+                  "replace": "environments/environment.ts",
+                  "with": "environments/environment.satipasala.ts"
                 }
               ],
               "optimization": true,

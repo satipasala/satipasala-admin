@@ -165,7 +165,7 @@ export function addCourseSubscription(db, batch, updatedUser, course) {
     id: subscriptionId
   });
 
-  addActionFeedRecord(db, ActionType.subscribed_to_course, updatedUser,getCourseInfo(course) )
+  addActionFeedRecord(db, ActionType.subscribed_to_course, userInfoObj,getCourseInfo(course) )
     .then(value => console.log("completed"))
     .catch(reason => console.error(reason));
 
@@ -181,7 +181,7 @@ export function addProgramSubscription(db, batch, updatedUser, program) {
     hostInfo: {},
     id: subscriptionId
   });
-  addActionFeedRecord(db, ActionType.subscribed_to_program, updatedUser, getProgramInfo(program))
+  addActionFeedRecord(db, ActionType.subscribed_to_program, userInfoObj, getProgramInfo(program))
     .then(value => console.log("completed"))
     .catch(reason => console.error(reason));
 }
@@ -211,7 +211,7 @@ export function addSessionSubscription(db, batch, updatedUser, session) {
       }
       snap.ref.update(eventSession).then(() => {
         console.log("adding eventSessionSubscriptions on user %s success", updatedUser.email);
-        addActionFeedRecord(db, ActionType.subscribed_to_session, updatedUser, getEventInfo(eventSession))
+        addActionFeedRecord(db, ActionType.subscribed_to_session, userInfoObj, getEventInfo(eventSession))
           .then(value => console.log("completed"))
           .catch(reason => console.error(reason));
       }).catch((error) => {

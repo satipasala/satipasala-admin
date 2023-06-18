@@ -17,7 +17,7 @@ import { Feedback } from "../../../../../../../../libs/base/src/lib/model/Feedba
 import { FeedbackService } from "../../../../../../../../libs/base/src/lib/services/feedback.service";
 
 import { UserInfo } from "../../../../../../../../libs/base/src/lib/model/User";
-import { MatPaginator, PageEvent } from "@angular/material/paginator";
+import { MatPaginator } from "@angular/material/paginator";
 import { SSearchBoxComponent } from 'libs/core/src/lib/search-box/s-search-box.component';
 import { FilterGroup } from "../../../../../../../../libs/base/src/lib/impl/FirebaseDataSource";
 @Component({
@@ -70,11 +70,8 @@ export class CourseStatsPage implements OnInit, OnDestroy, AfterViewInit {
 
   length = 100;
 
-  constructor(private referenceDataService: ReferenceDataService,
-    private feedbackService: FeedbackService,
-    private usersService: UsersService,
+  constructor(private usersService: UsersService,
     private router: Router,
-    private activatedRoute: ActivatedRoute,
     private formBuilder: FormBuilder,
     private notificationService: NotificationService,
     private permissionsService: PermissionsService

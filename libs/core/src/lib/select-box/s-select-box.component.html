@@ -1,11 +1,11 @@
-<mat-form-field>
-  <mat-select placeholder="Organization*" [formControl]="formControlInstance" [compareWith]="compareOrgs">
-    <mat-option *ngFor="let org of infinite" [value]="org">
-      {{org[displayField]}}
+<mat-form-field [formGroup]="parentForm" class='full-width'>
+  <mat-select [placeholder]="placeholder" [formControl]="searchFormControl" [compareWith]="compareOrgs">
+    <mat-option *ngFor="let option of infinite" [value]="option">
+      {{option[displayField]}}
     </mat-option>
   </mat-select>
-    <mat-error *ngIf="formControlInstance.hasError('required')">
-      organization is <strong>required</strong>
+    <mat-error *ngIf="searchFormControl.hasError('required')">
+      {{requiredField}} is <strong>required</strong>
     </mat-error>
 </mat-form-field>
 

@@ -6,9 +6,9 @@ import {HttpClient} from '@angular/common/http'
  ********************************************/
 
 import {AngularFireAuth} from '@angular/fire/compat/auth';
-import {AngularFirestore} from '@angular/fire/compat/firestore';
+import {Action, AngularFirestore, DocumentSnapshot} from '@angular/fire/compat/firestore';
 
-import {Observable, Observer} from 'rxjs';
+import {Observable, Observer, Subscription} from 'rxjs';
 import {User, UserInfo} from "../model/User";
 import {CollectionService} from "../impl/CollectionService";
 import {LOGIN_IN_PROGRESS_KEY} from "../../../../../apps/admin/src/app/admin-const";
@@ -16,7 +16,7 @@ import {NotificationService} from "./notificationService";
 import {MatDialog} from "@angular/material/dialog";
 import {LinkAccountDialog} from "../component/link-account-dialog/link-account-dialog";
 import firebase from "firebase/compat/app";
-import auth = firebase.auth;
+import auth = firebase.auth; 
 
 
 
@@ -29,6 +29,7 @@ export class AuthService extends CollectionService<User> {
   private isSignedOut: boolean = false; // In order to prevent user re-login during sign-out
   private _cachedDbuser: User; // Cached instance in order to prevent multiple doc retrieval for current user. Use getCurrentDbUser() to get current user.
   // private authUserTokenLSKey = "firestore_auth_user_token_state_firestore";
+  private userSubscription:Subscription;
 
   constructor(private afAuth: AngularFireAuth, private afs: AngularFirestore, private router: Router, private http: HttpClient,
               private notificationService: NotificationService, public dialog: MatDialog) {
@@ -424,6 +425,7 @@ export class AuthService extends CollectionService<User> {
    */
   public signOut():Promise<boolean> {
     return new Promise<any>((resolve,reject) => {
+      this.userSubscription.unsubscribe();
       this.afAuth.signOut().then(() => {
         this.isSignedOut = true;
         this._cachedDbuser = null;
@@ -468,27 +470,27 @@ export class AuthService extends CollectionService<User> {
         observer.complete();
       } else {
         this.getCurrentAuthUser().then(currentDbUser => {
-          this.afs.collection("users").doc(currentDbUser.email).snapshotChanges().subscribe(snapshot => {
-              const dbUser = snapshot.payload.data() as User;
-              this._cachedDbuser = dbUser;
-              console.log('**********New read for current user : ' + dbUser.email);
-              // this.getAuthTokenInfo().then(tokenInfo => {
-              //   const authUserTokenInfo: {} = {
-              //     token: tokenInfo.token,
-              //     uid: tokenInfo.email
-              //   };
-              //   localStorage.setItem(this.authUserTokenLSKey, JSON.stringify(authUserTokenInfo));
-              // }).catch(error => {
-              //   this.notificationService.showErrorNotification("Auth token fetch." + error);
-              // });
-              observer.next(dbUser);
-              observer.complete();
-            }, error => {
-              // Exception thrown when logging user out
-              this.notificationService.showErrorNotification("Reading logged in user info." + error)
-              observer.error(error);
-            }
-          );
+         this.userSubscription =  this.afs.collection<User>("users").doc(currentDbUser.email).snapshotChanges().subscribe(snapshot => {
+          const dbUser = snapshot.payload.data() as User;
+          this._cachedDbuser = dbUser;
+          console.log('**********New read for current user : ' + dbUser.email);
+          // this.getAuthTokenInfo().then(tokenInfo => {
+          //   const authUserTokenInfo: {} = {
+          //     token: tokenInfo.token,
+          //     uid: tokenInfo.email
+          //   };
+          //   localStorage.setItem(this.authUserTokenLSKey, JSON.stringify(authUserTokenInfo));
+          // }).catch(error => {
+          //   this.notificationService.showErrorNotification("Auth token fetch." + error);
+          // });
+          observer.next(dbUser);
+          observer.complete();
+        }, error => {
+          // Exception thrown when logging user out
+          this.notificationService.showErrorNotification("Reading logged in user info." + error)
+          observer.error(error);
+        }
+      ); 
 
         }).catch(reason => {
           this.notificationService.showErrorNotification("Reading logged in user info." + reason)

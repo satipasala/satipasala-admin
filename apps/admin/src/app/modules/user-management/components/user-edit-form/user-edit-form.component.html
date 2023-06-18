@@ -138,7 +138,7 @@
                       [searchFields]="defaultSearchFields"
                       [collectionName]="'hosts'" [displayField]="'name'" [orderBy]="hostOrderBy"
                       [filterBy]="hostFilterBy"
-                      [batchSize]="10" [fieldWidth]="'full-width'" [placeholder]="'Organization*'"
+                      [batchSize]="10" [fieldWidth]="'full-width'" [placeholder]="'Organization'"
                       (valueChange)="setOrganization($event)" [readonly]="mode === 'view'">
           <ng-template let-option="option">
             <div style="display: flex;flex-direction: row;">  {{option['name']}} (

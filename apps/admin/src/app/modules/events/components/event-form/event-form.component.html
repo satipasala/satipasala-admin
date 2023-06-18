@@ -19,7 +19,7 @@
                         [searchFields]="facilitatorSearchFields" [collectionName]="'users'"
                         [displayField]="facilitatorDisplayField"
                         [orderBy]="facilitatorOrderBy" [batchSize]="5" [fieldWidth]="'full-width'"
-                        [placeholder]="'Facilitator Name*'" (valueChange)="onSelectCoodinator($event)"
+                        [placeholder]="'Facilitator Name'" (valueChange)="onSelectCoodinator($event)"
                         [readonly]="mode === 'view'">
           </s-search-box>
         </div>
@@ -51,14 +51,14 @@
       <div class="row">
         <div class="col">
           <div class="row">
-            <s-search-box [searchControlName]="'program'"
+            <s-select-box [searchControlName]="'program'"
                           [parentForm]="eventForm"
                           [searchFields]="defaultSearchFields"
                           [collectionName]="'programs'"
                           [displayField]="defaultDisplayField" [orderBy]="defaultOrderBy"
-                          [batchSize]="5" [fieldWidth]="'full-width'" [placeholder]="'Program Name*'"
+                          [batchSize]="50" [fieldWidth]="'full-width'" [placeholder]="'Program Name'"
                           (valueChange)="onSelectProgram($event)" [readonly]="mode === 'view'">
-            </s-search-box>
+            </s-select-box>
           </div>
 
           <div class="column" *ngIf="mode !== 'view'; else elseBlock">
@@ -150,7 +150,7 @@
           <s-search-box [searchControlName]="'host'" [parentForm]="eventForm" [searchFields]="defaultSearchFields"
                         [collectionName]="'hosts'" [displayField]="defaultDisplayField" [orderBy]="defaultOrderBy"
                         [batchSize]="5"
-                        [fieldWidth]="'full-width'" [placeholder]="'Organization Name*'"
+                        [fieldWidth]="'full-width'" [placeholder]="'Organization Name'"
                         (valueChange)="onSelectHost($event)"
                         [readonly]="mode === 'view'">
           </s-search-box>

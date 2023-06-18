@@ -6,7 +6,7 @@ import {AngularFireFunctionsModule} from '@angular/fire/compat/functions';
 import {AngularFireAuthModule} from '@angular/fire/compat/auth';
 import {AngularFirestoreModule} from '@angular/fire/compat/firestore';
 import {AngularFireModule} from '@angular/fire/compat/';
-import {environment} from '../environments/environment';
+import {environment} from 'environments/environment';
 import {MatSnackBarModule} from "@angular/material/snack-bar";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 

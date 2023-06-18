@@ -9,7 +9,7 @@ export const dbRoleOnUpdate = functions.firestore.document('roles/{roleId}').onU
     const db = admin.firestore();
     //update the relevent user claims when role is updated
     admin.firestore().collection("users")
-      .where("userRole.id", "==", change.after.id).get()
+      .where("userRoleId", "==", change.after.id).get()
       .then(snap => {
         snap.forEach((doc) => {
           const user = doc.data();

@@ -415,7 +415,8 @@ export function getCustomClaims(user: any) {
   const customClaimObj = {
     allowedPermissions: getCollectionPermission(user.userRole.allowedPermissions),
     permissionLevelGroup: getPermissionLevelGroup(user.userRole.permissionLevelGroup),
-    accessLevel: user.userRole.roleLevel.access_level
+    accessLevel: user.userRole.roleLevel.access_level,
+    roleId:user.userRole.id
   }
   return customClaimObj;
 }

@@ -57,20 +57,24 @@ export class UserLoginFormComponent implements OnInit {
 
   onSubmit() {
     this.notification = "Please wait...";
+    this.showIndicator = true;
     this.authService.emailLogin(this.loginForm.value['email'], this.loginForm.value['password']).subscribe(loginResult => {
       this.notification = loginResult;
       this.error = "";
     }, error => {
       this.error = error;
       this.notification = "";
+      this.showIndicator = false;
     });
   }
 
   signInWithOAuthLogin(provider) {
+    this.showIndicator = true;
     this.authService.oAuthLogin(provider).subscribe(loginResult => {
       this.notification = loginResult;
       this.error = "";
     }, error => {
+      this.showIndicator = false;
       this.error = error;
       this.notification = "";
       localStorage.removeItem(LOGIN_IN_PROGRESS_KEY);

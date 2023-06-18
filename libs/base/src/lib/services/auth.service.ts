@@ -1,38 +1,48 @@
-import {Injectable} from '@angular/core';
-import {Router} from '@angular/router';
-import {HttpClient} from '@angular/common/http'
+import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http'
 /*******************************************
  * Temporary Models
  ********************************************/
 
-import {AngularFireAuth} from '@angular/fire/compat/auth';
-import {Action, AngularFirestore, DocumentSnapshot} from '@angular/fire/compat/firestore';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { Action, AngularFirestore, DocumentSnapshot } from '@angular/fire/compat/firestore';
 
-import {Observable, Observer, Subscription} from 'rxjs';
-import {User, UserInfo} from "../model/User";
-import {CollectionService} from "../impl/CollectionService";
-import {LOGIN_IN_PROGRESS_KEY} from "../../../../../apps/admin/src/app/admin-const";
-import {NotificationService} from "./notificationService";
-import {MatDialog} from "@angular/material/dialog";
-import {LinkAccountDialog} from "../component/link-account-dialog/link-account-dialog";
+import { Observable, Observer, Subscription } from 'rxjs';
+import { User, UserInfo } from "../model/User";
+import { CollectionService } from "../impl/CollectionService";
+import { LOGIN_IN_PROGRESS_KEY } from "../../../../../apps/admin/src/app/admin-const";
+import { NotificationService } from "./notificationService";
+import { MatDialog } from "@angular/material/dialog";
+import { LinkAccountDialog } from "../component/link-account-dialog/link-account-dialog";
 import firebase from "firebase/compat/app";
-import auth = firebase.auth; 
+import auth = firebase.auth;
+import { IdTokenResult } from '../../../../../functions/node_modules/@firebase/auth-types/index.d';
 
 
 
 @Injectable({
-    providedIn: "root", //todo check root or base module
-  }
+  providedIn: "root", //todo check root or base module
+}
 )
 export class AuthService extends CollectionService<User> {
+
+  public static userAccessLevels = {
+    super_admin: 60,
+    admin: 50,
+    organization_admin: 40,
+    facilitator: 34,
+    teacher: 30,
+    student: 20
+  }
 
   private isSignedOut: boolean = false; // In order to prevent user re-login during sign-out
   private _cachedDbuser: User; // Cached instance in order to prevent multiple doc retrieval for current user. Use getCurrentDbUser() to get current user.
   // private authUserTokenLSKey = "firestore_auth_user_token_state_firestore";
-  private userSubscription:Subscription;
+  private userSubscription: Subscription;
 
   constructor(private afAuth: AngularFireAuth, private afs: AngularFirestore, private router: Router, private http: HttpClient,
-              private notificationService: NotificationService, public dialog: MatDialog) {
+    private notificationService: NotificationService, public dialog: MatDialog) {
     super("users", afs);
     console.log("AuthService Init...");
 
@@ -46,11 +56,10 @@ export class AuthService extends CollectionService<User> {
     // }
   }
 
-  public isUserLoggedIn(): Promise<boolean> {
+  public isUserLoggedIn (): Promise<boolean> {
     return new Promise<boolean>((resolve, reject) => {
-
-      this.afAuth.authState.subscribe(user => {
-        if (user != null) {
+      this.handleAuthClaims().subscribe(idTokenResult => {
+        if (idTokenResult != null) {
           this.getCurrentDbUser().subscribe(dbUser => {
             if (dbUser != null) {
               resolve(true);
@@ -61,15 +70,15 @@ export class AuthService extends CollectionService<User> {
         } else {
           resolve(false)
         }
-      }, error => resolve(false))
+      }, error => resolve(false)) 
     })
   }
 
-  private hashedPassword(password): string {
+  private hashedPassword (password): string {
     return password
   }
 
-  getAuthTokenInfo(): Promise<any> {
+  getAuthTokenInfo (): Promise<any> {
     return firebase.auth().currentUser.getIdTokenResult();
   }
 
@@ -80,7 +89,7 @@ export class AuthService extends CollectionService<User> {
    * @param {string} password
    * @returns {Observable<string>}
    */
-  createFirestoreseUser(user: User): Observable<string> {
+  createFirestoreseUser (user: User): Observable<string> {
     return new Observable<string>(observer => {
       user.email = user.email.toLowerCase();
       user.id = user.email;
@@ -107,7 +116,7 @@ export class AuthService extends CollectionService<User> {
    * @param {User} user
    * @returns {Observable<string>}
    */
-  updateFirestoreUser(user: User): Observable<string> {
+  updateFirestoreUser (user: User): Observable<string> {
     return new Observable(observer => {
       this.afs.collection("users").doc(user.email).update(user).then(result => {
         observer.next("User is updated");
@@ -126,7 +135,7 @@ export class AuthService extends CollectionService<User> {
    * @returns {Observable<string>}
    * @deprecated will be removed
    */
-  updateFirebaseAuthLoginPassword(email: string, oldPassword: string, newPassword: string): Observable<string> {
+  updateFirebaseAuthLoginPassword (email: string, oldPassword: string, newPassword: string): Observable<string> {
     return new Observable(observer => {
       this.afAuth.signInWithEmailAndPassword(email, this.hashedPassword(oldPassword)).then(result => {
         this.afAuth.currentUser.then(currentUser => {
@@ -160,7 +169,7 @@ export class AuthService extends CollectionService<User> {
    * @param newPassword
    * @returns {Observable<string>}
    */
-  updateFirebaseAuthProfilePassword(newPassword: string): Observable<Object> {
+  updateFirebaseAuthProfilePassword (newPassword: string): Observable<Object> {
 
     return new Observable(observer => {
 
@@ -168,19 +177,19 @@ export class AuthService extends CollectionService<User> {
 
         currentFirebaseUser.updatePassword(this.hashedPassword(newPassword)).then(() => {
           this.afAuth.updateCurrentUser(currentFirebaseUser).then(() => {
-            observer.next({message: 'Profile update', status: 'Success'});
+            observer.next({ message: 'Profile update', status: 'Success' });
             observer.complete();
           }, error => {
             console.error(error);
-            observer.error({message: 'Profile update', status: 'Failed'});
+            observer.error({ message: 'Profile update', status: 'Failed' });
           })
         }, error => {
           console.error(error);
-          observer.error({message: 'Profile update', status: 'Failed'});
+          observer.error({ message: 'Profile update', status: 'Failed' });
         });
       }).catch(error => {
         console.error(error);
-        observer.error({message: 'User Fetch update', status: 'Failed'});
+        observer.error({ message: 'User Fetch update', status: 'Failed' });
       })
     });
   };
@@ -192,7 +201,7 @@ export class AuthService extends CollectionService<User> {
    * @param userData
    * @returns {Observable<Object>}
    */
-  resetUserPasswordToDefault(userData, passwordResetUrl) {
+  resetUserPasswordToDefault (userData, passwordResetUrl) {
     return this.http.post(passwordResetUrl, userData);
   }
 
@@ -203,19 +212,36 @@ export class AuthService extends CollectionService<User> {
    * @param {string} password
    * @returns {Observable<string>}
    */
-  emailLogin(email: string, password: string): Observable<string> {
+  emailLogin (email: string, password: string): Observable<string> {
     return new Observable<string>(observer => {
       this.afAuth
         .signInWithEmailAndPassword(email, this.hashedPassword(password))
         .then(credential => {
-          console.log(email + " authentication success!");
-          observer.next("Getting your profile ready. Please wait...");
-          this.checkUserAuthorization(email, observer, false, false, null);
+          console.log(email + " authentication success!"); 
+          this.handleAuthClaims().subscribe(() => {
+            observer.next("Getting your profile ready. Please wait...");
+            this.checkUserAuthorization(email, observer, false, false, null);
+          }, e => observer.error(e));
         })
         .catch(error => {
           console.error(error);
           observer.error(this.getMessageError(error));
         });
+    });
+  }
+
+  public handleAuthClaims (): Observable<auth.IdTokenResult> {
+    return new Observable<auth.IdTokenResult>(observer => {
+      this.afAuth.idTokenResult.subscribe(idTokenResult => {
+        if(idTokenResult == null){
+          observer.error("Login error occurred.Contact your administrator or try a different login method.");
+        }else if (idTokenResult?.claims?.accessLevel > AuthService.userAccessLevels.student) {
+          observer.next(idTokenResult);
+          observer.complete();
+        } else {
+          observer.error("Sorry! You don't have permissions to access this portal");
+        }
+      }, e => observer.error(e));
     });
   }
 
@@ -228,7 +254,7 @@ export class AuthService extends CollectionService<User> {
    * @param {string} providerString
    * @returns {Observable<string>}
    */
-  public oAuthLogin(providerString: string): Observable<string> {
+   public oAuthLogin (providerString: string): Observable<string> {
     let provider;
     if (providerString === 'Google') {
       provider = new auth.GoogleAuthProvider();
@@ -243,55 +269,50 @@ export class AuthService extends CollectionService<User> {
     // Set login in progress key to local storage
     localStorage.setItem(LOGIN_IN_PROGRESS_KEY, "true");
 
-    return new Observable(observer => {
+    return new Observable( observer => {
       observer.next("Redirecting to " + providerString + " login. Please wait...");
-      this.afAuth.signInWithRedirect(provider); // Start sign in with redirect to oauth provider.
+      this.afAuth.signInWithRedirect(provider)
+        .then(() => observer.next("Redirect successful"))
+        .catch((error) => observer.error(error));
     });
   }
 
-  /**
-   * Check whether user logins are in progress. If it is proceed with login (OAuth logins)
-   *
-   * @returns {Observable<string>}
-   */
-  public proceedWithInProgressLogin(): Observable<string> {
+  public proceedWithInProgressLogin (): Observable<string> {
     return new Observable(observer => {
-      // if "isSignedOut" is true, this redirection is just after sign out. Do not attempt to login user.
       if (!this.isSignedOut) {
-
-        // Remove in progress local storage stored key
-        if (localStorage.getItem(LOGIN_IN_PROGRESS_KEY)) {
-          localStorage.removeItem(LOGIN_IN_PROGRESS_KEY);
-        }
-
-        this.afAuth.getRedirectResult() // Check the redirection results
-          .then(result => {
-            const authUser = result.user;
-            if (authUser == null) {
-              // Authentication failure
-              console.error("User authentication failed!");
-              observer.error("");// Empty string in order to remove in progress login message
-            } else {
-              // Authentication is successful. Let's check DB to find out whether we have this user.
+  
+        // authState will emit a value immediately upon subscription. This value will be the current user if logged in, or null if not logged in.
+        this.afAuth.authState.subscribe(user => {
+          // If the user is logged in
+          if (user) {
+            this.handleAuthClaims().subscribe(() => {
               observer.next("Getting your profile ready. Please wait...");
-              // Check the current auth providers, If it contains only google.com, then this is a google oauth login.
               let checkLinking = false;
               let googleLinking = false;
-              if (authUser.providerData.length === 1) {
+              if (user.providerData.length === 1) {
                 checkLinking = true;
-                const providerId = authUser.providerData[0].providerId;
+                const providerId = user.providerData[0].providerId;
                 if (providerId === 'google.com') {
                   googleLinking = true;
                 }
               }
               //this.afAuth.setPersistence(firebase.Auth.Persistence.NONE);
-              this.checkUserAuthorization(authUser.email, observer, checkLinking, googleLinking, null);
-            }
-          }).catch(error => {
-          // Below error code is for all the OAuth providers except Google OAuth.
+              this.checkUserAuthorization(user.email, observer, checkLinking, googleLinking, null);
+            }, e => {
+              observer.error(e);
+            })
+          } else {
+            // No user was logged in
+            console.error("User authentication failed!");
+            observer.error("");
+          }
+        }, error => {
+          // Error handling
           if (error.code === "auth/account-exists-with-different-credential") { // https://github.com/firebase/firebase-js-sdk/issues/301
-            observer.next("Getting your profile ready. Please wait...");
-            this.checkUserAuthorization(error.email, observer, true, false, error.credential);
+            this.handleAuthClaims().subscribe(() => {
+              observer.next("Getting your profile ready. Please wait...");
+              this.checkUserAuthorization(error.email, observer, true, false, error.credential);
+            }, e => observer.error(e))
           } else if (error.code === "auth/user-token-expired") {
             observer.error("Your login credential has expired. Please re-login by refreshing this window.");
             console.error("auth/user-token-expired: This may be due to user was removed from auth!")
@@ -304,6 +325,7 @@ export class AuthService extends CollectionService<User> {
       }
     });
   }
+  
 
   /**
    * Retrieve user from firstore. If found, login to system.
@@ -313,7 +335,7 @@ export class AuthService extends CollectionService<User> {
    * @param userId
    * @param observer
    */
-  private checkUserAuthorization(userId: string, observer:Observer<string>, checkLinking, isGoogleLinking, linkingCredential) {
+  private checkUserAuthorization (userId: string, observer: Observer<string>, checkLinking, isGoogleLinking, linkingCredential) {
 
     this.get(userId.toLowerCase()).subscribe(authDoc => {
       if (authDoc === undefined) {
@@ -351,10 +373,10 @@ export class AuthService extends CollectionService<User> {
                     console.error("auth/user-token-expired: This may be due to user was removed from auth!");
                     this.signOutWithoutReload();
                   } else {
-                    console.log("Account linking error:"+error.code);
-                    observer.error("NAccount linking error:"+error.code);
+                    console.log("Account linking error:" + error.code);
+                    observer.error("NAccount linking error:" + error.code);
                     this.signOut().then(value => {
-                      this.notificationService.showErrorNotification("Account linking error:"+error.code)
+                      this.notificationService.showErrorNotification("Account linking error:" + error.code)
                     });
 
                   }
@@ -378,9 +400,9 @@ export class AuthService extends CollectionService<User> {
                 });
 
               }, siginInError => {
-                console.log("Account linking error:"+siginInError);
-                observer.error("NAccount linking error:"+siginInError);
-                this.signOut().then(value => this.notificationService.showSuccessNotification("Account linking error:"+siginInError));
+                console.log("Account linking error:" + siginInError);
+                observer.error("NAccount linking error:" + siginInError);
+                this.signOut().then(value => this.notificationService.showSuccessNotification("Account linking error:" + siginInError));
               });
             })
 
@@ -404,7 +426,7 @@ export class AuthService extends CollectionService<User> {
    * Check whether user is active (Auth Document), and navigate to main window.
    * @param authUser
    */
-  private navigateToMainIfActive(authUser: User) {
+  private navigateToMainIfActive (authUser: User) {
     if (authUser.disabled) {
       console.log("User is disabled in firestore");
     } else {
@@ -412,7 +434,7 @@ export class AuthService extends CollectionService<User> {
     }
   }
 
-  public signOutWithoutReload(){
+  public signOutWithoutReload () {
     this.afAuth.signOut().then(() => {
       this.isSignedOut = true;
       this._cachedDbuser = null;
@@ -423,8 +445,8 @@ export class AuthService extends CollectionService<User> {
   /**
    * Signout from the system
    */
-  public signOut():Promise<boolean> {
-    return new Promise<any>((resolve,reject) => {
+  public signOut (): Promise<boolean> {
+    return new Promise<any>((resolve, reject) => {
       this.userSubscription.unsubscribe();
       this.afAuth.signOut().then(() => {
         this.isSignedOut = true;
@@ -432,7 +454,7 @@ export class AuthService extends CollectionService<User> {
         localStorage.clear();
         this.router.navigateByUrl("/login").then(value => {
           resolve(true)
-        }).catch(reason =>  resolve(true))
+        }).catch(reason => resolve(true))
 
       }).catch(reason => {
         reject(reason)
@@ -442,7 +464,7 @@ export class AuthService extends CollectionService<User> {
   }
 
 
-  private accessUserData(userInfo: UserInfo) {
+  private accessUserData (userInfo: UserInfo) {
     const userRef = this.afs.collection("users").doc(userInfo.email);
     return userRef.get();
   }
@@ -452,7 +474,7 @@ export class AuthService extends CollectionService<User> {
    *
    * @returns {firebase.UserInfo}
    */
-  public async getCurrentAuthUser(): Promise<firebase.User> {
+  public async getCurrentAuthUser (): Promise<firebase.User> {
     return this.afAuth.currentUser;
   }
 
@@ -462,7 +484,7 @@ export class AuthService extends CollectionService<User> {
    *
    * @returns {Observable<User>}
    */
-  public getCurrentDbUser(): Observable<User> {
+  public getCurrentDbUser (): Observable<User> {
     return new Observable<User>(observer => {
       if (this._cachedDbuser) {
         console.log('**********Cached current user : ' + this._cachedDbuser.email);
@@ -470,27 +492,27 @@ export class AuthService extends CollectionService<User> {
         observer.complete();
       } else {
         this.getCurrentAuthUser().then(currentDbUser => {
-         this.userSubscription =  this.afs.collection<User>("users").doc(currentDbUser.email).snapshotChanges().subscribe(snapshot => {
-          const dbUser = snapshot.payload.data() as User;
-          this._cachedDbuser = dbUser;
-          console.log('**********New read for current user : ' + dbUser.email);
-          // this.getAuthTokenInfo().then(tokenInfo => {
-          //   const authUserTokenInfo: {} = {
-          //     token: tokenInfo.token,
-          //     uid: tokenInfo.email
-          //   };
-          //   localStorage.setItem(this.authUserTokenLSKey, JSON.stringify(authUserTokenInfo));
-          // }).catch(error => {
-          //   this.notificationService.showErrorNotification("Auth token fetch." + error);
-          // });
-          observer.next(dbUser);
-          observer.complete();
-        }, error => {
-          // Exception thrown when logging user out
-          this.notificationService.showErrorNotification("Reading logged in user info." + error)
-          observer.error(error);
-        }
-      ); 
+          this.userSubscription = this.afs.collection<User>("users").doc(currentDbUser.email).snapshotChanges().subscribe(snapshot => {
+            const dbUser = snapshot.payload.data() as User;
+            this._cachedDbuser = dbUser;
+            console.log('**********New read for current user : ' + dbUser.email);
+            // this.getAuthTokenInfo().then(tokenInfo => {
+            //   const authUserTokenInfo: {} = {
+            //     token: tokenInfo.token,
+            //     uid: tokenInfo.email
+            //   };
+            //   localStorage.setItem(this.authUserTokenLSKey, JSON.stringify(authUserTokenInfo));
+            // }).catch(error => {
+            //   this.notificationService.showErrorNotification("Auth token fetch." + error);
+            // });
+            observer.next(dbUser);
+            observer.complete();
+          }, error => {
+            // Exception thrown when logging user out
+            this.notificationService.showErrorNotification("Reading logged in user info." + error)
+            observer.error(error);
+          }
+          );
 
         }).catch(reason => {
           this.notificationService.showErrorNotification("Reading logged in user info." + reason)
@@ -501,7 +523,7 @@ export class AuthService extends CollectionService<User> {
     });
   }
 
-  getMessageError(error) {
+  getMessageError (error) {
     switch (error.code) {
       case "auth/invalid-email":
         return "Email format shoud be as name@example.com";
@@ -515,12 +537,12 @@ export class AuthService extends CollectionService<User> {
   }
 
 
-  openLinkAccountsDialog(user: User): Promise<string> {
+  openLinkAccountsDialog (user: User): Promise<string> {
     return new Promise<string>(resolve => {
       const dialogRef = this.dialog.open(LinkAccountDialog, {
         width: '350px',
         // height: '35%',
-        data: {user: user}
+        data: { user: user }
       });
 
       dialogRef.afterClosed().subscribe(result => {

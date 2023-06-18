@@ -1,7 +1,7 @@
 <img mat-card-image class="side-bar-loading" src="assets/images/login_loading.gif" alt="Please wait..." *ngIf="showIndicator">
 <div class="login-notification">{{notification}}</div>
 <div class="error-nofication">{{error}}</div>
-<div class="sati-div">
+<div *ngIf="!showIndicator" class="sati-div">
 
   <div class="login-box">
     <mat-card class="login-card">

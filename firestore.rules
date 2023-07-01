@@ -58,8 +58,12 @@ allow write: if false;
 
 
     match /eventSessions/{eventSessions} {
-      allow read: if signedIn();
-allow write: if false;
+       allow read: if isAuthorizedToEvents(
+      'view',
+      getUser());
+      allow write: if isAuthorizedToEvents(
+      'edit',
+      getUser());
     }
 
     match /programs/{program} {

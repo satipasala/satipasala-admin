@@ -2,9 +2,7 @@ import {Component, Inject} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {RefDataFormObject, ReferenceDataFormDialog} from "../../../base";
 import {Language} from "@satipasala/base";
-import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import * as uuid from 'uuid'
-
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog"; 
 @Component({
   selector: 'admin-language-form',
   templateUrl: './language-form.component.html',

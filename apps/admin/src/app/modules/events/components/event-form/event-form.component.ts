@@ -18,12 +18,11 @@ import {
   User
 } from "@satipasala/base";
 import {ActivatedRoute} from "@angular/router";
-import * as uuid from 'uuid'
+import { v4 as uuidv4 } from 'uuid';
 import {AddressFormComponent} from '../../../core/components/address-form/address-form.component';
 import {FilterGroup} from 'libs/base/src/lib/impl/FirebaseDataSource';
 import {Subscription} from "rxjs";
 import {Program} from "../../../../../../../../libs/base/src/lib/model/Course";
-import { SSelectBoxComponent } from 'libs/core/src/lib/select-box/s-select-box.component';
 
 @Component({
   selector: 'admin-event-form',
@@ -93,7 +92,7 @@ export class EventFormComponent {
         if (queryParams.eventId == undefined) {
           this.mode = "add";
           this.satiEvent = <Event>{
-            id: uuid(),
+            id: uuidv4(),
             disabled: false,
             imgUrls: []
           };

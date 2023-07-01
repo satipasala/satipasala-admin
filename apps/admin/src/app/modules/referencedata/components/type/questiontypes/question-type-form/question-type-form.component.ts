@@ -3,7 +3,6 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {RefDataFormObject, ReferenceDataFormDialog} from "../../../base";
 import {QuestionType} from "@satipasala/base";
 import {AnswerType, FormFieldType} from "../../../../../../../../../../libs/base/src/lib/model/Types";
-import * as uuid from 'uuid'
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 
 @Component({

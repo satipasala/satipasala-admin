@@ -18,7 +18,7 @@ import {
 import {LocationSelectDialog} from "./location-select-dialog/location-select-dialog.component";
 import {MatDialog} from "@angular/material/dialog";
 import {RefData} from "../../../../../../../../libs/base/src/lib/model/referencedata/RefData";
-import * as uuid from 'uuid';
+import { v4 as uuidv4 } from 'uuid';
 import {SpinnerOverlayService} from "@satipasala/base";
 
 @Component({
@@ -72,7 +72,7 @@ export class HostFormComponent implements OnInit {
   ngOnInit() {
 
     this.hostForm = this.formBuilder.group({
-      id: [uuid(), Validators.required],
+      id: [uuidv4(), Validators.required],
       name: ['', Validators.required],
       medium: ['', Validators.required],
       description: '',

@@ -1,9 +1,8 @@
 import {Injectable} from '@angular/core';
 import {CollectionService} from "@satipasala/base";
 import {TranslateText} from "./translate-text.TranslateText";
-import {AngularFirestore} from "@angular/fire/compat/firestore";
-import * as uuid from 'uuid'
-
+import {AngularFirestore} from "@angular/fire/compat/firestore"; 
+import { v4 as uuidv4 } from 'uuid';
 @Injectable({
   providedIn: 'root'
 })
@@ -20,7 +19,7 @@ export class GlossaryService extends CollectionService<TranslateText> {
 
   public createTranslation(textToTranslate: TranslateText) {
     textToTranslate.translated = "No";
-    textToTranslate.uid = uuid();
+    textToTranslate.uid = uuidv4();
     this.fireStore.collection(`glossary/${textToTranslate.lang}/translations`).add(textToTranslate);
   }
 

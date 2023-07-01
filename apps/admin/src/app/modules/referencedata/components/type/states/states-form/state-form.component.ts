@@ -3,7 +3,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {RefDataFormObject, ReferenceDataFormDialog} from "../../../base";
 import {City, Country, GeoLocation, RefDataType, ReferenceDataService, State} from "@satipasala/base";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import * as uuid from 'uuid'
+import { v4 as uuidv4 } from 'uuid';
 import {Observable, Subscription} from "rxjs";
 import {map, mergeMap, startWith} from "rxjs/operators";
 
@@ -23,7 +23,7 @@ export class StateFormComponent extends ReferenceDataFormDialog<State, StateForm
 
   getFormGroup(): FormGroup {
     return this.fb.group({
-      id: [this.dataObj.data.id || uuid()],
+      id: [this.dataObj.data.id || uuidv4()],
       name: [this.dataObj.data.name || "", Validators.required],
       shortName: [this.dataObj.data.shortName || ""],
       country: [this.dataObj.data.country || ""],

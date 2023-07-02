@@ -44,7 +44,7 @@ export class EventSessionFormComponent {
   facilitatorFilterBy: FilterGroup[] = [];
   userSearchFields: string[] = ['displayName', 'email'];
   facilitatorDisplayField: string = 'displayName';
-  facilitatorSearchSubscription: Subscription;
+  subscriptions: Subscription[] = [];
   eventSessionForm: FormGroup;// Form
   private _satiEvent: Event; // Model Object
   private _eventSession: EventSession;
@@ -107,22 +107,22 @@ export class EventSessionFormComponent {
       });
     }
 
-    this.facilitatorSearchSubscription = this.searchFilterService.connect(this.userSearchFields, filters => this.facilitatorSearchBy = filters, error => alert(error));
+    this.subscriptions.push( this.searchFilterService.connect(this.userSearchFields, filters => this.facilitatorSearchBy = filters, error => alert(error)));
   }
 
   populateEvent(eventId) {
-    this.eventsService.get(eventId).subscribe(event => {
+    this.subscriptions.push(this.eventsService.get(eventId).subscribe(event => {
         this.satiEvent = event;
         this.fillForm();
       }, err => {
         this.notificationService.showErrorNotification("Error retrieving event", err);
       }
-    );
+    ));
   }
 
   ngOnDestroy(): void {
-    this.facilitatorSearchSubscription.unsubscribe();
     this.subscription.unsubscribe();
+    this.subscriptions.forEach(subscription=> subscription.unsubscribe());
   }
 
   buildForm() {

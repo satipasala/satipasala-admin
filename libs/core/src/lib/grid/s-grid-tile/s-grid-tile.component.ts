@@ -13,10 +13,10 @@ export class SGridTile extends SElement implements OnInit {
   @HostBinding("style.grid-area")
   @Input() gridArea:string;
 
+  @Input() isLast: boolean;
 
   constructor(public _element: ElementRef<HTMLElement>) {
     super(_element);
-
   }
 
 

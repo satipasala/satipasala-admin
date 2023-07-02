@@ -2,17 +2,19 @@ import { Host } from "./Host";
 import { User } from './User';
 import { AddressInfo } from './AddressInfo';
 import { ParticipationInfo } from './Participation';
-import {Course, Program} from './Course';
+import { Program } from './Course';
 import { EventCategory } from './referencedata/EventCategory';
-import {MediaFiles} from "./Resources";
+import { MediaFiles } from "./Resources";
+import { Timestamp } from '@firebase/firestore-types';
+
 
 export interface Event {
   id: string;
   name: string;
   disabled: boolean | false;
   imgUrls?: string[];
-  startDate: Date;
-  endDate?: Date | null;
+  startDate: Timestamp | Date | string;
+  endDate?: Timestamp | Date | string;
   startTime?: string;
   endTime?: string | null;
   description?: string | null;
@@ -24,12 +26,12 @@ export interface Event {
   participants: ParticipationInfo;
   participation?: Object; //UserInfo map key by user_id
   facilitators?: Object;
-  tempFacilitators?:Object; //temp selection
-  tempParticipation?:Object;
+  tempFacilitators?: Object; //temp selection
+  tempParticipation?: Object;
   host: Host;
-  program:Program;
-  createdDate:string;
-  mediaFiles?:MediaFiles
+  program: Program;
+  createdDate: string;
+  mediaFiles?: MediaFiles
 }
 
 

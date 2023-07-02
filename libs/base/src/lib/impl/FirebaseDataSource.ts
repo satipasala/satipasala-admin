@@ -27,6 +27,7 @@ export class FirebaseDataSource<T> extends DataSource<T> implements AfterViewIni
   filterChangeSubject: Subject<boolean> = new Subject<boolean>(); //indicate when to fetch data
   orderBy: OrderBy[] = [];
   batchSize:number = 20;
+  dataLoading:boolean = false;
 
 
   private dataRquestSubject:Subject<any> = new Subject();
@@ -44,6 +45,9 @@ export class FirebaseDataSource<T> extends DataSource<T> implements AfterViewIni
     })
 
   }
+  isDataLoading () {
+    return this.dataLoading;
+  }
 
   public reachedEnd(): boolean {
     return this.collectionService.reachedEnd;
@@ -56,6 +60,7 @@ export class FirebaseDataSource<T> extends DataSource<T> implements AfterViewIni
    * @param subCollectionPaths [{documentId: 'course1', subCollection:'activities'}]
    */
   private _requestData(query: (value: Query) => Query, ...subCollectionPaths: SubCollectionInfo[]){
+    this.dataLoading = true;
     const observableList: Subject<any>[] = [];
 
     if (this.searchFilters.length > 0) {
@@ -78,6 +83,7 @@ export class FirebaseDataSource<T> extends DataSource<T> implements AfterViewIni
     //todo remove duplicates
     merge(observableList).pipe(mergeAll()).subscribe(
       document => {
+        this.dataLoading = false;
         this.dataSubject.next(document);
       });
   }

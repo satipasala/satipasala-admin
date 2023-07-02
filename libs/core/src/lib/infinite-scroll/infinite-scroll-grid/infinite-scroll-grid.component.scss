@@ -2,6 +2,10 @@
   margin-top: 5px;
   margin-bottom: 5px;
 }
+
+mat-progress-bar{
+  margin-top: 5px;
+}
 cdk-virtual-scroll-viewport,
 ul {
   position: absolute;
@@ -19,7 +23,7 @@ ul {
   justify-content: center;
   list-style: none;
   margin:  0 10px;
-  margin-bottom: 50px;
+  margin-bottom: 10px;
   li {
     height: 100px;
     margin: 10px;

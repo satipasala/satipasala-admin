@@ -10,6 +10,7 @@ import {
   GlobalSearchService,
   Host,
   NotificationService,
+  ObjectUtils,
   OrderBy,
   RefDataType,
   ReferenceDataService,
@@ -65,6 +66,7 @@ export class EventFormComponent {
   coodinatorNumber: string;
   facilitatorForm: FormGroup;
   defaultImage: string;
+  subscriptions:Subscription[] = [];
 
   constructor(private formBuilder: FormBuilder,
               private route: ActivatedRoute,
@@ -97,7 +99,7 @@ export class EventFormComponent {
             imgUrls: []
           };
         } else {
-          this.eventsService.get(queryParams.eventId).subscribe(event => {
+          this.subscriptions.push(this.eventsService.get(queryParams.eventId).subscribe(event => {
               if (queryParams.action === "view") {
                 this.mode = "view";
               } else {
@@ -107,27 +109,28 @@ export class EventFormComponent {
             }, err => {
               this.notificationService.showErrorNotification("Error retrieving course", err);
             }
-          );
+          ));
         }
       });
 
       if (this.mode === 'add') {
-        this.authService.getCurrentDbUser().subscribe(user => {
+        this.subscriptions.push(this.authService.getCurrentDbUser().subscribe(user => {
           this.coordinator = user;
           this.eventForm.patchValue({
             coordinatorInfo: user
           });
           this.coodinatorEmail = user.email;
           this.coodinatorNumber = user.phoneNumber;
-        });
+        }));
       }
     });
-    this.facilitatorSearchSubscription = this.searchFilterService.connect(this.facilitatorSearchFields,
-      filters => this.facilitatorSearchBy = filters, error => alert(error));
+    this.subscriptions.push(
+      this.searchFilterService.connect(this.facilitatorSearchFields,filters => this.facilitatorSearchBy = filters, error => alert(error))
+    );
   }
 
   ngOnDestroy(): void {
-    this.facilitatorSearchSubscription.unsubscribe();
+    this.subscriptions.forEach(subscription=> subscription.unsubscribe() )
   }
 
   buildForm() {
@@ -181,7 +184,10 @@ export class EventFormComponent {
   }
 
   set satiEvent(value: Event) {
+
     this._satiEvent = value;
+    this._satiEvent.startDate = ObjectUtils.convertFirebaseTimestamp(this._satiEvent.startDate);
+    this._satiEvent.endDate = ObjectUtils.convertFirebaseTimestamp(this._satiEvent.startDate);
     //added this way because address from is not initialized before fill form
     if (this.mode !== 'add') {
       this.addressFormComponents.changes.subscribe(() => {
@@ -192,17 +198,16 @@ export class EventFormComponent {
         }
       })
     }
-    this.storeService.getDefaultMediaPath(value.mediaFiles, "assets/images/location.jpg").subscribe(value1 =>
+    this.subscriptions.push( this.storeService.getDefaultMediaPath(value.mediaFiles, "assets/images/location.jpg").subscribe(value1 =>
       this.defaultImage = value1
-    )
+    ))
 
   }
 
   get participants(): any {
     return this.eventForm.get('participants');
   }
-
-
+ 
   updateEventName() {
     let generatedName = this.eventForm.controls['host'].value?.name + ' - '
       + this.eventForm.controls['program'].value?.name /*+ ' on '
@@ -239,7 +244,9 @@ export class EventFormComponent {
     this._satiEvent.coordinatorInfo = this.coordinator;
     this.satiEvent.coordinatorInfo.phoneNumber = this.coodinatorNumber;
     this._satiEvent.host = this.host;
-    this.eventCategories.forEach(category => (this.selectedEventCategory === category.id) ? this._satiEvent.category = category : '');
+    this.eventCategories.forEach(category => (this.selectedEventCategory === category.id) ? this._satiEvent.category = category : ''); 
+    this._satiEvent.startDate = ObjectUtils.getTimeStamp(this._satiEvent.startDate);
+    this._satiEvent.endDate = ObjectUtils.getTimeStamp(this._satiEvent.endDate);
     // Upload images and set path to model object
     if (this._satiEvent.imgUrls === null) {
       this._satiEvent.imgUrls = [];

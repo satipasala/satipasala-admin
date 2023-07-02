@@ -52,4 +52,6 @@ export interface SDataSource<T> {
   clearAllFilters();
 
   setBatchSize(batchSize:number): void;
+
+  isDataLoading();
 }

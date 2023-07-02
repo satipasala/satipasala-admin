@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Event as satiEvent, Event, NotificationService, PermissionsService, StorageService} from "@satipasala/base";
+import {Event as satiEvent, Event, NotificationService, PermissionsService, StorageService, ObjectUtils} from "@satipasala/base";
 import {Observable} from "rxjs";
 import {
   EVENT_MANAGEMENT_EDIT_ROUTE,
@@ -49,6 +49,9 @@ export class EventCardComponent implements OnInit {
   @Input()
   set event(event: Event) {
     this.satiEvent = event;
+    this.satiEvent.startDate = ObjectUtils.convertFirebaseTimestamp(this.satiEvent.startDate);
+    this.satiEvent.endDate = ObjectUtils.convertFirebaseTimestamp(this.satiEvent.endDate);
+    
     // this.imageUrl = this.storeService.getFileDownloadPath(event.imgUrls[0], "assets/images/location.jpg");
     this.imageUrl = this.storeService.getDefaultMediaPath(event.mediaFiles, "assets/images/location.jpg");
   }

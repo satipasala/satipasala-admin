@@ -10,9 +10,14 @@ export class LocalDataSource implements SDataSource<any> {
   dataSubject: Subject<any[]> = new Subject<any[]>();
   lastIndex: number = 0;
   batchSize:number = 20;
+  dataLoading:boolean = false;
 
   constructor(dataArray?: Array<any>) {
     this.dataArray = dataArray;
+  }
+  
+  isDataLoading () {
+    this.dataLoading;
   }
 
   get dataArray(): Array<any> {

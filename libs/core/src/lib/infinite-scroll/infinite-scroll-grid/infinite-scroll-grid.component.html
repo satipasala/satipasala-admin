@@ -1,12 +1,12 @@
 
 <ng-container>
+  <mat-progress-bar *ngIf="isLoading()" mode="indeterminate"></mat-progress-bar>
   <!--item size should be an input (autosize option is disabled since it has bugs)-->
-  <cdk-virtual-scroll-viewport itemSize="20" >
-
+  <cdk-virtual-scroll-viewport appendOnly itemSize="10" >
     <s-grid class="infinite-grid">
       <ng-container *cdkVirtualFor="let item of infinite; let i = index;">
         <s-grid-tile>
-          <ng-container *ngTemplateOutlet="templateVariable;context: {item: item,i:i}"></ng-container>
+          <ng-container *ngTemplateOutlet="templateVariable;context: {item: item,i:i, isLast: i === (infinite.length - 1)}"></ng-container>
         </s-grid-tile>
       </ng-container>
 
